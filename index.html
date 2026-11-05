@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ghost Hunter</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+/* BODY */
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0a0f1c;
+    padding:20px;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND VIDEO */
+.video-background{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+}
+
+/* MAIN CONTAINER */
+.container{
+    width:800px;
+    max-width:100%;
+    min-height:400px;
+    display:flex;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 0 25px #00f7ff;
+    position:relative;
+    z-index:1;
+}
+
+/* LEFT SIDE */
+.left{
+    width:50%;
+    background:#081421;
+    padding:40px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+}
+
+/* LOGO VIDEO */
+.logo-video{
+    width:calc(100% + 32px);
+    height:151px;
+    margin:-36px -16px -46px -39px;
+    overflow:hidden;
+    position:relative;
+}
+
+.logo-video video{
+    width:100%;
+    height:167%;
+    object-fit:cover;
+}
+
+/* HEADING */
+.left h2{
+    margin-bottom:119px;
+}
+
+.jb{
+    position:relative;
+    top:95px;
+    left:58px;
+    font-size:22px;
+}
+
+/* BUTTON */
+.btn{
+    width:100%;
+    padding:22px 0;
+    margin-top:27px;
+    position:relative;
+    color:#00eaff;
+    background:transparent;
+    border:none;
+    font-size:20px;
+    font-weight:bold;
+    letter-spacing:3px;
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.btn::after{
+    content:"";
+    position:absolute;
+    left:-100%;
+    bottom:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg,transparent,#00eaff,transparent);
+    animation:moveLight 2s linear infinite;
+}
+
+@keyframes moveLight{
+    0%{left:-100%;}
+    100%{left:100%;}
+}
+
+.btn::before{
+    content:"";
+    position:absolute;
+    width:80px;
+    height:80px;
+    background:linear-gradient(90deg,transparent,#00eaff);
+    border-radius:50%;
+    filter:blur(10px);
+    animation:run 4s linear infinite;
+}
+
+@keyframes run{
+    0%{top:0;left:0;}
+    25%{top:0;left:100%;transform:translateX(-100%);}
+    50%{top:100%;left:100%;transform:translate(-100%,-100%);}
+    75%{top:100%;left:0;transform:translateY(-100%);}
+    100%{top:0;left:0;}
+}
+
+.left a{
+    text-decoration:none;
+}
+
+/* RIGHT SIDE */
+.right{
+    width:50%;
+    background:linear-gradient(135deg,#00f7ff,#00c3ff);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.right h1{
+    font-size:66px;
+    margin-bottom:2px;
+}
+
+.right h2{
+    font-size:66px;
+    margin-bottom:67px;
+}
+
+.right p{
+    font-size:24px;
+}
+
+/* TABLET */
+@media(max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    .container{
+        width:100%;
+        min-height:350px;
+    }
+
+    .left{
+        padding:25px;
+    }
+
+    .right h1{
+        font-size:clamp(28px,6vw,48px);
+    }
+
+    .right h2{
+        font-size:clamp(30px,6vw,48px);
+    }
+
+    .right p{
+        font-size:20px;
+    }
+
+    .jb{
+        left:0;
+        top:85px;
+        font-size:17px;
+        text-align:center;
+    }
+
+    .logo-video{
+        height:120px;
+    }
+
+    .left h2{
+        margin-bottom:100px;
+    }
+
+    .btn{
+        font-size:17px;
+    }
+
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    body{
+        padding:15px;
+    }
+
+    .container{
+        width:100%;
+        min-height:300px;
+        border-radius:15px;
+    }
+
+    .left{
+        padding:18px 12px;
+    }
+
+    .right{
+        padding:10px;
+    }
+
+    .logo-video{
+        width:calc(100% + 20px);
+        height:90px;
+        margin:-15px -10px -25px -10px;
+    }
+
+    .logo-video video{
+        height:167%;
+    }
+
+    .jb{
+        top:60px;
+        left:0;
+        font-size:12px;
+        text-align:center;
+        white-space:nowrap;
+    }
+
+    .left h2{
+        margin-bottom:65px;
+    }
+
+    .btn{
+        font-size:13px;
+        letter-spacing:1px;
+        padding:15px 0;
+        margin-top:15px;
+    }
+
+    .right h1{
+        font-size:clamp(20px,6vw,30px);
+    }
+
+    .right h2{
+        font-size:clamp(22px,6vw,32px);
+        margin-bottom:30px;
+    }
+
+    .right p{
+        font-size:15px;
+    }
+
+}
+
+/* EXTRA SMALL MOBILE */
+@media(max-width:350px){
+
+    .container{
+        min-height:260px;
+    }
+
+    .jb{
+        font-size:10px;
+    }
+
+    .right h1{
+        font-size:19px;
+    }
+
+    .right h2{
+        font-size:20px;
+    }
+
+    .right p{
+        font-size:13px;
+    }
+
+    .btn{
+        font-size:11px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+        <!-- LOGO VIDEO -->
+        <div class="logo-video">
+            <video autoplay muted loop playsinline>
+                <source src="logo2.mp4" type="video/mp4">
+                আপনার ব্রাউজার ভিডিও সাপোর্ট করছে না।
+            </video>
+        </div>
+
+        <h2 class="jb">DIGNITARIES LIST</h2>
+
+        <a href="The Last Dance/The Last Dance.html">
+            <button class="btn">Let's Go</button>
+        </a>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+        <div>
+            <h1>WELCOME</h1>
+
+            <h2>
+                <p>to<br>Friends Hub</p>
+            </h2>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BACKGROUND VIDEO -->
+<video class="video-background" autoplay muted loop playsinline>
+    <source src="login bg.mp4" type="video/mp4">
+    আপনার ব্রাউজার ভিডিও সাপোর্ট করছে না।
+</video>
+
+</body>
+</html>
