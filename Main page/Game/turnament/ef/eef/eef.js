@@ -1,0 +1,1470 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>World Cup Tournament</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        /* =========================================
+           WORLD CUP 2026
+           COMPLETE CSS
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #05070c url("football.jpeg") center center/cover fixed;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* DARK OVERLAY */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                rgba(0,0,0,.78),
+                rgba(0,0,0,.68)
+            );
+            backdrop-filter: blur(2px);
+            z-index: -4;
+        }
+
+        /* BACKGROUND */
+
+        .bg-animation {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: -3;
+        }
+
+        .bg-animation::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: -50%;
+            top: -50%;
+
+            background:
+                radial-gradient(circle at 20% 20%, #00ff6625, transparent 35%),
+                radial-gradient(circle at 80% 30%, #ffd70025, transparent 35%),
+                radial-gradient(circle at 50% 80%, #00d4ff20, transparent 35%);
+
+            animation: rotateBG 35s linear infinite;
+        }
+
+        @keyframes rotateBG {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* PARTICLES */
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particles span {
+            position: absolute;
+            display: block;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 8px #fff,
+                0 0 15px #00ff66;
+
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(110vh) scale(.3);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-120vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* HEADER */
+
+        header {
+            text-align: center;
+            padding: 55px 20px 35px;
+            animation: fadeUp 1s ease;
+        }
+
+        .header-badge {
+            display: inline-block;
+            padding: 7px 18px;
+            margin-bottom: 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #00ff66;
+            border: 1px solid #00ff6660;
+            background: #00ff6610;
+            box-shadow: 0 0 20px #00ff6620;
+        }
+
+        header h1 {
+            font-size: clamp(38px, 6vw, 65px);
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #ffd700;
+
+            text-shadow:
+                0 0 12px gold,
+                0 0 30px gold,
+                0 0 60px #ffcc00;
+
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        header p {
+            margin-top: 12px;
+            font-size: 19px;
+            opacity: .9;
+            letter-spacing: 3px;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 8px gold, 0 0 18px gold;
+            }
+
+            to {
+                text-shadow:
+                    0 0 20px gold,
+                    0 0 45px gold,
+                    0 0 70px #ffcc00;
+            }
+        }
+
+        /* SECTION */
+
+        section {
+            width: min(1300px, 94%);
+            margin: auto;
+            padding: 45px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 42px;
+            color: #fff;
+            text-shadow: 0 0 12px #00ff66;
+        }
+
+        /* KNOCKOUT */
+
+        .bracket {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 45px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .round {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .round-title {
+            color: #00ff66;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-shadow: 0 0 10px #00ff66;
+        }
+
+        /* GLASS MATCH */
+
+        .match {
+            width: 290px;
+            padding: 17px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+
+            background: rgba(255,255,255,.07);
+            border: 2px solid rgba(255,255,255,.12);
+            backdrop-filter: blur(15px);
+
+            box-shadow: 0 12px 35px rgba(0,0,0,.5);
+            transition: .45s ease;
+            animation: fadeUp 1s ease;
+        }
+
+        .match::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 70%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,.3),
+                transparent
+            );
+
+            transform: skewX(-30deg);
+            transition: .8s;
+        }
+
+        .match:hover::before {
+            left: 150%;
+        }
+
+        .match:hover {
+            transform: translateY(-8px) scale(1.03);
+
+            box-shadow:
+                0 0 20px #00ff66,
+                0 0 45px #00ff6640;
+        }
+
+        /* TEAM */
+
+        .team {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 15px;
+            margin: 7px 0;
+            border-radius: 12px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.08);
+            transition: .35s;
+        }
+
+        .team:hover {
+            transform: scale(1.03);
+            border-color: #00ff66;
+            box-shadow: 0 0 18px #00ff6645;
+        }
+
+        .team-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .team-name small {
+            display: block;
+            font-size: 11px;
+            color: #00ff66;
+            margin-top: 2px;
+        }
+
+        .team-score {
+            min-width: 43px;
+            padding: 8px 12px;
+            text-align: center;
+            border-radius: 9px;
+            background: #d31535;
+            font-weight: 800;
+            box-shadow: 0 0 14px #d3153560;
+        }
+
+        /* WINNER */
+
+        .winner .champion-team {
+            border: 2px solid #00ff66;
+            box-shadow: 0 0 15px #00ff66;
+            animation: winnerPulse 1.7s infinite;
+        }
+
+        @keyframes winnerPulse {
+            0%, 100% {
+                box-shadow: 0 0 10px #00ff66;
+            }
+
+            50% {
+                box-shadow: 0 0 30px #00ff66;
+            }
+        }
+
+        /* CONNECTOR */
+
+        .connector {
+            width: 90px;
+            height: 4px;
+            border-radius: 20px;
+
+            background: linear-gradient(
+                90deg,
+                #00ff66,
+                #ffd700
+            );
+
+            box-shadow: 0 0 15px #00ff66;
+            animation: lineGlow 2s infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px #00ff66;
+            }
+
+            50% {
+                box-shadow: 0 0 30px gold;
+            }
+        }
+
+        /* CHAMPION BOX */
+
+        .champion-box {
+            width: 255px;
+            padding: 20px 18px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(255,215,0,.16),
+                rgba(0,255,102,.09),
+                rgba(255,255,255,.04)
+            );
+
+            border: 2px solid #ffd700a8;
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 0 18px #ffd70045,
+                0 0 40px #00ff6625,
+                inset 0 0 25px #ffffff08;
+
+            animation:
+                championFloat 3s ease-in-out infinite,
+                championGlow 2s ease-in-out infinite alternate;
+        }
+
+        .champion-box::before {
+            content: "";
+            position: absolute;
+            top: -120%;
+            left: -80%;
+            width: 55%;
+            height: 300%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,.35),
+                transparent
+            );
+
+            transform: rotate(25deg);
+            animation: championShine 4s linear infinite;
+        }
+
+        /* TROPHY */
+
+        .champion-trophy {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 125px;
+        }
+
+        .trophy-light {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #ffd700;
+            filter: blur(35px);
+            opacity: .25;
+        }
+
+        .champion-trophy img {
+            width: 105px;
+            height: 105px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+
+            filter:
+                drop-shadow(0 0 8px gold)
+                drop-shadow(0 0 22px gold)
+                drop-shadow(0 0 40px #ffd70099);
+
+            animation: trophyFloat 2.5s ease-in-out infinite;
+        }
+
+        @keyframes trophyFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-9px) rotate(2deg);
+            }
+        }
+
+        /* CHAMPION TITLE */
+
+        .champion-title {
+            position: relative;
+            z-index: 3;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #ffd700;
+
+            text-shadow:
+                0 0 8px gold,
+                0 0 20px gold,
+                0 0 35px #ffd700aa;
+        }
+
+        .champion-title span {
+            font-size: 15px;
+            display: inline-block;
+            animation: crownPulse 1.5s infinite alternate;
+        }
+
+        @keyframes crownPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+
+        /* CHAMPION PLAYER */
+
+        .champion-player {
+            position: relative;
+            z-index: 3;
+            margin-top: 13px;
+            padding: 10px;
+            border-radius: 14px;
+            background: rgba(0,0,0,.3);
+            border: 1px solid #ffd70040;
+        }
+
+        .champion-player strong {
+            display: block;
+            font-size: 19px;
+            text-shadow: 0 0 8px #fff;
+        }
+
+        .champion-player small {
+            display: block;
+            margin-top: 3px;
+            color: #00ff66;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px #00ff66;
+        }
+
+        /* CHAMPION ANIMATION */
+
+        @keyframes championFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+
+        @keyframes championGlow {
+            from {
+                box-shadow:
+                    0 0 12px #ffd70040,
+                    0 0 25px #00ff6620;
+            }
+
+            to {
+                box-shadow:
+                    0 0 28px #ffd70080,
+                    0 0 55px #00ff6635;
+            }
+        }
+
+        @keyframes championShine {
+            0% { left: -100%; }
+            50%, 100% { left: 160%; }
+        }
+
+        /* GROUP TABLE */
+
+        .tables {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 30px;
+        }
+
+        .table-card {
+            position: relative;
+            padding: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255,255,255,.07);
+            border: 2px solid rgba(255,255,255,.12);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 12px 35px rgba(0,0,0,.5);
+            transition: .4s;
+        }
+
+        .table-card:hover {
+            transform: translateY(-7px);
+            border-color: #00ff6660;
+            box-shadow: 0 0 30px #00ff6635;
+        }
+
+        .group-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #00ff66;
+            text-align: center;
+            margin-bottom: 3px;
+        }
+
+        .table-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 26px;
+            color: #ffd700;
+            text-shadow: 0 0 12px gold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 13px 7px;
+            background: #00ff6625;
+            color: #00ff66;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 13px 7px;
+            text-align: center;
+            font-size: 13px;
+            border-bottom: 1px solid #ffffff0d;
+        }
+
+        tr {
+            transition: .3s;
+        }
+
+        tbody tr:hover {
+            background: #00ff6615;
+            transform: scale(1.01);
+        }
+
+        .top-team td:first-child {
+            color: #ffd700;
+            font-weight: 800;
+        }
+
+        /* MATCH RESULTS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .match-card {
+            display: grid;
+            grid-template-columns: 1fr 55px 1fr 55px;
+            align-items: center;
+            gap: 8px;
+            padding: 18px;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 18px;
+            background: rgba(255,255,255,.07);
+            border: 2px solid rgba(255,255,255,.12);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0,0,0,.45);
+            transition: .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .match-card:hover {
+            transform: translateY(-7px) scale(1.02);
+            box-shadow: 0 0 25px #00ff6645;
+        }
+
+        .match-card.winner {
+            border-color: #00ff6660;
+        }
+
+        .match-card .score {
+            padding: 9px 6px;
+            text-align: center;
+            border-radius: 9px;
+            background: #2939c9;
+            font-weight: 800;
+            box-shadow: 0 0 15px #2939c960;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 40px 20px 55px;
+            opacity: .8;
+            font-size: 14px;
+        }
+
+        footer div {
+            color: #ffd700;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        footer span {
+            display: block;
+            margin-top: 6px;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        /* FADE ANIMATION */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CONFETTI */
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 7px;
+            height: 12px;
+            z-index: 50;
+            animation: confettiFall linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* SPARK */
+
+        .spark {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffd700;
+
+            box-shadow:
+                0 0 10px gold,
+                0 0 20px gold;
+
+            pointer-events: none;
+            z-index: 20;
+            animation: sparkMove 1.5s ease-out forwards;
+        }
+
+        @keyframes sparkMove {
+            from {
+                transform: scale(.5) translate(0,0);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(0) translate(
+                    calc((var(--x, 1) * 40px)),
+                    -60px
+                );
+                opacity: 0;
+            }
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 900px) {
+            header {
+                padding-top: 40px;
+            }
+
+            .bracket {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .connector {
+                width: 4px;
+                height: 55px;
+
+                background: linear-gradient(
+                    180deg,
+                    #00ff66,
+                    #ffd700
+                );
+            }
+
+            .round {
+                width: 100%;
+                gap: 20px;
+            }
+
+            .match {
+                width: min(100%, 340px);
+            }
+
+            .champion-box {
+                width: min(100%, 260px);
+            }
+
+            .tables {
+                grid-template-columns: 1fr;
+            }
+
+            .table-card {
+                padding: 17px 10px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 390px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .match-card {
+                grid-template-columns: 1fr 45px 1fr 45px;
+                padding: 14px 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* SMALL PHONE */
+
+        @media(max-width: 480px) {
+            header h1 {
+                font-size: 32px;
+                letter-spacing: 1px;
+            }
+
+            header p {
+                font-size: 15px;
+                letter-spacing: 2px;
+            }
+
+            section {
+                width: 92%;
+                padding: 32px 0;
+            }
+
+            section h2 {
+                font-size: 27px;
+                margin-bottom: 30px;
+            }
+
+            .team {
+                padding: 11px;
+            }
+
+            .team-name {
+                font-size: 13px;
+            }
+
+            .team-score {
+                min-width: 40px;
+                padding: 7px 9px;
+            }
+
+            .champion-trophy {
+                height: 110px;
+            }
+
+            .champion-trophy img {
+                width: 90px;
+                height: 90px;
+            }
+
+            .champion-title {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            .table-card h3 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+
+    <div class="bg-animation"></div>
+    <div class="particles"></div>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="header-badge">
+            ⚽ TOURNAMENT 2026
+        </div>
+
+        <h1>🏆 WORLD CUP 2026</h1>
+
+        <p>Ultimate Tournament</p>
+
+    </header>
+
+    <!-- KNOCKOUT STAGE -->
+
+    <section class="knockout">
+
+        <h2>Knockout Stage</h2>
+
+        <div class="bracket">
+
+            <!-- SEMI FINAL -->
+
+            <div class="round">
+
+                <div class="round-title">
+                    SEMI FINAL
+                </div>
+
+                <div class="match winner">
+
+                    <div class="team">
+                        <span class="team-name">
+                            France
+                            <small>(AL-Amin)</small>
+                        </span>
+
+                        <span class="team-score">8</span>
+                    </div>
+
+                    <div class="team">
+                        <span class="team-name">
+                            Norway
+                            <small>(Taki)</small>
+                        </span>
+
+                        <span class="team-score">6</span>
+                    </div>
+
+                </div>
+
+                <div class="match winner">
+
+                    <div class="team">
+                        <span class="team-name">
+                            Argentina
+                            <small>(Tamim)</small>
+                        </span>
+
+                        <span class="team-score">1</span>
+                    </div>
+
+                    <div class="team">
+                        <span class="team-name">
+                            Switzerland
+                        </span>
+
+                        <span class="team-score">0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CONNECTOR -->
+
+            <div class="connector"></div>
+
+            <!-- FINAL -->
+
+            <div class="round final-round">
+
+                <div class="round-title">
+                    FINAL
+                </div>
+
+                <div class="match winner">
+
+                    <div class="team champion-team">
+                        <span class="team-name">
+                            France
+                            <small>(AL-Amin)</small>
+                        </span>
+
+                        <span class="team-score">6</span>
+                    </div>
+
+                    <div class="team">
+                        <span class="team-name">
+                            Argentina
+                        </span>
+
+                        <span class="team-score">1</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CHAMPION BOX -->
+
+            <div class="champion-box">
+
+                <div class="champion-trophy">
+
+                    <div class="trophy-light"></div>
+
+                    <img src="C.png" alt="Champion Trophy">
+
+                </div>
+
+                <div class="champion-title">
+                    <span>🏆</span>
+                    CHAMPION
+                    <span>🏆</span>
+                </div>
+
+                <div class="champion-player">
+
+                    <strong>France</strong>
+
+                    <small>AL-Amin</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GROUP STAGE -->
+
+    <section class="groups">
+
+        <h2>Group Stage</h2>
+
+        <div class="tables">
+
+            <!-- GROUP A -->
+
+            <div class="table-card">
+
+                <div class="group-label">
+                    GROUP A
+                </div>
+
+                <h3>Group A</h3>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Team</th>
+                            <th>PTS</th>
+                            <th>W</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr class="top-team">
+                            <td>1</td>
+                            <td>France</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>6</td>
+                            <td>2</td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Switzerland</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Spain</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>6</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- GROUP B -->
+
+            <div class="table-card">
+
+                <div class="group-label">
+                    GROUP B
+                </div>
+
+                <h3>Group B</h3>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Team</th>
+                            <th>PTS</th>
+                            <th>W</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr class="top-team">
+                            <td>1</td>
+                            <td>Norway</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>1</td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Argentina</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Morocco</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>4</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MATCH RESULTS -->
+
+    <section class="matches">
+
+        <h2>Match Results</h2>
+
+        <div class="cards">
+
+            <div class="match-card winner">
+                <div>France</div>
+                <div class="score">3</div>
+                <div>Spain</div>
+                <div class="score">0</div>
+            </div>
+
+            <div class="match-card">
+                <div>Switzerland</div>
+                <div class="score">3</div>
+                <div>Spain</div>
+                <div class="score">0</div>
+            </div>
+
+            <div class="match-card winner">
+                <div>France</div>
+                <div class="score">3</div>
+                <div>Switzerland</div>
+                <div class="score">2</div>
+            </div>
+
+            <div class="match-card winner">
+                <div>Norway</div>
+                <div class="score">2</div>
+                <div>Morocco</div>
+                <div class="score">1</div>
+            </div>
+
+            <div class="match-card">
+                <div>Argentina</div>
+                <div class="score">2</div>
+                <div>Morocco</div>
+                <div class="score">0</div>
+            </div>
+
+            <div class="match-card winner">
+                <div>Norway</div>
+                <div class="score">1</div>
+                <div>Argentina</div>
+                <div class="score">0</div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            🏆 WORLD CUP 2026
+        </div>
+
+        <span>
+            Ultimate Tournament
+        </span>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        /* FLOATING PARTICLES */
+
+        const particles =
+            document.querySelector(".particles");
+
+        if (particles) {
+
+            for (let i = 0; i < 80; i++) {
+
+                const dot =
+                    document.createElement("span");
+
+                const size =
+                    Math.random() * 5 + 2;
+
+                dot.style.width = size + "px";
+                dot.style.height = size + "px";
+
+                dot.style.left =
+                    Math.random() * 100 + "%";
+
+                dot.style.animationDuration =
+                    Math.random() * 10 + 8 + "s";
+
+                dot.style.animationDelay =
+                    Math.random() * 8 + "s";
+
+                particles.appendChild(dot);
+            }
+        }
+
+        /* MOUSE GLOW */
+
+        const glow =
+            document.createElement("div");
+
+        glow.className = "mouseGlow";
+
+        glow.style.position = "fixed";
+        glow.style.width = "120px";
+        glow.style.height = "120px";
+        glow.style.borderRadius = "50%";
+        glow.style.pointerEvents = "none";
+        glow.style.transform = "translate(-50%,-50%)";
+
+        glow.style.background =
+            "radial-gradient(circle, rgba(0,255,102,.12), transparent 70%)";
+
+        glow.style.zIndex = "-1";
+
+        document.body.appendChild(glow);
+
+        document.addEventListener("mousemove", function(e) {
+
+            glow.style.left = e.clientX + "px";
+            glow.style.top = e.clientY + "px";
+
+        });
+
+        /* SCROLL REVEAL */
+
+        const observer =
+            new IntersectionObserver(
+                function(entries) {
+
+                    entries.forEach(function(entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.style.opacity = "1";
+
+                            entry.target.style.transform =
+                                "translateY(0)";
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: .15
+                }
+            );
+
+        document.querySelectorAll(
+            ".table-card, .match-card, .match, .champion-box"
+        ).forEach(function(element) {
+
+            element.style.opacity = "0";
+
+            element.style.transform =
+                "translateY(35px)";
+
+            element.style.transition =
+                "opacity .8s ease, transform .8s ease";
+
+            observer.observe(element);
+
+        });
+
+        /* SCORE PULSE */
+
+        setInterval(function() {
+
+            document.querySelectorAll(".score").forEach(function(score) {
+
+                score.animate(
+                    [
+                        {
+                            transform: "scale(1)"
+                        },
+                        {
+                            transform: "scale(1.12)"
+                        },
+                        {
+                            transform: "scale(1)"
+                        }
+                    ],
+                    {
+                        duration: 700,
+                        easing: "ease-in-out"
+                    }
+                );
+
+            });
+
+        }, 3500);
+
+        /* CHAMPION GLOW */
+
+        const champion =
+            document.querySelector(".champion-box");
+
+        if (champion) {
+
+            setInterval(function() {
+
+                champion.animate(
+                    [
+                        {
+                            filter: "brightness(1)"
+                        },
+                        {
+                            filter: "brightness(1.18)"
+                        },
+                        {
+                            filter: "brightness(1)"
+                        }
+                    ],
+                    {
+                        duration: 1500,
+                        easing: "ease-in-out"
+                    }
+                );
+
+            }, 3000);
+
+        }
+
+        /* CONFETTI */
+
+        function createConfetti() {
+
+            for (let i = 0; i < 35; i++) {
+
+                const c =
+                    document.createElement("div");
+
+                c.className = "confetti";
+
+                c.style.left =
+                    Math.random() * 100 + "vw";
+
+                c.style.animationDuration =
+                    Math.random() * 3 + 3 + "s";
+
+                c.style.animationDelay =
+                    Math.random() * 1.5 + "s";
+
+                const colors = [
+                    "#ffd700",
+                    "#00ff66",
+                    "#ffffff",
+                    "#00d4ff"
+                ];
+
+                c.style.background =
+                    colors[
+                        Math.floor(
+                            Math.random() * colors.length
+                        )
+                    ];
+
+                c.style.transform =
+                    `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(c);
+
+                setTimeout(function() {
+
+                    c.remove();
+
+                }, 6500);
+
+            }
+
+        }
+
+        /* START CONFETTI */
+
+        setTimeout(createConfetti, 1800);
+
+        setInterval(createConfetti, 12000);
+
+        /* TROPHY SPARKLES */
+
+        const trophy =
+            document.querySelector(".champion-trophy");
+
+        function createSpark() {
+
+            if (!trophy) return;
+
+            const spark =
+                document.createElement("div");
+
+            spark.className = "spark";
+
+            const rect =
+                trophy.getBoundingClientRect();
+
+            spark.style.left =
+                rect.left +
+                Math.random() * rect.width +
+                "px";
+
+            spark.style.top =
+                rect.top +
+                Math.random() * rect.height +
+                "px";
+
+            document.body.appendChild(spark);
+
+            setTimeout(function() {
+
+                spark.remove();
+
+            }, 1500);
+
+        }
+
+        setInterval(createSpark, 550);
+
+        /* PAGE LOAD */
+
+        window.addEventListener("load", function() {
+
+            document.body.classList.add("loaded");
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
