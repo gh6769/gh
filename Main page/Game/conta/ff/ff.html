@@ -1,0 +1,985 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FF Friend List</title>
+
+    <style>
+
+/* ================================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   BODY
+================================ */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0f14;
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+    padding: 20px 14px;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #8993a4;
+    font-size: 13px;
+}
+
+
+/* ================================
+   SEARCH
+================================ */
+
+.search-box {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #151b23;
+    border: 1px solid #252d38;
+    border-radius: 12px;
+
+    padding: 0 14px;
+    margin-bottom: 14px;
+}
+
+.search-box span {
+    font-size: 17px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: white;
+
+    font-size: 14px;
+}
+
+.search-box input::placeholder {
+    color: #687383;
+}
+
+
+/* ================================
+   FRIEND LIST
+================================ */
+
+#friendList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+/* Friend Box */
+
+.friend-box {
+    width: 100%;
+    min-height: 62px;
+
+    display: flex;
+    align-items: center;
+
+    background: #131922;
+    border: 1px solid #242d39;
+    border-radius: 11px;
+
+    padding: 8px 11px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.friend-box:hover {
+    transform: translateY(-1px);
+    border-color: #3d4a5c;
+}
+
+.friend-box:active {
+    transform: scale(0.98);
+}
+
+
+/* Number */
+
+.friend-number {
+    width: 28px;
+    color: #687383;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* Profile Image */
+
+.friend-img {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    margin: 0 11px 0 5px;
+
+    border: 2px solid #293442;
+}
+
+
+/* Friend Info */
+
+.friend-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.friend-name {
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin-bottom: 4px;
+}
+
+.friend-uid {
+    font-size: 11px;
+    color: #7f8998;
+}
+
+
+/* Arrow */
+
+.arrow {
+    font-size: 20px;
+    color: #596575;
+}
+
+
+/* ================================
+   NO RESULT
+================================ */
+
+.no-result {
+    display: none;
+    text-align: center;
+    color: #737e8e;
+    padding: 30px 0;
+    font-size: 14px;
+}
+
+
+/* ================================
+   MODAL
+================================ */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+
+    z-index: 999;
+
+    padding: 12px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+
+/* Modal Box */
+
+.modal-box {
+    width: 100%;
+    max-width: 500px;
+
+    background: #141a22;
+
+    border: 1px solid #293341;
+    border-radius: 18px 18px 12px 12px;
+
+    padding: 25px 18px 20px;
+
+    position: relative;
+
+    animation: popup 0.25s ease;
+}
+
+@keyframes popup {
+
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* Close Button */
+
+.close-btn {
+    position: absolute;
+    right: 13px;
+    top: 10px;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #242c37;
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+/* ================================
+   PROFILE
+================================ */
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile img {
+    width: 75px;
+    height: 75px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid #303b49;
+
+    margin-bottom: 9px;
+}
+
+.profile h2 {
+    font-size: 19px;
+    margin-bottom: 4px;
+}
+
+.profile p {
+    color: #7d8897;
+    font-size: 12px;
+}
+
+
+/* ================================
+   DETAILS
+================================ */
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #0e131a;
+
+    border: 1px solid #202934;
+
+    border-radius: 9px;
+
+    padding: 12px 13px;
+
+    font-size: 13px;
+}
+
+.detail-row span {
+    color: #8a95a4;
+}
+
+.detail-row strong {
+    color: white;
+    font-size: 13px;
+}
+
+
+/* ================================
+   DESKTOP
+================================ */
+
+@media (min-width: 700px) {
+
+    .container {
+        padding-top: 35px;
+    }
+
+    .modal {
+        align-items: center;
+    }
+
+    .modal-box {
+        border-radius: 18px;
+    }
+
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>🎮 FF Friend List</h1>
+            <p>Search & view player details</p>
+        </header>
+
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search name or FF ID..."
+            >
+
+        </div>
+
+
+        <!-- Friend List -->
+
+        <div id="friendList"></div>
+
+        <div id="noResult" class="no-result">
+            No friend found 😕
+        </div>
+
+    </div>
+
+
+    <!-- Details Popup -->
+
+    <div id="detailsModal" class="modal">
+
+        <div class="modal-box">
+
+            <button class="close-btn" onclick="closeDetails()">×</button>
+
+            <div class="profile">
+
+                <img id="detailImage" src="" alt="Profile">
+
+                <h2 id="detailName"></h2>
+
+                <p id="detailUsername"></p>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail-row">
+                    <span>🆔 FF UID</span>
+                    <strong id="detailUID"></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>🏆 Level</span>
+                    <strong id="detailLevel"></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>🔥 Likes</span>
+                    <strong id="detailLikes"></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>🛡️ Guild</span>
+                    <strong id="detailGuild"></strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>🌍 Region</span>
+                    <strong id="detailRegion"></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+/* =========================================================
+   FREE FIRE FRIEND LIST
+   Total Friends: 23
+========================================================= */
+
+
+/* ================================
+   FRIEND DATA
+================================ */
+
+const friends = [
+
+    // 01
+    {
+        name: "Sayem Chowdhury",
+        username: "Ghost Sayem",
+        uid: "2271680440",
+        level: "58",
+        likes: "2541",
+        guild: "Ghost Hunter",
+        region: "Bangladesh",
+        image: "images/sayem.jpg"
+    },
+
+    // 02
+    {
+        name: "Hasan al bannah",
+        username: "Y-NOXX",
+        uid: "11413670076",
+        level: "57",
+        likes: "1326",
+        guild: "Ghost Hunter",
+        region: "Bangladesh",
+        image: "images/hasan-al-bannah.jpg"
+    },
+
+    // 03
+    {
+        name: "Muhit Rahman",
+        username: "Mr.DOT",
+        uid: "7273676848",
+        level: "60",
+        likes: "2651",
+        guild: "OST.Hantar",
+        region: "Bangladesh",
+        image: "images/muhit-rahman.jpg"
+    },
+
+    // 04
+    {
+        name: "Tamim bin sayed",
+        username: "TAMIM<RDX>",
+        uid: "7173075643",
+        level: "59",
+        likes: "1678",
+        guild: "host.Hantal",
+        region: "Bangladesh",
+        image: "images/tamim-bin-sayed.jpg"
+    },
+
+    // 05
+    {
+        name: "Arman Asif",
+        username: "AriSabt4728X",
+        uid: "2925529892",
+        level: "57",
+        likes: "1098",
+        guild: "host.Hant",
+        region: "Bangladesh",
+        image: "images/arman-asif.jpg"
+    },
+
+    // 06
+    {
+        name: "Mahdi hasan",
+        username: "BD71 X English",
+        uid: "12967691837",
+        level: "51",
+        likes: "460",
+        guild: "host.Hant",
+        region: "Bangladesh",
+        image: "images/mahdi-hasan.jpg"
+    },
+
+    // 07
+    {
+        name: "Asif Ikram",
+        username: "Jean2yOH",
+        uid: "8987501948",
+        level: "51",
+        likes: "915",
+        guild: "host.Hant",
+        region: "Bangladesh",
+        image: "images/asif-ikram.jpg"
+    },
+
+    // 08
+    {
+        name: "Shariat Ullah",
+        username: 'I\'m"Dadking',
+        uid: "6245144347",
+        level: "53",
+        likes: "745",
+        guild: "host.Hant",
+        region: "English",
+        image: "images/shariat-ullah.jpg"
+    },
+
+    // 09
+    {
+        name: "Nafiz Sahariar",
+        username: "saharia2004H",
+        uid: "2993101057",
+        level: "53",
+        likes: "818",
+        guild: "host.Hanta",
+        region: "Bangladesh",
+        image: "images/nafiz-sahariar.jpg"
+    },
+
+    // 10
+    {
+        name: "Raki",
+        username: "mohiturraman",
+        uid: "6602342149",
+        level: "51",
+        likes: "620",
+        guild: "Ost.Hantar",
+        region: "বাংলা",
+        image: "images/raki.jpg"
+    },
+
+    // 11
+    {
+        name: "Hasibul Hasan",
+        username: "HASIB 214",
+        uid: "12512069232",
+        level: "44",
+        likes: "—",
+        guild: "host.Hanta",
+        region: "Bangladesh",
+        image: "images/hasibul-hasan.jpg"
+    },
+
+    // 12
+    {
+        name: "Mudabbir Ansari",
+        username: "Mudabbir_01",
+        uid: "10515725486",
+        level: "34",
+        likes: "67",
+        guild: "Ghost.Hant",
+        region: "English",
+        image: "images/mudabbir-ansari.jpg"
+    },
+
+    // 13
+    {
+        name: "Habib",
+        username: "OPsoHeLyT",
+        uid: "9231011071",
+        level: "51",
+        likes: "1004",
+        guild: "1OST.Hantar",
+        region: "Bangladesh",
+        image: "images/habib.jpg"
+    },
+
+    // 14
+    {
+        name: "Toha",
+        username: "TohaVhai1020",
+        uid: "12035113404",
+        level: "27",
+        likes: "—",
+        guild: "host.Hantall",
+        region: "Bangladesh",
+        image: "images/toha.jpg"
+    },
+
+    // 15
+    {
+        name: "Mir Rafi",
+        username: "ي ف اردم ح م رم",
+        uid: "7969761384",
+        level: "39",
+        likes: "184",
+        guild: "host.Hanta",
+        region: "English",
+        image: "images/mir-rafi.jpg"
+    },
+
+    // 16
+    {
+        name: "Taki",
+        username: "Taki(Hunter)",
+        uid: "9770944558",
+        level: "49",
+        likes: "409",
+        guild: "host.Hanta",
+        region: "Bangladesh",
+        image: "images/taki.jpg"
+    },
+
+    // 17
+    {
+        name: "Saadat",
+        username: "NABIL",
+        uid: "2540558636",
+        level: "58",
+        likes: "1831",
+        guild: "NEIGHBORHOD- SVE",
+        region: "English",
+        image: "images/saadat.jpg"
+    },
+
+    // 18
+    {
+        name: "Habib !!",
+        username: "NG HABIB",
+        uid: "9059431934",
+        level: "69",
+        likes: "5676",
+        guild: "QUOTEX",
+        region: "Bangladesh",
+        image: "images/habib-2.jpg"
+    },
+
+    // 19
+    {
+        name: "Junayed",
+        username: "TRX>JUNAVED",
+        uid: "3164847324",
+        level: "62",
+        likes: "3176",
+        guild: "EPALI FLAGJ",
+        region: "English",
+        image: "images/junayed.jpg"
+    },
+
+    // 20
+    {
+        name: "Toha",
+        username: "TS-SANYIツ",
+        uid: "2261114234",
+        level: "66",
+        likes: "7286",
+        guild: "TOXIC TITAN",
+        region: "English",
+        image: "images/toha-2.jpg"
+    },
+
+    // 21
+    {
+        name: "Toha",
+        username: "TOHA(10)",
+        uid: "12400208049",
+        level: "56",
+        likes: "1959",
+        guild: "TOXIC TITAN",
+        region: "Bangladesh",
+        image: "images/toha-3.jpg"
+    },
+
+    // 22
+    {
+        name: "Samir",
+        username: "H@nta12",
+        uid: "9104436760",
+        level: "42",
+        likes: "243",
+        guild: "HUZUREMPIR",
+        region: "Bangladesh",
+        image: "images/samir.jpg"
+    },
+
+    // 23
+    {
+        name: "Habibullah Esa",
+        username: "@bot@esa@bot",
+        uid: "3193842380",
+        level: "23",
+        likes: "63",
+        guild: "",
+        region: "Bangladesh",
+        image: "images/habibullah.jpg"
+    }
+
+];
+
+
+/* =========================================================
+   GET HTML ELEMENTS
+========================================================= */
+
+const friendList = document.getElementById("friendList");
+const searchInput = document.getElementById("searchInput");
+const noResult = document.getElementById("noResult");
+const modal = document.getElementById("detailsModal");
+
+
+/* =========================================================
+   DISPLAY FRIEND LIST
+========================================================= */
+
+function displayFriends(list) {
+
+    friendList.innerHTML = "";
+
+    if (list.length === 0) {
+
+        noResult.style.display = "block";
+
+        return;
+    }
+
+    noResult.style.display = "none";
+
+
+    list.forEach((friend, index) => {
+
+        const box = document.createElement("div");
+
+        box.className = "friend-box";
+
+        box.innerHTML = `
+
+            <div class="friend-number">
+                ${String(index + 1).padStart(2, "0")}
+            </div>
+
+            <img
+                class="friend-img"
+                src="${friend.image}"
+                alt="${friend.name}"
+            >
+
+            <div class="friend-info">
+
+                <div class="friend-name">
+                    ${friend.name}
+                </div>
+
+                <div class="friend-uid">
+                    UID: ${friend.uid}
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        `;
+
+
+        box.addEventListener("click", function () {
+
+            showDetails(friend);
+
+        });
+
+
+        friendList.appendChild(box);
+
+    });
+
+}
+
+
+/* =========================================================
+   SHOW PLAYER DETAILS
+========================================================= */
+
+function showDetails(friend) {
+
+    document.getElementById("detailImage").src =
+        friend.image;
+
+    document.getElementById("detailImage").alt =
+        friend.name;
+
+    document.getElementById("detailName").textContent =
+        friend.name;
+
+    document.getElementById("detailUsername").textContent =
+        friend.username;
+
+    document.getElementById("detailUID").textContent =
+        friend.uid;
+
+    document.getElementById("detailLevel").textContent =
+        friend.level;
+
+    document.getElementById("detailLikes").textContent =
+        friend.likes;
+
+    document.getElementById("detailGuild").textContent =
+        friend.guild || "—";
+
+    document.getElementById("detailRegion").textContent =
+        friend.region;
+
+    modal.classList.add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE PLAYER DETAILS
+========================================================= */
+
+function closeDetails() {
+
+    modal.classList.remove("show");
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL BY CLICKING OUTSIDE
+========================================================= */
+
+modal.addEventListener("click", function (event) {
+
+    if (event.target === modal) {
+
+        closeDetails();
+
+    }
+
+});
+
+
+/* =========================================================
+   SEARCH FUNCTION
+========================================================= */
+
+searchInput.addEventListener("input", function () {
+
+    const searchText = this.value
+        .toLowerCase()
+        .trim();
+
+
+    const filteredFriends = friends.filter(function (friend) {
+
+        return (
+
+            friend.name
+                .toLowerCase()
+                .includes(searchText)
+
+            ||
+
+            friend.username
+                .toLowerCase()
+                .includes(searchText)
+
+            ||
+
+            friend.uid
+                .includes(searchText)
+
+            ||
+
+            friend.guild
+                .toLowerCase()
+                .includes(searchText)
+
+            ||
+
+            friend.region
+                .toLowerCase()
+                .includes(searchText)
+
+        );
+
+    });
+
+
+    displayFriends(filteredFriends);
+
+});
+
+
+/* =========================================================
+   ESC KEY = CLOSE MODAL
+========================================================= */
+
+document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+
+        closeDetails();
+
+    }
+
+});
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+displayFriends(friends);
+
+    </script>
+
+</body>
+</html>
+```
