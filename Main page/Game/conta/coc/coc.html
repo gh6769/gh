@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Hunter | Clan Members</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --green:#00ff9d;
+    --blue:#00c8ff;
+    --purple:#a855f7;
+    --dark:#050811;
+    --card:#101827;
+}
+
+body{
+    background:var(--dark);
+    color:white;
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+    radial-gradient(circle at 20% 20%,#063e3540,transparent 35%),
+    radial-gradient(circle at 80% 70%,#42136c40,transparent 35%),
+    linear-gradient(135deg,#050811,#091322,#050811);
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    opacity:.12;
+    background-image:
+    linear-gradient(#00ff9d22 1px,transparent 1px),
+    linear-gradient(90deg,#00ff9d22 1px,transparent 1px);
+    background-size:45px 45px;
+    animation:gridMove 15s linear infinite;
+}
+
+@keyframes gridMove{
+    from{background-position:0 0;}
+    to{background-position:45px 45px;}
+}
+
+/* LIGHT EFFECT */
+
+.light{
+    position:fixed;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.25;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.light.one{
+    background:#00ff9d;
+    top:10%;
+    left:-100px;
+    animation:float 7s infinite alternate;
+}
+
+.light.two{
+    background:#a855f7;
+    right:-100px;
+    bottom:10%;
+    animation:float 8s infinite alternate-reverse;
+}
+
+@keyframes float{
+    to{transform:translate(100px,80px) scale(1.4);}
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:55px 15px 25px;
+}
+
+.logo{
+    font-size:clamp(35px,7vw,65px);
+    font-family:'Orbitron',sans-serif;
+    font-weight:900;
+    letter-spacing:3px;
+    color:white;
+    text-shadow:
+    0 0 10px var(--green),
+    0 0 25px var(--green),
+    0 0 55px #00ff9d99;
+    animation:logoGlow 2s infinite alternate;
+}
+
+@keyframes logoGlow{
+    from{text-shadow:0 0 10px var(--green),0 0 20px var(--green);}
+    to{text-shadow:0 0 20px var(--green),0 0 50px var(--blue);}
+}
+
+.subtitle{
+    color:#aab9c9;
+    letter-spacing:5px;
+    font-size:12px;
+    margin-top:10px;
+}
+
+.clan-tag{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 22px;
+    border:1px solid var(--green);
+    border-radius:30px;
+    color:var(--green);
+    font-family:'Orbitron',sans-serif;
+    font-size:12px;
+    box-shadow:0 0 15px #00ff9d44;
+    background:#00ff9d0c;
+}
+
+/* STATS */
+
+.stats{
+    max-width:1000px;
+    margin:35px auto;
+    padding:0 15px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat-box{
+    background:#101827bb;
+    border:1px solid #ffffff17;
+    border-radius:15px;
+    padding:22px 10px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+    transition:.3s;
+}
+
+.stat-box:hover{
+    border-color:var(--green);
+    transform:translateY(-5px);
+    box-shadow:0 0 25px #00ff9d22;
+}
+
+.stat-box h2{
+    color:var(--green);
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(22px,4vw,35px);
+}
+
+.stat-box p{
+    color:#9eafc3;
+    font-size:11px;
+    margin-top:8px;
+    letter-spacing:1px;
+}
+
+/* SECTION */
+
+.section-title{
+    text-align:center;
+    margin:55px 10px 25px;
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(19px,4vw,28px);
+}
+
+.section-title span{
+    color:var(--green);
+    text-shadow:0 0 15px var(--green);
+}
+
+/* SEARCH */
+
+.search-area{
+    max-width:500px;
+    margin:0 auto 35px;
+    padding:0 15px;
+}
+
+.search-area input{
+    width:100%;
+    padding:16px 20px;
+    border:1px solid #00ff9d66;
+    border-radius:12px;
+    outline:none;
+    background:#101827;
+    color:white;
+    font-size:14px;
+    box-shadow:0 0 15px #00ff9d11;
+}
+
+.search-area input:focus{
+    border-color:var(--green);
+    box-shadow:0 0 20px #00ff9d44;
+}
+
+.search-area input::placeholder{
+    color:#8191a6;
+}
+
+/* MEMBER GRID */
+
+.members{
+    max-width:1150px;
+    padding:0 18px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+    gap:22px;
+}
+
+.member-card{
+    position:relative;
+    padding:25px 20px;
+    border-radius:17px;
+    background:linear-gradient(145deg,#131f30,#090f1c);
+    border:1px solid #ffffff19;
+    overflow:hidden;
+    transition:.4s;
+    animation:cardAppear .7s ease both;
+}
+
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.member-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--green),transparent);
+    transition:.6s;
+}
+
+.member-card:hover::before{
+    left:100%;
+}
+
+.member-card:hover{
+    transform:translateY(-9px) scale(1.02);
+    border-color:var(--green);
+    box-shadow:
+    0 0 15px #00ff9d33,
+    0 0 40px #00ff9d16;
+}
+
+.member-top{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-bottom:22px;
+}
+
+.avatar{
+    width:53px;
+    height:53px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:linear-gradient(135deg,#00ff9d,#007cba);
+    color:#06111b;
+    font-family:'Orbitron',sans-serif;
+    font-size:21px;
+    font-weight:900;
+    box-shadow:0 0 18px #00ff9d55;
+}
+
+.member-name{
+    font-size:14px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+.member-role{
+    font-size:10px;
+    color:var(--green);
+    margin-top:4px;
+    letter-spacing:1px;
+}
+
+.member-number{
+    position:absolute;
+    right:18px;
+    top:17px;
+    color:#ffffff20;
+    font-family:'Orbitron',sans-serif;
+    font-size:24px;
+    font-weight:900;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #ffffff10;
+    font-size:12px;
+}
+
+.info:last-child{
+    border-bottom:none;
+}
+
+.info span:first-child{
+    color:#91a1b5;
+}
+
+.info span:last-child{
+    color:white;
+    font-weight:600;
+}
+
+.xp{
+    color:var(--green)!important;
+}
+
+.war{
+    color:#ffca58!important;
+}
+
+.th{
+    color:#bd91ff!important;
+}
+
+.uid{
+    font-size:10px!important;
+    color:#7ddcff!important;
+    letter-spacing:.3px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    margin-top:70px;
+    padding:30px 15px;
+    border-top:1px solid #ffffff15;
+    color:#8291a5;
+    font-size:12px;
+}
+
+footer h3{
+    font-family:'Orbitron',sans-serif;
+    color:var(--green);
+    margin-bottom:10px;
+    letter-spacing:3px;
+}
+
+footer span{
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+    header{padding-top:40px;}
+    .stats{gap:8px;}
+    .stat-box{padding:17px 5px;}
+    .stat-box p{font-size:9px;}
+    .members{grid-template-columns:1fr;}
+    .member-card{padding:23px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="light one"></div>
+<div class="light two"></div>
+
+<!-- HEADER -->
+
+<header>
+    <h1 class="logo">GHOST HUNTER</h1>
+    <p class="subtitle">CLASH OF CLANS OFFICIAL CLAN</p>
+    <div class="clan-tag">⚔ CLAN ID : #2RVGJUYGJ</div>
+</header>
+
+<!-- CLAN STATS -->
+
+<section class="stats">
+
+    <div class="stat-box">
+        <h2 id="totalMembers">08</h2>
+        <p>TOTAL MEMBERS</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>243</h2>
+        <p>TOTAL WAR STARS</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>464</h2>
+        <p>TOTAL XP</p>
+    </div>
+
+</section>
+
+<h2 class="section-title">
+    OUR <span>CLAN MEMBERS</span>
+</h2>
+
+<!-- SEARCH -->
+
+<div class="search-area">
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search clan member..."
+        oninput="searchMembers()"
+    >
+</div>
+
+<!-- MEMBERS -->
+
+<section class="members" id="members">
+
+    <!-- MEMBER 1 -->
+
+    <div class="member-card">
+        <span class="member-number">01</span>
+        <div class="member-top">
+            <div class="avatar">R</div>
+            <div>
+                <div class="member-name">Rakee us sajied</div>
+                <div class="member-role">👑 CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">109</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#G0JGJJJLR</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">78 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 16</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 2 -->
+
+    <div class="member-card">
+        <span class="member-number">02</span>
+        <div class="member-top">
+            <div class="avatar">S</div>
+            <div>
+                <div class="member-name">Sayem Chowdhury</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">104</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#LYURYCOQU</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">73 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 11</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 3 -->
+
+    <div class="member-card">
+        <span class="member-number">03</span>
+        <div class="member-top">
+            <div class="avatar">H</div>
+            <div>
+                <div class="member-name">Hasan</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">69</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#GPRUJU002</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">0 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 10</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 4 -->
+
+    <div class="member-card">
+        <span class="member-number">04</span>
+        <div class="member-top">
+            <div class="avatar">S</div>
+            <div>
+                <div class="member-name">Sakib al Hasan</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">62</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#Q209YP9JV</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">50 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 9</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 5 -->
+
+    <div class="member-card">
+        <span class="member-number">05</span>
+        <div class="member-top">
+            <div class="avatar">T</div>
+            <div>
+                <div class="member-name">Taki</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">33</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#R2CRUC2J2</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">0 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 8</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 6 -->
+
+    <div class="member-card">
+        <span class="member-number">06</span>
+        <div class="member-top">
+            <div class="avatar">Z</div>
+            <div>
+                <div class="member-name">Zihadul islam</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">51</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#LVCUWGLJ2</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">32 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 8</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 7 -->
+
+    <div class="member-card">
+        <span class="member-number">07</span>
+        <div class="member-top">
+            <div class="avatar">S</div>
+            <div>
+                <div class="member-name">SAHADAT HOSSA</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">27</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#WLUOUJVJV</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">10 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 6</span>
+        </div>
+    </div>
+
+    <!-- MEMBER 8 -->
+
+    <div class="member-card">
+        <span class="member-number">08</span>
+        <div class="member-top">
+            <div class="avatar">G</div>
+            <div>
+                <div class="member-name">GH EMPIRE</div>
+                <div class="member-role">⚔ CLAN MEMBER</div>
+            </div>
+        </div>
+        <div class="info">
+            <span>⭐ XP Level</span>
+            <span class="xp">9</span>
+        </div>
+        <div class="info">
+            <span>🆔 Player ID</span>
+            <span class="uid">#RTU09GQRO</span>
+        </div>
+        <div class="info">
+            <span>⚔ War Stars</span>
+            <span class="war">0 ⭐</span>
+        </div>
+        <div class="info">
+            <span>🏰 Town Hall</span>
+            <span class="th">TH 5</span>
+        </div>
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+    <h3>GHOST HUNTER</h3>
+    <p>WE FIGHT TOGETHER • WE WIN TOGETHER</p>
+    <p style="margin-top:12px;">
+        Clan ID: <span>#2RVGJUYGJ</span>
+    </p>
+    <p style="margin-top:15px;">
+        © 2026 GHOST HUNTER CLAN. ALL RIGHTS RESERVED.
+    </p>
+</footer>
+
+<script>
+
+// MEMBER SEARCH
+
+function searchMembers(){
+
+    let input = document
+        .getElementById("search")
+        .value.toLowerCase();
+
+    let cards = document.querySelectorAll(".member-card");
+
+    cards.forEach(card => {
+
+        let name = card
+            .querySelector(".member-name")
+            .innerText.toLowerCase();
+
+        let uid = card
+            .querySelector(".uid")
+            .innerText.toLowerCase();
+
+        if(name.includes(input) || uid.includes(input)){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+
+}
+
+// CARD ANIMATION DELAY
+
+document.querySelectorAll(".member-card").forEach((card,index)=>{
+    card.style.animationDelay = (index * 0.12) + "s";
+});
+
+</script>
+
+</body>
+</html>
