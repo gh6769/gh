@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#078f6b">
+<title>NOOR - ইসলামিক অ্যাপ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--green:#078f6b;
+--deep:#075b49;
+--mint:#dff5ed;
+--ink:#183d35;
+--muted:#71847e;
+--bg:#f2f7f5;
+--white:#fff;
+--line:#e7eeeb;
+--shadow:0 8px 26px #164d3d10;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+color:var(--ink);
+font-family:'Hind Siliguri',sans-serif;
+}
+
+/* বাংলা সংখ্যা আরও পরিষ্কারভাবে দেখানোর জন্য */
+.hero-date,
+#gregDate,
+#todayLabel,
+#sunrise,
+#sunset,
+#hijri,
+.timer,
+.timeval,
+.ringcenter,
+.mini .big,
+#fasting {
+font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;
+font-variant-numeric:tabular-nums;
+}
+
+.app{
+max-width:520px;
+margin:auto;
+min-height:100vh;
+padding:18px 16px 105px;
+}
+
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:8px 2px 20px;
+}
+
+.loc{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:19px;
+font-weight:600;
+}
+
+.loc button,.iconbtn{
+border:0;
+background:transparent;
+color:var(--ink);
+font:inherit;
+cursor:pointer;
+}
+
+.top-actions{
+display:flex;
+gap:10px;
+}
+
+.iconbtn{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#e1f4ec;
+font-size:20px;
+}
+
+.hero{
+background:linear-gradient(130deg,#079c72,#087b60);
+color:white;
+border-radius:18px;
+padding:22px 20px;
+box-shadow:0 10px 25px #078f6b25;
+position:relative;
+overflow:hidden;
+}
+
+.hero:after{
+content:"☪";
+position:absolute;
+font-size:130px;
+right:10px;
+top:-32px;
+color:#ffffff12;
+}
+
+.hero-date{
+font-family:'Noto Serif Bengali',serif;
+font-size:23px;
+font-weight:600;
+}
+
+.hero-sub{
+font-size:16px;
+opacity:.9;
+margin-top:3px;
+}
+
+.sunrow{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:16px;
+gap:10px;
+}
+
+.suninfo{
+display:flex;
+gap:8px;
+align-items:center;
+font-size:15px;
+}
+
+.sun{
+font-size:29px;
+}
+
+.card{
+background:var(--white);
+border:1px solid #e8eeeb;
+border-radius:16px;
+box-shadow:var(--shadow);
+margin-top:14px;
+overflow:hidden;
+}
+
+.prayer-card{
+padding:18px 16px 0;
+}
+
+.prayer-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.section-title{
+font-size:19px;
+font-weight:700;
+}
+
+.small{
+font-size:13px;
+color:var(--muted);
+}
+
+.next-layout{
+display:grid;
+grid-template-columns:1fr 1.2fr;
+gap:12px;
+align-items:center;
+}
+
+.countbox{
+text-align:center;
+padding:12px 0 18px;
+}
+
+.next-label{
+font-size:22px;
+font-weight:700;
+}
+
+.remain{
+font-size:14px;
+color:var(--muted);
+margin:3px 0 8px;
+}
+
+.timer{
+font-size:27px;
+font-weight:700;
+letter-spacing:1px;
+color:var(--green);
+}
+
+.ring{
+width:126px;
+height:126px;
+margin:8px auto 0;
+position:relative;
+}
+
+.ring svg{
+width:100%;
+height:100%;
+transform:rotate(-90deg);
+}
+
+.ring circle{
+fill:none;
+stroke-width:9;
+}
+
+.ring .track{
+stroke:#edf1ef;
+}
+
+.ring .progress{
+stroke:var(--green);
+stroke-linecap:round;
+stroke-dasharray:339;
+stroke-dashoffset:120;
+transition:stroke-dashoffset .8s;
+}
+
+.ringcenter{
+position:absolute;
+inset:0;
+display:grid;
+place-items:center;
+font-size:13px;
+color:var(--muted);
+}
+
+.times{
+padding-left:4px;
+}
+
+.time-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:11px 2px;
+border-bottom:1px solid var(--line);
+font-size:17px;
+}
+
+.time-row:last-child{
+border:0;
+}
+
+.time-row.active{
+background:var(--green);
+color:white;
+border-radius:9px;
+padding:11px 10px;
+margin:4px -2px;
+}
+
+.time-row.active .small{
+color:#e1fff4;
+}
+
+.timeval{
+font-size:17px;
+font-weight:600;
+white-space:nowrap;
+}
+
+.card-actions{
+display:flex;
+border-top:1px solid var(--line);
+margin:14px -16px 0;
+padding:12px;
+}
+
+.card-actions button{
+flex:1;
+border:0;
+background:transparent;
+color:var(--ink);
+font:inherit;
+font-size:16px;
+cursor:pointer;
+}
+
+.card-actions button+button{
+border-left:1px solid var(--line);
+}
+
+.quote{
+padding:20px;
+display:flex;
+gap:14px;
+align-items:center;
+}
+
+.quote-icon{
+width:48px;
+height:48px;
+flex:none;
+border-radius:15px;
+background:#fff4d5;
+display:grid;
+place-items:center;
+font-size:27px;
+}
+
+.quote strong{
+font-size:17px;
+}
+
+.quote p{
+margin:5px 0 0;
+color:var(--muted);
+line-height:1.5;
+font-size:14px;
+}
+
+.quick{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+padding:17px 8px;
+text-align:center;
+}
+
+.quick button{
+border:0;
+background:transparent;
+color:var(--ink);
+font:inherit;
+cursor:pointer;
+}
+
+.quick .bubble{
+width:58px;
+height:58px;
+margin:0 auto 7px;
+border-radius:50%;
+background:var(--mint);
+display:grid;
+place-items:center;
+font-size:24px;
+color:var(--deep);
+}
+
+.quick span{
+font-size:14px;
+}
+
+.below{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:14px;
+}
+
+.mini{
+padding:16px;
+text-align:center;
+}
+
+.mini .big{
+font-size:24px;
+color:var(--green);
+font-weight:700;
+}
+
+.mini .small{
+margin-top:3px;
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(520px,100%);
+background:#ffffffed;
+backdrop-filter:blur(12px);
+border-top:1px solid var(--line);
+display:flex;
+justify-content:space-around;
+padding:9px 6px max(13px,env(safe-area-inset-bottom));
+z-index:5;
+}
+
+.bottom button{
+border:0;
+background:transparent;
+color:#62766f;
+font:inherit;
+min-width:58px;
+cursor:pointer;
+}
+
+.bottom .navicon{
+font-size:22px;
+display:block;
+}
+
+.bottom small{
+font-size:12px;
+}
+
+.bottom button.selected{
+color:var(--green);
+font-weight:700;
+}
+
+.bottom button.selected .navicon{
+background:var(--mint);
+border-radius:18px;
+padding:4px 16px;
+}
+
+.status{
+font-size:12px;
+color:var(--muted);
+text-align:center;
+margin:12px 0;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#102b25a8;
+z-index:10;
+align-items:flex-end;
+justify-content:center;
+}
+
+.modal.show{
+display:flex;
+}
+
+.sheet{
+background:white;
+border-radius:22px 22px 0 0;
+padding:22px;
+width:min(520px,100%);
+max-height:82vh;
+overflow:auto;
+}
+
+.sheet h3{
+margin:0 0 12px;
+}
+
+.sheet input{
+width:100%;
+padding:13px;
+border:1px solid var(--line);
+border-radius:10px;
+font:inherit;
+margin:7px 0;
+}
+
+.primary{
+width:100%;
+padding:13px;
+border:0;
+border-radius:11px;
+background:var(--green);
+color:white;
+font:inherit;
+font-weight:600;
+margin-top:8px;
+cursor:pointer;
+}
+
+.secondary{
+width:100%;
+padding:12px;
+border:1px solid var(--line);
+border-radius:11px;
+background:white;
+color:var(--ink);
+font:inherit;
+margin-top:8px;
+cursor:pointer;
+}
+
+.hint{
+font-size:12px;
+color:var(--muted);
+line-height:1.5;
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:94px;
+transform:translateX(-50%);
+background:#173e34;
+color:white;
+padding:10px 16px;
+border-radius:30px;
+font-size:13px;
+opacity:0;
+pointer-events:none;
+transition:.25s;
+z-index:20;
+}
+
+.toast.show{
+opacity:1;
+}
+
+@media(max-width:370px){
+.app{padding:12px 10px 100px}
+.next-layout{grid-template-columns:.9fr 1.1fr}
+.time-row{font-size:15px}
+.timeval{font-size:15px}
+.timer{font-size:23px}
+.hero-date{font-size:20px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="top">
+<div class="loc">
+<span>📍</span>
+<button id="locationBtn">চাঁদপুর⌄</button>
+</div>
+
+<div class="top-actions">
+<button class="iconbtn" id="shareBtn">↗</button>
+<button class="iconbtn" id="notifyBtn">🔔</button>
+</div>
+</header>
+
+<section class="hero">
+
+<div class="hero-date" id="banglaDate">
+আজকের তারিখ
+</div>
+
+<div class="hero-sub" id="gregDate">
+তারিখ লোড হচ্ছে...
+</div>
+
+<div class="sunrow">
+
+<div class="suninfo">
+<span class="sun">☀</span>
+<span>সূর্যোদয়<br><b id="sunrise">--:--</b></span>
+</div>
+
+<div class="suninfo">
+<span class="sun">🌇</span>
+<span>সূর্যাস্ত<br><b id="sunset">--:--</b></span>
+</div>
+
+<div class="suninfo">
+<span class="sun">🌙</span>
+<span>হিজরি<br><b id="hijri">--</b></span>
+</div>
+
+</div>
+</section>
+
+<section class="card prayer-card">
+
+<div class="prayer-head">
+<span class="section-title">🕌 নামাজের সময়সূচি</span>
+<span class="small" id="todayLabel">আজ</span>
+</div>
+
+<div class="next-layout">
+
+<div class="countbox">
+
+<div class="next-label" id="nextName">ইশা</div>
+
+<div class="remain">শুরু হতে বাকি</div>
+
+<div class="timer" id="countdown">--:--:--</div>
+
+<div class="ring">
+
+<svg viewBox="0 0 120 120">
+
+<circle class="track" cx="60" cy="60" r="54"/>
+
+<circle class="progress" id="ringProgress" cx="60" cy="60" r="54"/>
+
+</svg>
+
+<div class="ringcenter" id="ringText">
+পরবর্তী ওয়াক্ত
+</div>
+
+</div>
+
+</div>
+
+<div class="times" id="prayerList">
+
+<div class="time-row">
+<span>ফজর</span>
+<span class="timeval">--:--</span>
+</div>
+
+<div class="time-row">
+<span>যোহর</span>
+<span class="timeval">--:--</span>
+</div>
+
+<div class="time-row">
+<span>আসর</span>
+<span class="timeval">--:--</span>
+</div>
+
+<div class="time-row">
+<span>মাগরিব</span>
+<span class="timeval">--:--</span>
+</div>
+
+<div class="time-row">
+<span>ইশা</span>
+<span class="timeval">--:--</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="card-actions">
+<button id="alarmBtn">♧ অ্যালার্ম / নোটিফিকেশন</button>
+<button id="calendarBtn">▦ ক্যালেন্ডার</button>
+</div>
+
+</section>
+
+<section class="card quote">
+
+<div class="quote-icon">﷽</div>
+
+<div>
+<strong>একটি সুন্দর দিনের শুরু হোক আল্লাহর স্মরণে</strong>
+
+<p>
+নিয়মিত নামাজ আদায় করুন। আল্লাহ আমাদের সবাইকে সঠিক পথে পরিচালিত করুন।
+</p>
+</div>
+
+</section>
+
+<section class="card quick">
+
+<button data-feature="তাসবিহ">
+<div class="bubble">📿</div>
+<span>তাসবিহ</span>
+</button>
+
+<button data-feature="তাফসীর">
+<div class="bubble">📖</div>
+<span>তাফসীর</span>
+</button>
+
+<button data-feature="আল্লাহর ৯৯ নাম">
+<div class="bubble">الله</div>
+<span>৯৯ নাম</span>
+</button>
+
+<button data-feature="রুকইয়াহ">
+<div class="bubble">۞</div>
+<span>রুকইয়াহ</span>
+</button>
+
+</section>
+
+<div class="below">
+
+<section class="card mini">
+<div class="big" id="fasting">--</div>
+<div class="small">পরবর্তী রোজা</div>
+</section>
+
+<section class="card mini">
+<div class="big">🧭</div>
+<div class="small">কিবলা (কম্পাস)</div>
+</section>
+
+</div>
+
+<div class="status" id="status">
+নামাজের সময় জানতে ইন্টারনেট সংযোগ প্রয়োজন।
+</div>
+
+</div>
+
+<nav class="bottom">
+
+<button class="selected" data-tab="হোম">
+<span class="navicon">⌂</span>
+<small>হোম</small>
+</button>
+
+<button data-tab="টুলস">
+<span class="navicon">◉</span>
+<small>টুলস</small>
+</button>
+
+<button data-tab="কুরআন">
+<span class="navicon">▤</span>
+<small>কুরআন</small>
+</button>
+
+<button data-tab="দোয়া">
+<span class="navicon">🤲</span>
+<small>দোয়া</small>
+</button>
+
+<button data-tab="অন্যান্য">
+<span class="navicon">♙</span>
+<small>অন্যান্য</small>
+</button>
+
+</nav>
+
+<div class="modal" id="locationModal">
+
+<div class="sheet">
+
+<h3>📍 আপনার অবস্থান</h3>
+
+<p class="hint">
+শহরের নাম লিখে খুঁজুন, অথবা আপনার ডিভাইসের লোকেশন ব্যবহার করুন।
+</p>
+
+<input id="cityInput" placeholder="যেমন: Chandpur, Bangladesh">
+
+<button class="primary" id="searchCity">
+শহর খুঁজুন
+</button>
+
+<button class="secondary" id="useGPS">
+বর্তমান লোকেশন ব্যবহার করুন
+</button>
+
+<button class="secondary closeModal">
+বন্ধ করুন
+</button>
+
+</div>
+</div>
+
+<div class="modal" id="calendarModal">
+
+<div class="sheet">
+
+<h3>📅 নামাজের ক্যালেন্ডার</h3>
+
+<p class="hint">
+নির্দিষ্ট তারিখের নামাজের সময় দেখতে তারিখ নির্বাচন করুন।
+</p>
+
+<input type="date" id="datePicker">
+
+<button class="primary" id="loadDate">
+এই তারিখের সময় দেখুন
+</button>
+
+<button class="secondary closeModal">
+বন্ধ করুন
+</button>
+
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const $=id=>document.getElementById(id);
+
+const bnDigits=s=>String(s).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+
+const fmtTime=t=>{
+if(!t)return'--:--';
+let [h,m]=t.split(':');
+return bnDigits(`${h}:${m}`);
+};
+
+const prayerNames=[
+['Fajr','ফজর'],
+['Dhuhr','যোহর'],
+['Asr','আসর'],
+['Maghrib','মাগরিব'],
+['Isha','ইশা']
+];
+
+let place={
+name:'চাঁদপুর',
+lat:23.2333,
+lon:90.6667
+};
+
+let timings=null;
+let prayerDate=new Date();
+let nextPrayer=null;
+let timerLoop=null;
+let alarmTimeout=null;
+
+function dateText(d){
+return new Intl.DateTimeFormat('bn-BD',{
+weekday:'long',
+day:'numeric',
+month:'long'
+}).format(d);
+}
+
+function gregText(d){
+return new Intl.DateTimeFormat('bn-BD',{
+year:'numeric',
+month:'long',
+day:'numeric'
+}).format(d);
+}
+
+function timeToDate(time,dayOffset=0){
+
+const [h,m]=time.split(':').map(Number);
+
+const d=new Date(prayerDate);
+
+d.setDate(d.getDate()+dayOffset);
+
+d.setHours(h,m,0,0);
+
+return d;
+
+}
+
+function getPrayerSequence(data){
+
+return prayerNames.map(([key,label])=>({
+key,
+label,
+time:data[key].split(' ')[0]
+}));
+
+}
+
+function paintList(data){
+
+const seq=getPrayerSequence(data);
+
+$('prayerList').innerHTML=seq.map(p=>`
+
+<div class="time-row" data-key="${p.key}">
+
+<span>${p.label}</span>
+
+<span class="timeval">${fmtTime(p.time)}</span>
+
+</div>
+
+`).join('');
+
+updateCountdown();
+
+}
+
+function updateCountdown(){
+
+if(!timings)return;
+
+const seq=getPrayerSequence(timings);
+
+const now=new Date();
+
+let upcoming=seq.find(p=>timeToDate(p.time)>now);
+
+let target;
+
+if(upcoming){
+
+target=timeToDate(upcoming.time);
+
+}else{
+
+upcoming=seq[0];
+
+target=timeToDate(upcoming.time,1);
+
+}
+
+nextPrayer=upcoming;
+
+$('nextName').textContent=upcoming.label;
+
+const diff=Math.max(0,target-now);
+
+const total=Math.floor(diff/1000);
+
+const hh=Math.floor(total/3600);
+
+const mm=Math.floor(total%3600/60);
+
+const ss=total%60;
+
+$('countdown').textContent=bnDigits(
+
+[hh,mm,ss]
+.map(n=>String(n).padStart(2,'0'))
+.join(':')
+
+);
+
+$('ringText').textContent=bnDigits(
+`${Math.floor(total/60)} মিনিট`
+);
+
+const previous=seq
+.filter(p=>timeToDate(p.time)<=now)
+.slice(-1)[0];
+
+document.querySelectorAll('.time-row').forEach(row=>{
+
+row.classList.toggle(
+'active',
+row.dataset.key===upcoming.key
+);
+
+});
+
+const previousTime=previous
+?timeToDate(previous.time)
+:timeToDate(seq[4].time,-1);
+
+const span=Math.max(1,target-previousTime);
+
+const elapsed=Math.max(
+0,
+Math.min(span,now-previousTime)
+);
+
+$('ringProgress').style.strokeDashoffset=
+String(339-(elapsed/span)*339);
+
+}
+
+async function loadPrayerTimes(date=new Date()){
+
+prayerDate=new Date(date);
+
+$('banglaDate').textContent=dateText(prayerDate);
+
+$('gregDate').textContent=gregText(prayerDate);
+
+$('todayLabel').textContent=dateText(prayerDate);
+
+$('status').textContent='নামাজের সময় আপডেট হচ্ছে…';
+
+try{
+
+const dd=String(prayerDate.getDate()).padStart(2,'0');
+
+const mm=String(prayerDate.getMonth()+1).padStart(2,'0');
+
+const yy=prayerDate.getFullYear();
+
+const url=
+`https://api.aladhan.com/v1/timings/${dd}-${mm}-${yy}?latitude=${place.lat}&longitude=${place.lon}&method=1&school=1`;
+
+const res=await fetch(url);
+
+if(!res.ok)throw new Error('API error');
+
+const json=await res.json();
+
+if(json.code!==200)throw new Error('No data');
+
+timings=json.data.timings;
+
+$('hijri').textContent=
+`${bnDigits(json.data.date.hijri.day)} ${json.data.date.hijri.month.ar}`;
+
+$('sunrise').textContent=fmtTime(timings.Sunrise);
+
+$('sunset').textContent=fmtTime(timings.Sunset);
+
+paintList(timings);
+
+$('status').textContent=
+`${place.name} • সময়সূচি AlAdhan থেকে নেওয়া`;
+
+$('fasting').textContent=
+json.data.date.hijri.holidays?.length?'আজ':'শীঘ্রই';
+
+}catch(e){
+
+$('status').textContent=
+'সময়সূচি আনতে সমস্যা হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।';
+
+toast('সময়সূচি লোড হয়নি');
+
+}
+
+}
+
+async function searchCity(){
+
+const q=$('cityInput').value.trim();
+
+if(!q)return toast('শহরের নাম লিখুন');
+
+try{
+
+const r=await fetch(
+`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(q)}`
+);
+
+const a=await r.json();
+
+if(!a.length)throw 0;
+
+place={
+name:a[0].display_name.split(',')[0],
+lat:+a[0].lat,
+lon:+a[0].lon
+};
+
+$('locationBtn').textContent=place.name+'⌄';
+
+$('locationModal').classList.remove('show');
+
+loadPrayerTimes();
+
+}catch(e){
+
+toast('শহর খুঁজে পাওয়া যায়নি');
+
+}
+
+}
+
+function useGPS(){
+
+if(!navigator.geolocation){
+
+return toast('এই ডিভাইসে লোকেশন সুবিধা নেই');
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+async pos=>{
+
+place={
+name:'আপনার লোকেশন',
+lat:pos.coords.latitude,
+lon:pos.coords.longitude
+};
+
+try{
+
+const r=await fetch(
+`https://nominatim.openstreetmap.org/reverse?format=json&lat=${place.lat}&lon=${place.lon}`
+);
+
+const j=await r.json();
+
+place.name=
+j.address.city||
+j.address.town||
+j.address.village||
+'আপনার লোকেশন';
+
+}catch(e){}
+
+$('locationBtn').textContent=place.name+'⌄';
+
+$('locationModal').classList.remove('show');
+
+loadPrayerTimes();
+
+},
+
+()=>toast('লোকেশন অনুমতি দেওয়া হয়নি'),
+
+{
+enableHighAccuracy:true,
+timeout:12000
+}
+
+);
+
+}
+
+function setupAlarm(){
+
+if(!('Notification'in window)){
+
+return toast('এই ব্রাউজারে নোটিফিকেশন নেই');
+
+}
+
+Notification.requestPermission().then(p=>{
+
+if(p==='granted'){
+
+toast('নোটিফিকেশন চালু হয়েছে');
+
+scheduleAlarm();
+
+}else{
+
+toast('নোটিফিকেশন অনুমতি পাওয়া যায়নি');
+
+}
+
+});
+
+}
+
+function scheduleAlarm(){
+
+if(alarmTimeout)clearTimeout(alarmTimeout);
+
+if(!timings||Notification.permission!=='granted')return;
+
+const seq=getPrayerSequence(timings);
+
+const now=new Date();
+
+let p=seq.find(x=>timeToDate(x.time)>now);
+
+let target=p
+?timeToDate(p.time)
+:timeToDate(seq[0].time,1);
+
+alarmTimeout=setTimeout(()=>{
+
+new Notification('নামাজের সময় হয়েছে',{
+
+body:`এখন ${p?p.label:'ফজর'}র নামাজের সময়।`
+
+});
+
+scheduleAlarm();
+
+},target-now);
+
+}
+
+$('locationBtn').onclick=()=>{
+
+$('locationModal').classList.add('show');
+
+};
+
+$('searchCity').onclick=searchCity;
+
+$('useGPS').onclick=useGPS;
+
+$('shareBtn').onclick=()=>{
+
+if(navigator.share){
+
+navigator.share({
+
+title:'নূর — নামাজের সময়',
+
+text:'নামাজের সময়সূচি দেখুন',
+
+url:location.href
+
+});
+
+}else{
+
+toast('শেয়ার সুবিধা নেই');
+
+}
+
+};
+
+$('notifyBtn').onclick=setupAlarm;
+
+$('alarmBtn').onclick=setupAlarm;
+
+$('calendarBtn').onclick=()=>{
+
+$('calendarModal').classList.add('show');
+
+};
+
+$('loadDate').onclick=()=>{
+
+const d=$('datePicker').value;
+
+if(!d)return toast('তারিখ নির্বাচন করুন');
+
+$('calendarModal').classList.remove('show');
+
+loadPrayerTimes(new Date(d+'T12:00:00'));
+
+};
+
+document.querySelectorAll('.closeModal').forEach(b=>{
+
+b.onclick=()=>{
+
+b.closest('.modal').classList.remove('show');
+
+};
+
+});
+
+document.querySelectorAll('[data-feature]').forEach(b=>{
+
+b.onclick=()=>{
+
+toast(b.dataset.feature+' — পরবর্তী আপডেটে যুক্ত করা যাবে');
+
+};
+
+});
+
+document.querySelectorAll('[data-tab]').forEach(b=>{
+
+b.onclick=()=>{
+
+document.querySelectorAll('[data-tab]').forEach(x=>{
+
+x.classList.remove('selected');
+
+});
+
+b.classList.add('selected');
+
+if(b.dataset.tab!=='হোম'){
+
+toast(b.dataset.tab+' বিভাগটি ডেমো হিসেবে রাখা হয়েছে');
+
+}
+
+};
+
+});
+
+function toast(message){
+
+const el=$('toast');
+
+el.textContent=message;
+
+el.classList.add('show');
+
+setTimeout(()=>el.classList.remove('show'),2500);
+
+}
+
+$('datePicker').value=new Date().toISOString().slice(0,10);
+
+loadPrayerTimes();
+
+timerLoop=setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
