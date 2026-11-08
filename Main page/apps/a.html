@@ -1,218 +1,552 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Apps Dashboard</title>
+<meta name="theme-color" content="#080b16">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>My Apps Dashboard</title>
 
-        body {
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at top left, #173b4d, transparent 35%),
-                radial-gradient(circle at bottom right, #27194d, transparent 35%),
-                #080b12;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-            overflow-x: hidden;
-        }
+<style>
 
-        .dashboard {
-            width: 100%;
-            max-width: 900px;
-            text-align: center;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .title {
-            font-size: 34px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
+:root {
+    --cyan: #00f5d4;
+    --purple: #9b5cff;
+    --blue: #398cff;
+}
 
-        .subtitle {
-            color: #9da7b8;
-            margin-bottom: 35px;
-            font-size: 15px;
-        }
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
 
-        .apps {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
-        }
+    background:
+        radial-gradient(circle at 15% 15%, #123b4b 0%, transparent 35%),
+        radial-gradient(circle at 85% 85%, #29164b 0%, transparent 35%),
+        #080b16;
 
-        .app-card {
-            position: relative;
-            min-height: 190px;
-            padding: 30px 20px;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            overflow: hidden;
+    color: white;
 
-            transition: 0.35s ease;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        .app-card::before {
-            content: "";
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: rgba(0, 255, 200, 0.12);
-            top: -60px;
-            right: -50px;
-            filter: blur(10px);
-        }
+    padding: 30px 20px;
+    overflow-x: hidden;
+    position: relative;
+}
 
-        .app-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 255, 200, 0.5);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
-        }
+/* ANIMATED BACKGROUND */
 
-        .icon {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 18px;
+body::before,
+body::after {
+    content: "";
+    position: fixed;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    width: 350px;
+    height: 350px;
 
-            border-radius: 22px;
-            font-size: 38px;
+    border-radius: 50%;
+    filter: blur(100px);
 
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: inset 0 0 20px rgba(255,255,255,0.04);
-        }
+    opacity: 0.18;
+    pointer-events: none;
 
-        .app-name {
-            font-size: 21px;
-            font-weight: 700;
-            margin-bottom: 7px;
-        }
+    animation: moveGlow 10s infinite alternate ease-in-out;
+}
 
-        .app-description {
-            color: #9da7b8;
-            font-size: 13px;
-        }
+body::before {
+    background: #00e5ff;
+    top: -120px;
+    left: -120px;
+}
 
-        .footer {
-            margin-top: 35px;
-            color: #667085;
-            font-size: 12px;
-        }
+body::after {
+    background: #8b36ff;
+    bottom: -120px;
+    right: -120px;
+    animation-delay: 2s;
+}
 
-        /* Mobile */
-        @media (max-width: 600px) {
+@keyframes moveGlow {
 
-            body {
-                padding: 18px;
-            }
+    from {
+        transform: translate(0, 0) scale(1);
+    }
 
-            .title {
-                font-size: 28px;
-            }
+    to {
+        transform: translate(100px, 70px) scale(1.3);
+    }
 
-            .subtitle {
-                margin-bottom: 25px;
-            }
+}
 
-            .apps {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
+/* DASHBOARD */
 
-            .app-card {
-                min-height: 165px;
-                padding: 25px 18px;
-            }
+.dashboard {
+    width: 100%;
+    max-width: 950px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
 
-            .icon {
-                width: 65px;
-                height: 65px;
-                font-size: 32px;
-            }
-        }
-    </style>
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* TITLE */
+
+.title {
+    font-size: 48px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #00f5d4,
+        #9b5cff,
+        #ffffff
+    );
+
+    background-size: 300% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    animation: gradientText 5s linear infinite;
+}
+
+@keyframes gradientText {
+
+    to {
+        background-position: 300% center;
+    }
+
+}
+
+.subtitle {
+    color: #a7b2c5;
+    font-size: 15px;
+    margin-top: 12px;
+    margin-bottom: 45px;
+    letter-spacing: 1px;
+}
+
+/* APP GRID */
+
+.apps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+/* APP CARD */
+
+.app-card {
+
+    position: relative;
+
+    min-height: 230px;
+
+    padding: 35px 22px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.055);
+
+    border: 1px solid rgba(255,255,255,0.13);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    text-decoration: none;
+    color: white;
+
+    overflow: hidden;
+
+    transition: all 0.4s ease;
+
+    animation: cardFloat 5s ease-in-out infinite;
+}
+
+.app-card:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.app-card:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes cardFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+}
+
+/* CARD LIGHT EFFECT */
+
+.app-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(0,245,212,0.12);
+
+    top: -100px;
+    right: -80px;
+
+    filter: blur(25px);
+
+    transition: 0.5s;
+}
+
+.app-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--cyan),
+        var(--purple),
+        transparent
+    );
+
+    top: 0;
+    left: -100%;
+
+    transition: 0.6s;
+}
+
+.app-card:hover::after {
+    left: 100%;
+}
+
+.app-card:hover {
+
+    transform: translateY(-12px) scale(1.035);
+
+    border-color: rgba(0,245,212,0.55);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45),
+        0 0 25px rgba(0,245,212,0.13);
+}
+
+.app-card:hover::before {
+
+    transform: scale(1.8);
+
+    background: rgba(0,245,212,0.2);
+}
+
+/* ICON */
+
+.icon {
+
+    width: 85px;
+    height: 85px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 24px;
+
+    font-size: 42px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+        inset 0 0 20px rgba(255,255,255,0.04),
+        0 5px 25px rgba(0,0,0,0.2);
+
+    transition: 0.4s;
+
+    position: relative;
+    z-index: 1;
+}
+
+.app-card:hover .icon {
+
+    transform: scale(1.12) rotate(-5deg);
+
+    box-shadow:
+        0 0 25px rgba(0,245,212,0.2);
+}
+
+/* GHOST LOGO */
+
+.ghost-logo {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 10px;
+
+    border-radius: 22px;
+}
+
+/* APP NAME */
+
+.app-name {
+
+    font-size: 23px;
+    font-weight: 800;
+
+    margin-bottom: 10px;
+
+    letter-spacing: 0.5px;
+
+    position: relative;
+    z-index: 1;
+
+}
+
+.app-description {
+
+    color: #a5afc0;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    position: relative;
+    z-index: 1;
+}
+
+/* GHOST SPECIAL COLOR */
+
+.ghost-card {
+
+    border-color: rgba(155,92,255,0.35);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(100,50,180,0.13),
+            rgba(255,255,255,0.04)
+        );
+}
+
+.ghost-card::before {
+
+    background: rgba(155,92,255,0.22);
+
+}
+
+.ghost-card:hover {
+
+    border-color: #a56cff;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45),
+        0 0 30px rgba(155,92,255,0.2);
+}
+
+.ghost-card:hover .icon {
+
+    box-shadow: 0 0 30px rgba(155,92,255,0.35);
+
+}
+
+/* FOOTER */
+
+.footer {
+
+    margin-top: 45px;
+
+    color: #697589;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 35px 18px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    .apps {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .app-card {
+        min-height: 195px;
+        padding: 28px 18px;
+    }
+
+    .icon {
+        width: 72px;
+        height: 72px;
+        font-size: 35px;
+    }
+
+    .app-name {
+        font-size: 21px;
+    }
+
+    .footer {
+        margin-top: 30px;
+    }
+
+}
+
+/* REDUCE ANIMATION FOR ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-    <main class="dashboard">
+<main class="dashboard">
 
-        <h1 class="title">My Apps</h1>
+    <h1 class="title">My Apps</h1>
 
-        <p class="subtitle">
-            Choose an application to continue
-        </p>
+    <p class="subtitle">
+        Choose an application to continue
+    </p>
 
+    <div class="apps">
 
-        <div class="apps">
+        <!-- NAMAZ APP -->
 
-            <!-- Namaj App -->
-            <a href="namaj/n.html" class="app-card">
+        <a href="namaj/n.html" class="app-card">
 
-                <div class="icon">
-                    🕌
-                </div>
+            <div class="icon">
+                🕌
+            </div>
 
-                <div class="app-name">
-                    Namaj Time
-                </div>
+            <div class="app-name">
+                Namaj Time
+            </div>
 
-                <div class="app-description">
-                    Prayer times & Islamic information
-                </div>
+            <div class="app-description">
+                Prayer times & Islamic information
+            </div>
 
-            </a>
-
-
-            <!-- Note Pad -->
-            <a href="note/no.html" class="app-card">
-
-                <div class="icon">
-                    📝
-                </div>
-
-                <div class="app-name">
-                    Note Pad
-                </div>
-
-                <div class="app-description">
-                    Write and save your notes
-                </div>
-
-            </a>
-
-        </div>
+        </a>
 
 
-        <div class="footer">
-            © 2026 • My Apps Dashboard
-        </div>
+        <!-- NOTE PAD -->
 
-    </main>
+        <a href="note/no.html" class="app-card">
+
+            <div class="icon">
+                📝
+            </div>
+
+            <div class="app-name">
+                Note Pad
+            </div>
+
+            <div class="app-description">
+                Write and save your notes
+            </div>
+
+        </a>
+
+
+        <!-- GHOST INTELLIGENCE -->
+
+        <a href="gh/gh.html" class="app-card ghost-card">
+
+            <div class="icon">
+
+                <img
+                    src="gii.jpg"
+                    alt="Ghost Intelligence Logo"
+                    class="ghost-logo"
+                >
+
+            </div>
+
+            <div class="app-name">
+                Ghost Intelligence
+            </div>
+
+            <div class="app-description">
+                Smart AI & Intelligent Experience
+            </div>
+
+        </a>
+
+    </div>
+
+  
+
+</main>
 
 </body>
-
 </html>
+```
