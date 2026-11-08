@@ -6,1015 +6,597 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070716">
-
 <title>🎂 Friends Birthday Hub</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* =====================================
-   GLOBAL
-===================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    min-height: 100vh;
-    font-family: Arial, "Noto Sans Bengali", sans-serif;
-    color: white;
-
+body{
+    min-height:100vh;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    color:white;
     background:
-        radial-gradient(circle at top left, #29105c, transparent 35%),
-        radial-gradient(circle at bottom right, #063b50, transparent 35%),
+        radial-gradient(circle at top left,#29105c,transparent 35%),
+        radial-gradient(circle at bottom right,#063b50,transparent 35%),
         #070716;
-
-    overflow-x: hidden;
+    overflow-x:hidden;
 }
 
-/* =====================================
-   ANIMATED BACKGROUND
-===================================== */
-
-.bg-animation {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -1;
+.bg-animation{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-1;
 }
 
-.bg-animation span {
-    position: absolute;
-    display: block;
-    width: 8px;
-    height: 8px;
-    background: white;
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 10px white,
-        0 0 20px #8b5cf6;
-
-    animation: float 12s linear infinite;
-    opacity: .7;
+.bg-animation span{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 10px white,0 0 20px #8b5cf6;
+    animation:float 12s linear infinite;
+    opacity:.7;
 }
 
-.bg-animation span:nth-child(1) {
-    left: 10%;
-    top: 90%;
-    animation-duration: 12s;
+.bg-animation span:nth-child(1){left:10%;top:90%;animation-duration:12s;}
+.bg-animation span:nth-child(2){left:20%;top:80%;animation-duration:16s;width:5px;height:5px;}
+.bg-animation span:nth-child(3){left:35%;top:95%;animation-duration:14s;}
+.bg-animation span:nth-child(4){left:50%;top:85%;animation-duration:18s;}
+.bg-animation span:nth-child(5){left:65%;top:90%;animation-duration:13s;}
+.bg-animation span:nth-child(6){left:75%;top:75%;animation-duration:17s;}
+.bg-animation span:nth-child(7){left:88%;top:92%;animation-duration:15s;}
+.bg-animation span:nth-child(8){left:45%;top:70%;animation-duration:20s;}
+
+@keyframes float{
+    0%{transform:translateY(100vh) scale(0);opacity:0;}
+    20%{opacity:1;}
+    80%{opacity:.8;}
+    100%{transform:translateY(-120vh) scale(1.5);opacity:0;}
 }
 
-.bg-animation span:nth-child(2) {
-    left: 20%;
-    top: 80%;
-    animation-duration: 16s;
-    width: 5px;
-    height: 5px;
+.header{
+    text-align:center;
+    padding:55px 20px 35px;
 }
 
-.bg-animation span:nth-child(3) {
-    left: 35%;
-    top: 95%;
-    animation-duration: 14s;
+.cake{
+    font-size:65px;
+    display:inline-block;
+    animation:cakeFloat 2s ease-in-out infinite;
+    filter:drop-shadow(0 0 15px rgba(255,255,255,.5));
 }
 
-.bg-animation span:nth-child(4) {
-    left: 50%;
-    top: 85%;
-    animation-duration: 18s;
+@keyframes cakeFloat{
+    0%,100%{transform:translateY(0) rotate(-5deg);}
+    50%{transform:translateY(-12px) rotate(5deg);}
 }
 
-.bg-animation span:nth-child(5) {
-    left: 65%;
-    top: 90%;
-    animation-duration: 13s;
+.header h1{
+    margin-top:10px;
+    font-size:clamp(32px,6vw,65px);
+    font-weight:900;
+    background:linear-gradient(90deg,#ff6ec7,#8b5cf6,#38bdf8,#ff6ec7);
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:gradientMove 5s linear infinite;
 }
 
-.bg-animation span:nth-child(6) {
-    left: 75%;
-    top: 75%;
-    animation-duration: 17s;
+@keyframes gradientMove{
+    0%{background-position:0%;}
+    100%{background-position:300%;}
 }
 
-.bg-animation span:nth-child(7) {
-    left: 88%;
-    top: 92%;
-    animation-duration: 15s;
+.header p{
+    margin-top:12px;
+    color:#d7d4e8;
+    font-size:17px;
 }
 
-.bg-animation span:nth-child(8) {
-    left: 45%;
-    top: 70%;
-    animation-duration: 20s;
+.live-date{
+    display:inline-block;
+    margin-top:18px;
+    padding:8px 18px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:30px;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(10px);
+    color:#c4b5fd;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(100vh) scale(0);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: .8;
-    }
-
-    100% {
-        transform: translateY(-120vh) scale(1.5);
-        opacity: 0;
-    }
+.birthday-section{
+    width:min(1200px,92%);
+    margin:auto;
+    padding-bottom:60px;
 }
 
-/* =====================================
-   HEADER
-===================================== */
-
-.header {
-    text-align: center;
-    padding: 55px 20px 35px;
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:30px;
 }
 
-.cake {
-    font-size: 65px;
-    display: inline-block;
+.section-title h2{font-size:30px;}
 
-    animation: cakeFloat 2s ease-in-out infinite;
-
-    filter: drop-shadow(0 0 15px rgba(255,255,255,.5));
+.section-title span{
+    animation:spinEmoji 2s ease-in-out infinite alternate;
 }
 
-@keyframes cakeFloat {
-    0%, 100% {
-        transform: translateY(0) rotate(-5deg);
-    }
-
-    50% {
-        transform: translateY(-12px) rotate(5deg);
-    }
+@keyframes spinEmoji{
+    from{transform:rotate(-15deg) scale(1);}
+    to{transform:rotate(15deg) scale(1.2);}
 }
 
-.header h1 {
-    margin-top: 10px;
-    font-size: clamp(32px, 6vw, 65px);
-    font-weight: 900;
-
-    background: linear-gradient(
-        90deg,
-        #ff6ec7,
-        #8b5cf6,
-        #38bdf8,
-        #ff6ec7
-    );
-
-    background-size: 300%;
-    -webkit-background-clip: text;
-    color: transparent;
-
-    animation: gradientMove 5s linear infinite;
+.birthday-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
 }
 
-@keyframes gradientMove {
-    0% {
-        background-position: 0%;
-    }
-
-    100% {
-        background-position: 300%;
-    }
+.birthday-card{
+    position:relative;
+    padding:25px;
+    border-radius:25px;
+    overflow:hidden;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 40px rgba(0,0,0,.3),inset 0 0 30px rgba(255,255,255,.02);
+    transition:.4s ease;
 }
 
-.header p {
-    margin-top: 12px;
-    color: #d7d4e8;
-    font-size: 17px;
+.birthday-card::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:#8b5cf6;
+    filter:blur(80px);
+    opacity:.18;
+    top:-80px;
+    right:-70px;
 }
 
-/* Today's Date */
-
-.live-date {
-    display: inline-block;
-    margin-top: 18px;
-    padding: 8px 18px;
-
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 30px;
-
-    background: rgba(255,255,255,.06);
-    backdrop-filter: blur(10px);
-
-    color: #c4b5fd;
+.birthday-card::after{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:25px;
+    padding:2px;
+    background:linear-gradient(120deg,transparent,#a855f7,#38bdf8,transparent);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:0;
+    transition:.4s;
+    pointer-events:none;
 }
 
-/* =====================================
-   SECTION
-===================================== */
-
-.birthday-section {
-    width: min(1200px, 92%);
-    margin: auto;
-    padding-bottom: 60px;
+.birthday-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 30px rgba(139,92,246,.25);
 }
 
-.section-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 30px;
+.birthday-card:hover::after{opacity:1;}
+
+.card-number{
+    position:absolute;
+    top:15px;
+    right:18px;
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    color:#c4b5fd;
+    font-weight:bold;
+    z-index:5;
 }
 
-.section-title h2 {
-    font-size: 30px;
+.next-badge{
+    display:block;
+    width:fit-content;
+    margin:0 auto 18px;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#f59e0b,#ef4444);
+    box-shadow:0 0 15px rgba(245,158,11,.4);
+    animation:badgePulse 1.5s infinite;
 }
 
-.section-title span {
-    animation: spinEmoji 2s ease-in-out infinite alternate;
+@keyframes badgePulse{
+    50%{transform:scale(1.06);}
 }
 
-@keyframes spinEmoji {
-    from {
-        transform: rotate(-15deg) scale(1);
-    }
-
-    to {
-        transform: rotate(15deg) scale(1.2);
-    }
+.avatar{
+    width:90px;
+    height:90px;
+    margin:0 auto 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    padding:3px;
+    background:linear-gradient(135deg,#8b5cf6,#ec4899,#38bdf8);
+    box-shadow:0 0 25px rgba(168,85,247,.5);
+    animation:avatarGlow 3s ease-in-out infinite;
+    position:relative;
+    z-index:2;
 }
 
-/* =====================================
-   GRID
-===================================== */
-
-.birthday-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+.avatar img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    border:3px solid #121225;
 }
 
-/* =====================================
-   CARD
-===================================== */
-
-.birthday-card {
-    position: relative;
-    padding: 25px;
-    border-radius: 25px;
-    overflow: hidden;
-
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.15);
-
-    backdrop-filter: blur(18px);
-
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.3),
-        inset 0 0 30px rgba(255,255,255,.02);
-
-    transition: .4s ease;
+@keyframes avatarGlow{
+    0%,100%{box-shadow:0 0 15px rgba(168,85,247,.3);}
+    50%{box-shadow:0 0 35px rgba(168,85,247,.8);}
 }
 
-.birthday-card::before {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-
-    background: #8b5cf6;
-    filter: blur(80px);
-    opacity: .18;
-
-    top: -80px;
-    right: -70px;
+.friend-name{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:8px;
+    position:relative;
+    z-index:2;
 }
 
-.birthday-card::after {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: 25px;
-    padding: 2px;
-
-    background: linear-gradient(
-        120deg,
-        transparent,
-        #a855f7,
-        #38bdf8,
-        transparent
-    );
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-
-    opacity: 0;
-    transition: .4s;
-    pointer-events: none;
+.birthday-date{
+    text-align:center;
+    color:#c4b5fd;
+    margin-bottom:22px;
+    position:relative;
+    z-index:2;
 }
 
-.birthday-card:hover {
-    transform: translateY(-10px) scale(1.02);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.45),
-        0 0 30px rgba(139,92,246,.25);
+.countdown{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    position:relative;
+    z-index:2;
 }
 
-.birthday-card:hover::after {
-    opacity: 1;
+.time-box{
+    padding:12px 5px;
+    border-radius:12px;
+    text-align:center;
+    background:rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.08);
 }
 
-/* =====================================
-   CARD NUMBER
-===================================== */
-
-.card-number {
-    position: absolute;
-    top: 15px;
-    right: 18px;
-
-    width: 35px;
-    height: 35px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    background: rgba(255,255,255,.1);
-    color: #c4b5fd;
-
-    font-weight: bold;
-    z-index: 5;
+.time-number{
+    display:block;
+    font-size:22px;
+    font-weight:bold;
+    color:white;
 }
 
-/* =====================================
-   NEXT BADGE
-===================================== */
-
-.next-badge {
-    display: block;
-    width: fit-content;
-    margin: 0 auto 18px;
-    padding: 6px 14px;
-
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-
-    background: linear-gradient(90deg, #f59e0b, #ef4444);
-
-    box-shadow: 0 0 15px rgba(245,158,11,.4);
-
-    animation: badgePulse 1.5s infinite;
+.time-label{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    color:#aaa4c5;
 }
 
-@keyframes badgePulse {
-    50% {
-        transform: scale(1.06);
-    }
+.next-birthday{
+    border-color:#f59e0b;
+    box-shadow:0 0 25px rgba(245,158,11,.2),inset 0 0 25px rgba(245,158,11,.05);
 }
 
-/* =====================================
-   AVATAR
-===================================== */
-
-.avatar {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    padding: 3px;
-
-    background: linear-gradient(
-        135deg,
-        #8b5cf6,
-        #ec4899,
-        #38bdf8
-    );
-
-    box-shadow: 0 0 25px rgba(168,85,247,.5);
-
-    animation: avatarGlow 3s ease-in-out infinite;
-
-    position: relative;
-    z-index: 2;
+.birthday-today{
+    border-color:#22c55e;
+    animation:birthdayGlow 1.5s infinite alternate;
 }
 
-.avatar img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    border: 3px solid #121225;
+@keyframes birthdayGlow{
+    from{box-shadow:0 0 10px rgba(34,197,94,.3);}
+    to{box-shadow:0 0 40px rgba(34,197,94,.7);}
 }
 
-@keyframes avatarGlow {
-    0%, 100% {
-        box-shadow: 0 0 15px rgba(168,85,247,.3);
-    }
-
-    50% {
-        box-shadow: 0 0 35px rgba(168,85,247,.8);
-    }
+.happy-birthday{
+    text-align:center;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(34,197,94,.15);
+    color:#86efac;
+    font-size:18px;
+    font-weight:bold;
+    animation:happyPulse 1s infinite alternate;
+    position:relative;
+    z-index:3;
 }
 
-/* =====================================
-   NAME
-===================================== */
-
-.friend-name {
-    text-align: center;
-    font-size: 25px;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 2;
+@keyframes happyPulse{
+    to{transform:scale(1.03);}
 }
 
-/* =====================================
-   DATE
-===================================== */
-
-.birthday-date {
-    text-align: center;
-    color: #c4b5fd;
-    margin-bottom: 22px;
-    position: relative;
-    z-index: 2;
+footer{
+    text-align:center;
+    padding:30px 15px;
+    color:#aaa4c5;
+    border-top:1px solid rgba(255,255,255,.08);
 }
 
-/* =====================================
-   COUNTDOWN
-===================================== */
+footer p{margin-bottom:8px;}
 
-.countdown {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 7px;
-
-    position: relative;
-    z-index: 2;
+.confetti{
+    position:fixed;
+    top:-20px;
+    width:10px;
+    height:16px;
+    pointer-events:none;
+    animation:confettiFall 4s linear forwards;
+    z-index:9999;
 }
 
-.time-box {
-    padding: 12px 5px;
-    border-radius: 12px;
-    text-align: center;
-
-    background: rgba(0,0,0,.25);
-    border: 1px solid rgba(255,255,255,.08);
+@keyframes confettiFall{
+    to{transform:translateY(110vh) rotate(720deg);opacity:0;}
 }
 
-.time-number {
-    display: block;
-    font-size: 22px;
-    font-weight: bold;
-    color: white;
+@media(max-width:900px){
+    .birthday-grid{grid-template-columns:repeat(2,1fr);}
 }
 
-.time-label {
-    display: block;
-    margin-top: 4px;
-    font-size: 11px;
-    color: #aaa4c5;
+@media(max-width:600px){
+    .header{padding-top:35px;}
+    .cake{font-size:50px;}
+    .header h1{font-size:34px;}
+    .header p{font-size:14px;}
+    .birthday-grid{grid-template-columns:1fr;}
+    .birthday-card{padding:22px 18px;}
+    .countdown{gap:5px;}
+    .time-number{font-size:19px;}
+    .section-title h2{font-size:25px;}
 }
-
-/* =====================================
-   NEXT BIRTHDAY
-===================================== */
-
-.next-birthday {
-    border-color: #f59e0b;
-
-    box-shadow:
-        0 0 25px rgba(245,158,11,.2),
-        inset 0 0 25px rgba(245,158,11,.05);
-}
-
-/* =====================================
-   BIRTHDAY TODAY
-===================================== */
-
-.birthday-today {
-    border-color: #22c55e;
-    animation: birthdayGlow 1.5s infinite alternate;
-}
-
-@keyframes birthdayGlow {
-    from {
-        box-shadow: 0 0 10px rgba(34,197,94,.3);
-    }
-
-    to {
-        box-shadow: 0 0 40px rgba(34,197,94,.7);
-    }
-}
-
-.happy-birthday {
-    text-align: center;
-    padding: 15px;
-    border-radius: 15px;
-
-    background: rgba(34,197,94,.15);
-    color: #86efac;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    animation: happyPulse 1s infinite alternate;
-
-    position: relative;
-    z-index: 3;
-}
-
-@keyframes happyPulse {
-    to {
-        transform: scale(1.03);
-    }
-}
-
-/* =====================================
-   FOOTER
-===================================== */
-
-footer {
-    text-align: center;
-    padding: 30px 15px;
-    color: #aaa4c5;
-
-    border-top: 1px solid rgba(255,255,255,.08);
-}
-
-footer p {
-    margin-bottom: 8px;
-}
-
-/* =====================================
-   CONFETTI
-===================================== */
-
-.confetti {
-    position: fixed;
-    top: -20px;
-    width: 10px;
-    height: 16px;
-
-    pointer-events: none;
-
-    animation: confettiFall 4s linear forwards;
-
-    z-index: 9999;
-}
-
-@keyframes confettiFall {
-    to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-/* =====================================
-   TABLET
-===================================== */
-
-@media (max-width: 900px) {
-    .birthday-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* =====================================
-   MOBILE
-===================================== */
-
-@media (max-width: 600px) {
-
-    .header {
-        padding-top: 35px;
-    }
-
-    .cake {
-        font-size: 50px;
-    }
-
-    .header h1 {
-        font-size: 34px;
-    }
-
-    .header p {
-        font-size: 14px;
-    }
-
-    .birthday-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .birthday-card {
-        padding: 22px 18px;
-    }
-
-    .countdown {
-        gap: 5px;
-    }
-
-    .time-number {
-        font-size: 19px;
-    }
-
-    .section-title h2 {
-        font-size: 25px;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Animated Background -->
-
 <div class="bg-animation">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
 </div>
 
-<!-- Header -->
-
 <header class="header">
-
     <div class="cake">🎂</div>
-
     <h1>Friends Birthday Hub</h1>
-
     <p>Never Miss Your Friend's Special Day ❤️</p>
-
     <div class="live-date" id="todayDate"></div>
-
 </header>
 
-<!-- Main -->
-
 <main>
+<section class="birthday-section">
 
-    <section class="birthday-section">
+    <div class="section-title">
+        <span>🎉</span>
+        <h2>Birthday List</h2>
+        <span>🎉</span>
+    </div>
 
-        <div class="section-title">
+    <div id="birthdayList" class="birthday-grid"></div>
 
-            <span>🎉</span>
-
-            <h2>Birthday List</h2>
-
-            <span>🎉</span>
-
-        </div>
-
-        <div id="birthdayList" class="birthday-grid">
-
-        </div>
-
-    </section>
-
+</section>
 </main>
 
-<!-- Footer -->
-
 <footer>
-
     <p>Made with ❤️ for Friends</p>
-
     <span>© Ghost Hunter • All Rights Reserved</span>
-
 </footer>
-
-<!-- Confetti -->
 
 <div id="confetti"></div>
 
-
 <script>
 
-/* =====================================================
+/* ==========================================
    FRIENDS BIRTHDAY DATA
-===================================================== */
+========================================== */
 
 const friends = [
 
-    {
-        name: "সিবগাতুল্লাহ সোহান",
-        birthday: "30 July",
-        image: "Sibga.jpg"
-    },
+    // OLD FRIENDS
 
-    {
-        name: "হাসান আল বান্নাহ",
-        birthday: "2 October",
-        image: "Banna.jpg"
-    },
+    {name:"সিবগাতুল্লাহ সোহান",birthday:"30 July",image:"Sibga.jpg"},
+    {name:"হাসান আল বান্নাহ",birthday:"2 October",image:"Banna.jpg"},
+    {name:"আবিদুর রহমান",birthday:"11 February",image:"abid.jpg"},
+    {name:"নাফিজ শাহরিয়ার",birthday:"30 December",image:"Sharai.jpg"},
+    {name:"তামিম ইকবাল",birthday:"22 December",image:"tamim.jpeg"},
+    {name:"আসিফ ইকরাম",birthday:"27 May",image:"asif.png"},
+    {name:"আব্দুল খালেক",birthday:"15 December",image:"a.khalek.jpg"},
+    {name:"আরমান আসিফ",birthday:"3 December",image:"Arman.JPG"},
+    {name:"নাজমুস সায়াদাত",birthday:"23 July",image:"sadat.jpeg"},
+    {name:"হুজাইফা আস সাবুনী",birthday:"29 November",image:"Hujaifa.jpg"},
+    {name:"মাহদী হাসান",birthday:"6 October",image:"Mahadi.jpg"},
+    {name:"মুহিত",birthday:"25 March",image:"Muhit.jpg"},
+    {name:"মাহবুবুল্লাহ মুসা",birthday:"22 November",image:"musa.jpg"},
+    {name:"ওয়াজিহ উদ্দিন ত্বাকি",birthday:"21 July",image:"Taki.jpg"},
+    {name:"জাহিদুল ইসলাম সুজন",birthday:"17 June",image:"Sujon.jpg"},
+    {name:"আল-আমিন",birthday:"10 December",image:"Al amin.jpg"},
+    {name:"হাবিবুল্লাহ ইসা",birthday:"22 November",image:"esa.png"},
+    {name:"জুনায়েদ আখন্দ",birthday:"6 March",image:"images/junaid-akhand.jpg"},
+    {name:"মুদাব্বির হোসাইন আনসারী",birthday:"28 June",image:"Mudabbir.png"},
+    {name:"ইয়াহইয়া আত তাহেরি",birthday:"5 April",image:"Eyahiya.png"},
+    {name:"জুবায়ের আহমেদ",birthday:"16 July",image:"Jubu.JPG"},
+    {name:"নাজমুল ইসলাম",birthday:"12 January",image:"images/nazmul-islam.jpg"},
+    {name:"তানভির হোসাইন",birthday:"18 September",image:"Tanvi.jpg"},
+    {name:"আবির হোসাইন",birthday:"25 May",image:"Abir.jpg"},
+    {name:"রাফিউল ইসলাম",birthday:"4 January",image:"Rafiul.jpg"},
+    {name:"মাহদি বিন মোবারক",birthday:"9 December",image:"mahdi moba.jpg"},
+    {name:"তামিম বিন সাঈদ",birthday:"26 July",image:"Tamim bin.jpg"},
+    {name:"মীর রাফি",birthday:"10 September",image:"Mir Rafi.jpg"},
+    {name:"আব্দুল্লাহ ইয়ামেন",birthday:"19 September",image:"images/abdullah-yamen.jpg"},
+    {name:"তাহসিন",birthday:"20 December",image:"tahsin.jpg"},
 
-    {
-        name: "আবিদুর রহমান",
-        birthday: "11 February",
-        image: "abid.jpg"
-    },
+    // NEW FRIENDS
 
-    {
-        name: "নাফিজ শাহরিয়ার",
-        birthday: "30 December",
-        image: "Sharai.jpg"
-    },
-
-    {
-        name: "তামিম ইকবাল",
-        birthday: "22 December",
-        image: "tamim.jpeg"
-    },
-
-    {
-        name: "আসিফ ইকরাম",
-        birthday: "27 May",
-        image: "asif.png"
-    },
-
-    {
-        name: "আব্দুল খালেক",
-        birthday: "15 December",
-        image: "a.khalek.jpg"
-    },
-
-    {
-        name: "আরমান আসিফ",
-        birthday: "3 December",
-        image: "Arman.JPG"
-    },
-
-    {
-        name: "নাজমুস সায়াদাত",
-        birthday: "23 July",
-        image: "sadat.jpeg"
-    },
-
-    {
-        name: "হুজাইফা আস সাবুনী",
-        birthday: "29 November",
-        image: "Hujaifa.jpg"
-    },
-
-    {
-        name: "মাহদী হাসান",
-        birthday: "6 October",
-        image: "Mahadi.jpg"
-    },
-
-    {
-        name: "মুহিত",
-        birthday: "25 March",
-        image: "Muhit.jpg"
-    },
-
-    {
-        name: "মাহবুবুল্লাহ মুসা",
-        birthday: "22 November",
-        image: "musa.jpg"
-    },
-
-    {
-        name: "ওয়াজিহ উদ্দিন ত্বাকি",
-        birthday: "21 July",
-        image: "Taki.jpg"
-    },
-
-    {
-        name: "জাহিদুল ইসলাম সুজন",
-        birthday: "17 June",
-        image: "Sujon.jpg"
-    },
-
-    {
-        name: "আল-আমিন",
-        birthday: "10 December",
-        image: "Al amin.jpg"
-    },
-
-    {
-        name: "হাবিবুল্লাহ ইসা",
-        birthday: "22 November",
-        image: "esa.png"
-    },
-
-    {
-        name: "জুনায়েদ আখন্দ",
-        birthday: "6 March",
-        image: "images/junaid-akhand.jpg"
-    },
-
-    {
-        name: "মুদাব্বির হোসাইন আনসারী",
-        birthday: "28 June",
-        image: "Mudabbir.png"
-    },
-
-    {
-        name: "ইয়াহইয়া আত তাহেরি",
-        birthday: "5 April",
-        image: "Eyahiya.png"
-    },
-
-    {
-        name: "জুবায়ের আহমেদ",
-        birthday: "16 July",
-        image: "Jubu.JPG"
-    },
-
-    {
-        name: "নাজমুল ইসলাম",
-        birthday: "12 January",
-        image: "images/nazmul-islam.jpg"
-    },
-
-    {
-        name: "তানভির হোসাইন",
-        birthday: "18 September",
-        image: "Tanvi.jpg"
-    },
-
-    {
-        name: "আবির হোসাইন",
-        birthday: "25 May",
-        image: "Abir.jpg"
-    },
-
-    {
-        name: "রাফিউল ইসলাম",
-        birthday: "4 January",
-        image: "Rafiul.jpg"
-    },
-
-    {
-        name: "মাহদি বিন মোবারক",
-        birthday: "9 December",
-        image: "mahdi moba.jpg"
-    },
-
-    {
-        name: "তামিম বিন সাঈদ",
-        birthday: "26 July",
-        image: "Tamim bin.jpg"
-    },
-
-    {
-        name: "মীর রাফি",
-        birthday: "10 September",
-        image: "Mir Rafi.jpg"
-    },
-
-    {
-        name: "আব্দুল্লাহ ইয়ামেন",
-        birthday: "19 September",
-        image: "images/abdullah-yamen.jpg"
-    },
-
-    {
-        name: "তাহসিন",
-        birthday: "20 December",
-        image: "tahsin.jpg"
-    }
+    {name:"মো নাদিম",birthday:"24 December",image:"images/default.jpg"},
+    {name:"মোঃ তাহসিনুল ইসলাম",birthday:"10 July",image:"images/default.jpg"},
+    {name:"সাকিবুল হাসান আদিল",birthday:"13 August",image:"images/default.jpg"},
+    {name:"মোঃ হাসিবুজ্জামান",birthday:"16 July",image:"images/default.jpg"},
+    {name:"মো জিহাদুল ইসলাম",birthday:"9 February",image:"images/default.jpg"},
+    {name:"মোঃ রফিউল ইসলাম",birthday:"1 January",image:"images/default.jpg"},
+    {name:"মোহাম্মদ মিজানুর রহমান",birthday:"6 May",image:"images/default.jpg"},
+    {name:"সৈয়দ ইয়াজ উদ্দিন আহমেদ",birthday:"10 April",image:"images/default.jpg"},
+    {name:"মো ফখরুল ইসলাম",birthday:"30 May",image:"images/default.jpg"},
+    {name:"মো আবির হুসাইন",birthday:"25 May",image:"images/default.jpg"},
+    {name:"মো ফয়সান হোসেন",birthday:"1 January",image:"images/default.jpg"},
+    {name:"তানভীরুল ইসলাম",birthday:"1 January",image:"images/default.jpg"},
+    {name:"মো খন্দকার মোবাশ্বের",birthday:"1 March",image:"images/default.jpg"},
+    {name:"হাবিবুর রহমান",birthday:"10 August",image:"images/default.jpg"},
+    {name:"আশিক মাহমুদ বিন আজাদ",birthday:"1 May",image:"images/default.jpg"},
+    {name:"মাহমুদুল আমিন",birthday:"14 July",image:"images/default.jpg"},
+    {name:"মো শিহাব",birthday:"24 January",image:"images/default.jpg"},
+    {name:"মো আব্দুল্লাহ আল ইয়ামিন",birthday:"12 February",image:"images/default.jpg"},
+    {name:"মো নাজমুল হাছান",birthday:"12 January",image:"images/default.jpg"},
+    {name:"নাঈমুল হাসান মাহফুজ",birthday:"24 July",image:"images/default.jpg"},
+    {name:"মোঃ ইয়াহিয়া",birthday:"5 April",image:"images/default.jpg"},
+    {name:"আব্দুল্লাহ রিফাত",birthday:"2 February",image:"images/default.jpg"},
+    {name:"মীর মোঃ রাফি",birthday:"25 April",image:"images/default.jpg"},
+    {name:"মো নাজমুলদ্দীন জাকির",birthday:"11 August",image:"images/default.jpg"},
+    {name:"জুনায়েদ আকuঞ্জে",birthday:"6 March",image:"images/default.jpg"},
+    {name:"ইবনে শেখ মাহদী",birthday:"27 March",image:"images/default.jpg"},
+    {name:"মোঃ হাবিবুল্লাহ ঈসা",birthday:"22 November",image:"images/default.jpg"},
+    {name:"মেজবাউল হাসান মুক্ত",birthday:"23 October",image:"images/default.jpg"},
+    {name:"মোঃ মাহবুব উল্লাহ মুসা",birthday:"21 November",image:"images/default.jpg"},
+    {name:"মো মাহফুজুল আমীন মারজান",birthday:"28 September",image:"images/default.jpg"},
+    {name:"মহিতুর রহমান মিনহাজ",birthday:"3 April",image:"images/default.jpg"},
+    {name:"মুহাম্মদ যাইদ হাসান মারুফ",birthday:"16 June",image:"images/default.jpg"},
+    {name:"মোঃ নাজমুল সায়াদাত",birthday:"23 July",image:"images/default.jpg"},
+    {name:"রিয়ান মাহবুব",birthday:"7 July",image:"images/default.jpg"},
+    {name:"মুদাব্বির হোসেন আনসারী",birthday:"28 June",image:"images/default.jpg"},
+    {name:"খালেদ মো সাইফুল্লাহ",birthday:"27 April",image:"images/default.jpg"},
+    {name:"আরমান আলী আসিফ",birthday:"3 December",image:"images/default.jpg"},
+    {name:"মীর মুনতাছির মুহাম্মদ মহী উদ্দীন",birthday:"19 December",image:"images/default.jpg"},
+    {name:"মোঃ তামিম ইকবাল",birthday:"23 November",image:"images/default.jpg"},
+    {name:"আব্দুল্লাহ মো আবু মাহিদ",birthday:"11 June",image:"images/default.jpg"},
+    {name:"মাহেদী হাসান",birthday:"9 December",image:"images/default.jpg"},
+    {name:"মো আলমগীর হোসেন",birthday:"3 March",image:"images/default.jpg"},
+    {name:"মোঃ তামিম বিন সাঈদ",birthday:"26 September",image:"images/default.jpg"},
+    {name:"নুরাজ ইসলাম",birthday:"10 February",image:"images/default.jpg"},
+    {name:"সায়েম চৌধুরী",birthday:"18 September",image:"images/default.jpg"},
+    {name:"হাসান আল বান্নাহ",birthday:"2 October",image:"images/default.jpg"},
+    {name:"মোঃ ফুয়াদ হাসান",birthday:"10 January",image:"images/default.jpg"},
+    {name:"শেখ আব্দুল খালেক",birthday:"23 November",image:"images/default.jpg"},
+    {name:"মো মাহির শাহরিয়ার আবির",birthday:"28 June",image:"images/default.jpg"},
+    {name:"মোঃ আল আমিন খান",birthday:"7 October",image:"images/default.jpg"},
+    {name:"মো সাজ্জাদ হোসাইন রায়হান সরকার",birthday:"27 August",image:"images/default.jpg"},
+    {name:"आसिफ इकराम बिन हारुन",birthday:"6 December",image:"images/default.jpg"},
+    {name:"মো ত্বকী তাহমিদ খন্দকার",birthday:"18 November",image:"images/default.jpg"},
+    {name:"মোঃ মেহেদী হাসান",birthday:"6 October",image:"images/default.jpg"},
+    {name:"মো আতিকুর রহমান",birthday:"7 July",image:"images/default.jpg"},
+    {name:"মোঃ জাহিদুল ইসলাম সুজন",birthday:"16 June",image:"images/default.jpg"},
+    {name:"মোঃ ওয়াজির উদ্দিন ত্বকী",birthday:"21 July",image:"images/default.jpg"},
+    {name:"এস এম নাফিজ সাহরিয়ার",birthday:"20 October",image:"images/default.jpg"},
+    {name:"মোঃ হুজাইফা",birthday:"29 November",image:"images/default.jpg"},
+    {name:"আবিদুর রহমান",birthday:"1 February",image:"images/default.jpg"},
+    {name:"মোঃ সিবগাতুল্লাহ সোহান",birthday:"11 November",image:"images/default.jpg"},
+    {name:"মোঃ জুবায়ের আহমেদ",birthday:"1 January",image:"images/default.jpg"},
+    {name:"ইব্রাহিম মোল্লা",birthday:"9 October",image:"images/default.jpg"}
 
 ];
 
 
-/* =====================================================
+/* ==========================================
    MONTHS
-===================================================== */
+========================================== */
 
 const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "January","February","March","April",
+    "May","June","July","August",
+    "September","October","November","December"
 ];
 
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
 let lastOrder = "";
-
 let lastDay = new Date().toDateString();
-
 let birthdayCelebrated = {};
 
 
-/* =====================================================
+/* ==========================================
    GET BIRTHDAY INFO
-===================================================== */
+========================================== */
 
-function getBirthdayInfo(birthday) {
+function getBirthdayInfo(birthday){
 
     const parts = birthday.trim().split(/\s+/);
 
-    const day = parseInt(parts[0], 10);
-
-    const month = monthNames.indexOf(parts[1]);
-
     return {
-        day: day,
-        month: month
+        day:parseInt(parts[0],10),
+        month:monthNames.indexOf(parts[1])
     };
-
 }
 
 
-/* =====================================================
+/* ==========================================
    GET NEXT BIRTHDAY
-===================================================== */
+========================================== */
 
-function getNextBirthday(birthday) {
+function getNextBirthday(birthday){
 
     const info = getBirthdayInfo(birthday);
-
     const now = new Date();
 
     let year = now.getFullYear();
 
     let nextBirthday = new Date(
-        year,
-        info.month,
-        info.day,
-        0, 0, 0, 0
+        year,info.month,info.day,0,0,0,0
     );
 
     const isToday =
         now.getMonth() === info.month &&
         now.getDate() === info.day;
 
-    if (nextBirthday < now && !isToday) {
+    if(nextBirthday < now && !isToday){
 
         nextBirthday = new Date(
-            year + 1,
-            info.month,
-            info.day,
-            0, 0, 0, 0
+            year+1,info.month,info.day,0,0,0,0
         );
 
     }
 
     return nextBirthday;
-
 }
 
 
-/* =====================================================
-   DISPLAY DATE
-===================================================== */
+/* ==========================================
+   FORMAT DATE
+========================================== */
 
-function formatDate(date) {
+function formatDate(date){
 
-    return date.toLocaleDateString("bn-BD", {
-        day: "numeric",
-        month: "long"
+    return date.toLocaleDateString("bn-BD",{
+        day:"numeric",
+        month:"long"
     });
-
 }
 
 
-/* =====================================================
-   CREATE BIRTHDAY CARD
-===================================================== */
+/* ==========================================
+   CREATE CARD
+========================================== */
 
-function createCard(friend, index, isNext) {
+function createCard(friend,index,isNext){
 
     const birthday = getNextBirthday(friend.birthday);
 
@@ -1023,53 +605,43 @@ function createCard(friend, index, isNext) {
     card.className = "birthday-card";
 
     const info = getBirthdayInfo(friend.birthday);
-
     const now = new Date();
 
-    if (
+    if(
         now.getMonth() === info.month &&
         now.getDate() === info.day
-    ) {
-
+    ){
         card.classList.add("birthday-today");
-
     }
 
-    if (isNext) {
-
+    if(isNext){
         card.classList.add("next-birthday");
-
     }
 
     card.dataset.birthday = birthday.getTime();
-
     card.dataset.friendName = friend.name;
 
     card.innerHTML = `
 
         <div class="card-number">
-            ${String(index + 1).padStart(2, "0")}
+            ${String(index+1).padStart(2,"0")}
         </div>
 
         ${
             isNext
-            ? `<div class="next-badge">⭐ NEXT BIRTHDAY</div>`
-            : ""
+            ? '<div class="next-badge">⭐ NEXT BIRTHDAY</div>'
+            : ''
         }
 
         <div class="avatar">
-
             <img
                 src="${friend.image}"
                 alt="${friend.name}"
-                onerror="this.onerror=null; this.src='images/default.jpg';"
+                onerror="this.onerror=null;this.src='images/default.jpg';"
             >
-
         </div>
 
-        <h2 class="friend-name">
-            ${friend.name}
-        </h2>
+        <h2 class="friend-name">${friend.name}</h2>
 
         <p class="birthday-date">
             🎂 ${formatDate(birthday)}
@@ -1098,68 +670,58 @@ function createCard(friend, index, isNext) {
             </div>
 
         </div>
-
     `;
 
     return card;
-
 }
 
 
-/* =====================================================
+/* ==========================================
    SORT BIRTHDAYS
-===================================================== */
+========================================== */
 
-function getSortedFriends() {
+function getSortedFriends(){
 
-    return [...friends].sort((a, b) => {
+    return [...friends].sort((a,b)=>{
 
-        const dateA = getNextBirthday(a.birthday);
-
-        const dateB = getNextBirthday(b.birthday);
-
-        return dateA - dateB;
+        return getNextBirthday(a.birthday) -
+               getNextBirthday(b.birthday);
 
     });
-
 }
 
 
-/* =====================================================
-   RENDER BIRTHDAY LIST
-===================================================== */
+/* ==========================================
+   RENDER BIRTHDAYS
+========================================== */
 
-function renderBirthdays() {
+function renderBirthdays(){
 
     const list = document.getElementById("birthdayList");
 
-    if (!list) return;
+    if(!list) return;
 
     const sortedFriends = getSortedFriends();
 
     const newOrder = sortedFriends
-        .map(friend => friend.name)
+        .map(friend=>friend.name)
         .join("|");
 
-    if (
+    if(
         newOrder === lastOrder &&
         list.children.length > 0
-    ) {
-
+    ){
         return;
-
     }
 
     lastOrder = newOrder;
 
     list.innerHTML = "";
 
-    sortedFriends.forEach((friend, index) => {
+    sortedFriends.forEach((friend,index)=>{
 
         const card = createCard(
-            friend,
-            index,
-            index === 0
+            friend,index,index === 0
         );
 
         list.appendChild(card);
@@ -1169,27 +731,26 @@ function renderBirthdays() {
 }
 
 
-/* =====================================================
+/* ==========================================
    UPDATE COUNTDOWN
-===================================================== */
+========================================== */
 
-function updateCountdown() {
+function updateCountdown(){
 
     const now = new Date();
-
     const nowTime = now.getTime();
 
     const cards = document.querySelectorAll(".birthday-card");
 
-    cards.forEach(card => {
+    cards.forEach(card=>{
 
         const friendName = card.dataset.friendName;
 
         const friend = friends.find(
-            item => item.name === friendName
+            item=>item.name === friendName
         );
 
-        if (!friend) return;
+        if(!friend) return;
 
         const info = getBirthdayInfo(friend.birthday);
 
@@ -1197,21 +758,20 @@ function updateCountdown() {
             now.getMonth() === info.month &&
             now.getDate() === info.day;
 
-        /* Birthday Today */
-
-        if (isBirthdayToday) {
+        if(isBirthdayToday){
 
             card.classList.add("birthday-today");
 
             const countdown = card.querySelector(".countdown");
 
-            if (countdown) {
+            if(countdown){
                 countdown.style.display = "none";
             }
 
-            let happyBirthday = card.querySelector(".happy-birthday");
+            let happyBirthday =
+                card.querySelector(".happy-birthday");
 
-            if (!happyBirthday) {
+            if(!happyBirthday){
 
                 happyBirthday = document.createElement("div");
 
@@ -1220,31 +780,31 @@ function updateCountdown() {
                 happyBirthday.innerHTML =
                     "🎉🎂 Happy Birthday! 🎂🎉";
 
-                if (countdown) {
+                if(countdown){
 
                     countdown.parentNode.insertBefore(
-                        happyBirthday,
-                        countdown
+                        happyBirthday,countdown
                     );
 
-                } else {
+                }else{
 
                     card.appendChild(happyBirthday);
 
                 }
-
             }
 
-            const dateElement = card.querySelector(".birthday-date");
+            const dateElement =
+                card.querySelector(".birthday-date");
 
-            if (dateElement) {
-                dateElement.innerHTML = `🎂 ${formatDate(now)}`;
+            if(dateElement){
+                dateElement.innerHTML =
+                    `🎂 ${formatDate(now)}`;
             }
 
             const celebrationKey =
-                friendName + "-" + now.getFullYear();
+                friendName+"-"+now.getFullYear();
 
-            if (!birthdayCelebrated[celebrationKey]) {
+            if(!birthdayCelebrated[celebrationKey]){
 
                 birthdayCelebrated[celebrationKey] = true;
 
@@ -1253,47 +813,45 @@ function updateCountdown() {
             }
 
             return;
-
         }
-
-        /* Birthday শেষ হলে Countdown */
 
         card.classList.remove("birthday-today");
 
-        const happyBirthday = card.querySelector(".happy-birthday");
+        const happyBirthday =
+            card.querySelector(".happy-birthday");
 
-        if (happyBirthday) {
+        if(happyBirthday){
             happyBirthday.remove();
         }
 
         const countdown = card.querySelector(".countdown");
 
-        if (countdown) {
+        if(countdown){
             countdown.style.display = "grid";
         }
 
-        const nextBirthday = getNextBirthday(friend.birthday);
+        const nextBirthday =
+            getNextBirthday(friend.birthday);
 
         card.dataset.birthday = nextBirthday.getTime();
 
-        const difference = nextBirthday.getTime() - nowTime;
+        const difference =
+            nextBirthday.getTime()-nowTime;
 
         const days = Math.floor(
-            difference / (1000 * 60 * 60 * 24)
+            difference/(1000*60*60*24)
         );
 
         const hours = Math.floor(
-            (difference % (1000 * 60 * 60 * 24)) /
-            (1000 * 60 * 60)
+            (difference%(1000*60*60*24))/(1000*60*60)
         );
 
         const minutes = Math.floor(
-            (difference % (1000 * 60 * 60)) /
-            (1000 * 60)
+            (difference%(1000*60*60))/(1000*60)
         );
 
         const seconds = Math.floor(
-            (difference % (1000 * 60)) / 1000
+            (difference%(1000*60))/1000
         );
 
         const daysElement = card.querySelector(".days");
@@ -1301,20 +859,24 @@ function updateCountdown() {
         const minutesElement = card.querySelector(".minutes");
         const secondsElement = card.querySelector(".seconds");
 
-        if (daysElement) {
-            daysElement.textContent = String(days).padStart(2, "0");
+        if(daysElement){
+            daysElement.textContent =
+                String(days).padStart(2,"0");
         }
 
-        if (hoursElement) {
-            hoursElement.textContent = String(hours).padStart(2, "0");
+        if(hoursElement){
+            hoursElement.textContent =
+                String(hours).padStart(2,"0");
         }
 
-        if (minutesElement) {
-            minutesElement.textContent = String(minutes).padStart(2, "0");
+        if(minutesElement){
+            minutesElement.textContent =
+                String(minutes).padStart(2,"0");
         }
 
-        if (secondsElement) {
-            secondsElement.textContent = String(seconds).padStart(2, "0");
+        if(secondsElement){
+            secondsElement.textContent =
+                String(seconds).padStart(2,"0");
         }
 
     });
@@ -1322,41 +884,42 @@ function updateCountdown() {
 }
 
 
-/* =====================================================
+/* ==========================================
    TODAY'S DATE
-===================================================== */
+========================================== */
 
-function showTodayDate() {
+function showTodayDate(){
 
     const today = new Date();
 
-    const element = document.getElementById("todayDate");
+    const element =
+        document.getElementById("todayDate");
 
-    if (!element) return;
+    if(!element) return;
 
     element.textContent =
-        "📅 আজ: " +
-        today.toLocaleDateString("bn-BD", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
+        "📅 আজ: "+
+        today.toLocaleDateString("bn-BD",{
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
         });
 
 }
 
 
-/* =====================================================
+/* ==========================================
    CHECK NEW DAY
-===================================================== */
+========================================== */
 
-function checkNewDay() {
+function checkNewDay(){
 
     const today = new Date();
 
     const todayString = today.toDateString();
 
-    if (todayString !== lastDay) {
+    if(todayString !== lastDay){
 
         lastDay = todayString;
 
@@ -1367,55 +930,58 @@ function checkNewDay() {
     }
 
     showTodayDate();
-
 }
 
 
-/* =====================================================
+/* ==========================================
    CONFETTI
-===================================================== */
+========================================== */
 
-function createConfetti() {
+function createConfetti(){
 
-    const container = document.getElementById("confetti");
+    const container =
+        document.getElementById("confetti");
 
-    if (!container) return;
+    if(!container) return;
 
-    for (let i = 0; i < 70; i++) {
+    for(let i=0;i<70;i++){
 
         const piece = document.createElement("div");
 
         piece.className = "confetti";
 
-        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.left =
+            Math.random()*100+"vw";
 
-        piece.style.width = Math.random() * 8 + 5 + "px";
+        piece.style.width =
+            Math.random()*8+5+"px";
 
-        piece.style.height = Math.random() * 12 + 8 + "px";
+        piece.style.height =
+            Math.random()*12+8+"px";
 
         piece.style.background =
-            `hsl(${Math.random() * 360}, 90%, 60%)`;
+            `hsl(${Math.random()*360},90%,60%)`;
 
         piece.style.animationDuration =
-            Math.random() * 2 + 3 + "s";
+            Math.random()*2+3+"s";
 
         piece.style.animationDelay =
-            Math.random() * 0.5 + "s";
+            Math.random()*.5+"s";
 
         container.appendChild(piece);
 
-        setTimeout(() => {
+        setTimeout(()=>{
             piece.remove();
-        }, 6000);
+        },6000);
 
     }
 
 }
 
 
-/* =====================================================
+/* ==========================================
    WEBSITE START
-===================================================== */
+========================================== */
 
 renderBirthdays();
 
@@ -1423,21 +989,13 @@ showTodayDate();
 
 updateCountdown();
 
-/* প্রতি ১ সেকেন্ডে Countdown Update */
-
-setInterval(() => {
-
+setInterval(()=>{
     updateCountdown();
+},1000);
 
-}, 1000);
-
-/* প্রতি ১০ সেকেন্ডে Date Check */
-
-setInterval(() => {
-
+setInterval(()=>{
     checkNewDay();
-
-}, 10000);
+},10000);
 
 </script>
 
