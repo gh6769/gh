@@ -179,30 +179,6 @@ body::after {
     overflow: hidden;
 
     transition: all 0.4s ease;
-
-    animation: cardFloat 5s ease-in-out infinite;
-}
-
-.app-card:nth-child(2) {
-    animation-delay: 0.5s;
-}
-
-.app-card:nth-child(3) {
-    animation-delay: 1s;
-}
-
-.app-card:nth-child(4) {
-    animation-delay: 1.5s;
-}
-
-@keyframes cardFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-6px);
-    }
 }
 
 /* CARD LIGHT EFFECT */
@@ -368,6 +344,34 @@ body::after {
     box-shadow: 0 0 30px rgba(155,92,255,0.35);
 }
 
+/* SECRET CHAT */
+
+.secret-card {
+    border-color: rgba(0,245,212,0.35);
+
+    background: linear-gradient(
+        145deg,
+        rgba(0,180,180,0.15),
+        rgba(255,255,255,0.04)
+    );
+}
+
+.secret-card::before {
+    background: rgba(0,245,212,0.22);
+}
+
+.secret-card:hover {
+    border-color: #00f5d4;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45),
+        0 0 30px rgba(0,245,212,0.2);
+}
+
+.secret-card:hover .icon {
+    box-shadow: 0 0 30px rgba(0,245,212,0.35);
+}
+
 /* GH TOPUP */
 
 .topup-card {
@@ -508,6 +512,26 @@ body::after {
 
             <div class="app-description">
                 Write and save your notes
+            </div>
+
+        </a>
+
+
+        <!-- SECRET CHAT -->
+
+        <a href="Secret/Secret.html"
+           class="app-card secret-card">
+
+            <div class="icon">
+                🔐
+            </div>
+
+            <div class="app-name">
+                Secret Chat
+            </div>
+
+            <div class="app-description">
+                Hide messages inside emojis & letters
             </div>
 
         </a>
