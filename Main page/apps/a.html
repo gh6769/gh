@@ -429,6 +429,34 @@ body::after {
     box-shadow: 0 0 30px rgba(255,80,150,0.35);
 }
 
+/* GH MAIL */
+
+.ghmail-card {
+    border-color: rgba(57,140,255,0.35);
+
+    background: linear-gradient(
+        145deg,
+        rgba(57,140,255,0.15),
+        rgba(255,255,255,0.04)
+    );
+}
+
+.ghmail-card::before {
+    background: rgba(57,140,255,0.22);
+}
+
+.ghmail-card:hover {
+    border-color: #398cff;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45),
+        0 0 30px rgba(57,140,255,0.2);
+}
+
+.ghmail-card:hover .icon {
+    box-shadow: 0 0 30px rgba(57,140,255,0.35);
+}
+
 /* FOOTER */
 
 .footer {
@@ -615,7 +643,7 @@ body::after {
             <div class="icon">
                 <img
                     src="f.png"
-                    alt="Ghost Intelligence Logo"
+                    alt="Fokbok Logo"
                     class="ghost-logo"
                 >
             </div>
@@ -630,7 +658,27 @@ body::after {
 
         </a>
 
+        <!-- GH MAIL -->
+
+        <a href="https://ghmail.netlify.app"
+           class="app-card ghmail-card">
+
+            <div class="icon">
+                📧
+            </div>
+
+            <div class="app-name">
+                Gh Mail
+            </div>
+
+            <div class="app-description">
+                Email Management & Messaging Services
+            </div>
+
+        </a>
+
     </div>
+
 
 </main>
 
