@@ -22,6 +22,7 @@
     --purple: #9b5cff;
     --blue: #398cff;
     --orange: #ff9d36;
+    --pink: #ff5096;
 }
 
 body {
@@ -400,6 +401,34 @@ body::after {
     box-shadow: 0 0 30px rgba(255,157,54,0.35);
 }
 
+/* FOKBOK */
+
+.fokbok-card {
+    border-color: rgba(255,80,150,0.35);
+
+    background: linear-gradient(
+        145deg,
+        rgba(255,60,130,0.15),
+        rgba(255,255,255,0.04)
+    );
+}
+
+.fokbok-card::before {
+    background: rgba(255,80,150,0.22);
+}
+
+.fokbok-card:hover {
+    border-color: #ff5096;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45),
+        0 0 30px rgba(255,80,150,0.2);
+}
+
+.fokbok-card:hover .icon {
+    box-shadow: 0 0 30px rgba(255,80,150,0.35);
+}
+
 /* FOOTER */
 
 .footer {
@@ -497,7 +526,6 @@ body::after {
 
         </a>
 
-
         <!-- NOTE PAD -->
 
         <a href="note/no.html" class="app-card">
@@ -515,7 +543,6 @@ body::after {
             </div>
 
         </a>
-
 
         <!-- SECRET CHAT -->
 
@@ -535,7 +562,6 @@ body::after {
             </div>
 
         </a>
-
 
         <!-- GHOST INTELLIGENCE -->
 
@@ -562,7 +588,6 @@ body::after {
 
         </a>
 
-
         <!-- GH TOPUP -->
 
         <a href="https://gh-topup-tuzx.onrender.com/"
@@ -582,8 +607,30 @@ body::after {
 
         </a>
 
-    </div>
+        <!-- FOKBOK -->
 
+        <a href="https://fokbok-social-space.base44.app/"
+           class="app-card fokbok-card">
+
+            <div class="icon">
+                <img
+                    src="f.png"
+                    alt="Ghost Intelligence Logo"
+                    class="ghost-logo"
+                >
+            </div>
+
+            <div class="app-name">
+                Fokbok
+            </div>
+
+            <div class="app-description">
+                Fokbok Application & Services
+            </div>
+
+        </a>
+
+    </div>
 
 </main>
 
