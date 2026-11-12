@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -557,17 +556,158 @@ button, input {
     }
 }
 
+/* THE GOODBYE CREW */
+
+.goodbye-section {
+    margin-top: 34px;
+    padding: 25px 18px 22px;
+    border: 1px solid #29445f;
+    border-radius: 20px;
+    background:
+        radial-gradient(ellipse at 50% 0%, #183b5c88, transparent 65%),
+        linear-gradient(145deg, #0e1d30, #091523);
+    box-shadow: 0 8px 28px #00000025;
+    overflow: hidden;
+    position: relative;
+}
+
+.goodbye-heading {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.goodbye-heading h2 {
+    display: inline-block;
+    font-size: clamp(23px, 4vw, 34px);
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #48dcff,
+        #b59aff,
+        #ff9bc9,
+        #ffffff
+    );
+    background-size: 250% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: goodbyeShine 4s linear infinite, goodbyeFloat 3s ease-in-out infinite;
+    text-shadow: 0 0 24px #48dcff20;
+}
+
+.goodbye-heading p {
+    margin-top: 7px;
+    color: #91a8bf;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.goodbye-line {
+    width: 90px;
+    height: 2px;
+    margin: 13px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, transparent, #48dcff, #b59aff, transparent);
+    box-shadow: 0 0 12px #48dcff80;
+}
+
+.goodbye-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.goodbye-card {
+    min-height: 125px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    padding: 16px 10px;
+    text-align: center;
+    border: 1px solid #2a4662;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #142943, #0c1a2b);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    animation: goodbyeCardEnter .7s ease both;
+}
+
+.goodbye-card:nth-child(2) { animation-delay: .12s; }
+.goodbye-card:nth-child(3) { animation-delay: .24s; }
+.goodbye-card:nth-child(4) { animation-delay: .36s; }
+
+.goodbye-card:hover {
+    transform: translateY(-6px);
+    border-color: #48dcff;
+    box-shadow: 0 8px 22px #00cfff18;
+}
+
+.goodbye-card i {
+    font-size: 24px;
+    color: #61dcff;
+    filter: drop-shadow(0 0 8px #48dcff55);
+}
+
+.goodbye-card h3 {
+    color: #eef7ff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.goodbye-card p {
+    color: #91a8bf;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+@keyframes goodbyeShine {
+    from { background-position: 0% center; }
+    to { background-position: 250% center; }
+}
+
+@keyframes goodbyeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes goodbyeCardEnter {
+    from { opacity: 0; transform: translateY(16px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 650px) {
+    .goodbye-section {
+        margin-top: 27px;
+        padding: 21px 12px 16px;
+    }
+
+    .goodbye-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .goodbye-card {
+        min-height: 118px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .contact-card,
     .page-header,
     .dragon-fx,
-    .dragon-spark {
+    .dragon-spark,
+    .goodbye-heading h2,
+    .goodbye-card {
         animation-duration: 0.01ms !important;
     }
 
     .contact-card,
     .profile img,
-    .contact-btn {
+    .contact-btn,
+    .goodbye-card {
         transition-duration: 0.01ms !important;
     }
 }
@@ -617,6 +757,41 @@ button, input {
         No contacts found.
     </p>
 
+    <!-- THE GOODBYE CREW SECTION -->
+    <section class="goodbye-section" aria-label="The Goodbye Crew">
+        <div class="goodbye-heading">
+            <h2>The Goodbye Crew</h2>
+            <p>NOT THE END — JUST ANOTHER MEMORY</p>
+            <div class="goodbye-line"></div>
+        </div>
+
+        <div class="goodbye-grid">
+            <article class="goodbye-card">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Forever Friends</h3>
+                <p>Some bonds stay with us forever.</p>
+            </article>
+
+            <article class="goodbye-card">
+                <i class="fa-solid fa-star"></i>
+                <h3>Golden Memories</h3>
+                <p>Every moment becomes a memory.</p>
+            </article>
+
+            <article class="goodbye-card">
+                <i class="fa-solid fa-handshake"></i>
+                <h3>Our Journey</h3>
+                <p>Different paths, one shared story.</p>
+            </article>
+
+            <article class="goodbye-card">
+                <i class="fa-solid fa-infinity"></i>
+                <h3>Until We Meet</h3>
+                <p>Goodbyes never erase friendship.</p>
+            </article>
+        </div>
+    </section>
+
     <footer class="page-footer">
         <span class="footer-heart">
             <i class="fa-solid fa-heart"></i>
@@ -639,6 +814,7 @@ const contacts = [
         call: "01706026736",
         whatsapp: "01706026736",
         telegram: "01706026736"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Abidur Rahman",
@@ -646,6 +822,7 @@ const contacts = [
         call: "01925811325",
         whatsapp: "01925811325",
         telegram: "01925811325"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Shahariar",
@@ -653,6 +830,7 @@ const contacts = [
         call: "01790872494",
         whatsapp: "01790872494",
         telegram: "01790872494"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
 
     /*
@@ -675,12 +853,14 @@ const contacts = [
         profile: "Sibga.jpg",
         call: "01631384360",
         whatsapp: "01631384360"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Tamim Iqbal",
         profile: "tamim.jpeg",
         call: "01835868277",
         whatsapp: "01835868277"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Asif Ikram",
@@ -688,17 +868,20 @@ const contacts = [
         call: "01604358812",
         whatsapp: "01604358812",
         telegram: "01604358812"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Abdul Khalek",
         profile: "a.khalek.jpg",
         call: "01346566876",
         whatsapp: "01747540789"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Arman Asif",
         profile: "Arman.JPG",
         call: "01910441536"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Saadat",
@@ -706,12 +889,14 @@ const contacts = [
         call: "01987545415",
         whatsapp: "01987545415",
         telegram: "01987545415"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Hujaifa",
         profile: "Hujaifa.jpg",
         call: "01857737086",
         whatsapp: "01345572504"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Mahdi Hasan",
@@ -719,6 +904,7 @@ const contacts = [
         call: "01909742115",
         whatsapp: "01909742115",
         telegram: "01909742115"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Muhitur Rahman",
@@ -726,6 +912,7 @@ const contacts = [
         call: "01833449196",
         whatsapp: "01618666955",
         telegram: "01618666955"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Tamim Bin Sayed",
@@ -733,6 +920,7 @@ const contacts = [
         call: "01978894952",
         whatsapp: "01978894952",
         telegram: "01978894952"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Mahbubullah Musa",
@@ -740,6 +928,7 @@ const contacts = [
         call: "01870503619",
         whatsapp: "01870503619",
         telegram: "01870503619"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Jubayer Ahmed",
@@ -747,12 +936,13 @@ const contacts = [
         call: "01789013628",
         whatsapp: "01789013628",
         telegram: "01789013628"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Taki",
         profile: "Taki.jpg",
-        call: "01677185757",
-        whatsapp: "01677185757"
+        call: "01677185757"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Jahidul Islam Sujon",
@@ -761,12 +951,14 @@ const contacts = [
         call: "01943464407",
         whatsapp: "01943464407",
         telegram: "01943464407"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "AL-Amin",
         profile: "Al amin.jpg",
         call: "01410733175",
         whatsapp: "01849969318"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Habibullah Esa",
@@ -774,18 +966,21 @@ const contacts = [
         call: "01746804733",
         whatsapp: "01746804733",
         telegram: "01746804733"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Junayed",
         profile: "images/person21.jpg",
         call: "01760938894",
         whatsapp: "01839517890"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Mudabbir",
         profile: "Mudabbir.png",
         call: "01973674145",
         whatsapp: "01973674145"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Mir Rafi",
@@ -793,18 +988,21 @@ const contacts = [
         call: "01754038553",
         whatsapp: "01754038553",
         telegram: "01754038553"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Eyahiya",
         profile: "Eyahiya.png",
         call: "01730983367",
         whatsapp: "01730983367"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Nazmul",
         profile: "images/person25.jpg",
         call: "01715450885",
         whatsapp: "01715450885"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Abdullah",
@@ -812,6 +1010,7 @@ const contacts = [
         call: "01606685443",
         whatsapp: "01824812518",
         telegram: "01824812518"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Mahmudul Amin",
@@ -819,24 +1018,28 @@ const contacts = [
         call: "01703472143",
         whatsapp: "01603220353",
         telegram: "01603220353"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Habibur Rahman",
         profile: "Habib.jpg",
         call: "01326320739",
         whatsapp: "01914921489"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Tanvir",
         profile: "Tanvi.jpg",
         call: "01819036458",
         whatsapp: "01819036458"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Abir Hossain",
         profile: "Abir.jpg",
         call: "01921650054",
         whatsapp: "01921650054"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Yeazuddin Ahmed",
@@ -844,6 +1047,7 @@ const contacts = [
         call: "01861686952",
         whatsapp: "01735019250",
         telegram: "01735019250"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Mahdi Mobarok",
@@ -851,24 +1055,27 @@ const contacts = [
         call: "01327482121",
         whatsapp: "01327482121",
         telegram: "01327482121"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Rafiul Islam",
         profile: "Rafiul.jpg",
         call: "01966387600",
         whatsapp: "01966387600"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Tahsinul Islam",
         profile: "tahsin.jpg",
-        call: "01731087151",
-        whatsapp: "01731087151"
+        call: "01731087151"
+        // facebook: "https://www.facebook.com/USERNAME"
     },
     {
         name: "Hasibujjaman",
         profile: "hasi.jpg",
         call: "01570279644",
         whatsapp: "01757674263"
+        // facebook: "https://www.facebook.com/USERNAME"
     }
 ];
 
