@@ -765,31 +765,7 @@ button, input {
             <div class="goodbye-line"></div>
         </div>
 
-        <div class="goodbye-grid">
-            <article class="goodbye-card">
-                <i class="fa-solid fa-heart"></i>
-                <h3>Forever Friends</h3>
-                <p>Some bonds stay with us forever.</p>
-            </article>
-
-            <article class="goodbye-card">
-                <i class="fa-solid fa-star"></i>
-                <h3>Golden Memories</h3>
-                <p>Every moment becomes a memory.</p>
-            </article>
-
-            <article class="goodbye-card">
-                <i class="fa-solid fa-handshake"></i>
-                <h3>Our Journey</h3>
-                <p>Different paths, one shared story.</p>
-            </article>
-
-            <article class="goodbye-card">
-                <i class="fa-solid fa-infinity"></i>
-                <h3>Until We Meet</h3>
-                <p>Goodbyes never erase friendship.</p>
-            </article>
-        </div>
+        <div id="goodbyeContactList" class="contact-list" aria-label="Goodbye Crew contacts"></div>
     </section>
 
     <footer class="page-footer">
@@ -813,7 +789,7 @@ const contacts = [
         profile: "Banna.jpg",
         call: "01706026736",
         whatsapp: "01706026736",
-        telegram: "01706026736"
+        telegram: "01706026736",
          facebook: "https://www.facebook.com/profile.php?id=61577683834150"
     },
     {
@@ -821,7 +797,7 @@ const contacts = [
         profile: "abid.jpg",
         call: "01925811325",
         whatsapp: "01925811325",
-        telegram: "01925811325"
+        telegram: "01925811325",
          facebook: "https://www.facebook.com/profile.php?id=61578739479029"
     },
     {
@@ -852,14 +828,14 @@ const contacts = [
         name: "Sibgatullah Sohan",
         profile: "Sibga.jpg",
         call: "01631384360",
-        whatsapp: "01631384360"
+        whatsapp: "01631384360",
          facebook: "https://www.facebook.com/profile.php?id=61577591856505"
     },
     {
         name: "Tamim Iqbal",
         profile: "tamim.jpeg",
         call: "01835868277",
-        whatsapp: "01835868277"
+        whatsapp: "01835868277",
          facebook: "https://www.facebook.com/profile.php?id=61554849213497"
     },
     {
@@ -867,20 +843,20 @@ const contacts = [
         profile: "asif.png",
         call: "01604358812",
         whatsapp: "01604358812",
-        telegram: "01604358812"
+        telegram: "01604358812",
          facebook: "https://www.facebook.com/asif.ikram.643385"
     },
     {
         name: "Abdul Khalek",
         profile: "a.khalek.jpg",
         call: "01346566876",
-        whatsapp: "01747540789"
+        whatsapp: "01747540789",
          facebook: "https://www.facebook.com/sheikh.squad.3"
     },
     {
         name: "Arman Asif",
         profile: "Arman.JPG",
-        call: "01910441536"
+        call: "01910441536",
         facebook: "https://www.facebook.com/mdasifarman.mdasifarman"
     },
     {
@@ -888,15 +864,14 @@ const contacts = [
         profile: "sadat.jpeg",
         call: "01987545415",
         whatsapp: "01987545415",
-        telegram: "01987545415"
-        facebook: "https://www.facebook.com/sa.dat.338947
-"
+        telegram: "01987545415",
+        facebook: "https://www.facebook.com/sa.dat.338947"
     },
     {
         name: "Hujaifa",
         profile: "Hujaifa.jpg",
         call: "01857737086",
-        whatsapp: "01345572504"
+        whatsapp: "01345572504",
         facebook: "https://www.facebook.com/hujaifa.al.sabuni"
     },
     {
@@ -904,8 +879,9 @@ const contacts = [
         profile: "Mahadi.jpg",
         call: "01909742115",
         whatsapp: "01909742115",
-        telegram: "01909742115"
+        telegram: "01909742115",
         facebook: "https://www.facebook.com/profile.php?id=61577647707325"
+        facebook: "https://www.facebook.com/profile.php?id=61576628969120"
     },
     {
         name: "Muhitur Rahman",
@@ -920,7 +896,7 @@ const contacts = [
         profile: "Tamim bin.jpg",
         call: "01978894952",
         whatsapp: "01978894952",
-        telegram: "01978894952"
+        telegram: "01978894952",
         facebook: "https://www.facebook.com/tamim.binsayeed"
     },
     {
@@ -943,7 +919,7 @@ const contacts = [
         name: "Taki",
         profile: "Taki.jpg",
         call: "01677185757"
-        // facebook: "https://www.facebook.com/USERNAME"
+         facebook: "https://www.facebook.com/m.w.taki"
     },
     {
         name: "Jahidul Islam Sujon",
@@ -952,14 +928,14 @@ const contacts = [
         call: "01943464407",
         whatsapp: "01943464407",
         telegram: "01943464407"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/jahidul.islam.sujon.522517"
     },
     {
         name: "AL-Amin",
         profile: "Al amin.jpg",
         call: "01410733175",
         whatsapp: "01849969318"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/profile.php?id=61578357805564"
     },
     {
         name: "Habibullah Esa",
@@ -967,21 +943,21 @@ const contacts = [
         call: "01746804733",
         whatsapp: "01746804733",
         telegram: "01746804733"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/profile.php?id=61577726443565"
     },
     {
         name: "Junayed",
         profile: "images/person21.jpg",
         call: "01760938894",
         whatsapp: "01839517890"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/junaed.ahkon"
     },
     {
         name: "Mudabbir",
         profile: "Mudabbir.png",
         call: "01973674145",
         whatsapp: "01973674145"
-        // facebook: "https://www.facebook.com/USERNAME"
+        // facebook: "https://www.facebook.com/mhamudabbiransari"
     },
     {
         name: "Mir Rafi",
@@ -989,14 +965,15 @@ const contacts = [
         call: "01754038553",
         whatsapp: "01754038553",
         telegram: "01754038553"
-        // facebook: "https://www.facebook.com/USERNAME"
+         facebook: "https://www.facebook.com/mr.mhmd.rafy"
+        facebook: "https://www.facebook.com/mir.md.rafi.664200"
     },
     {
         name: "Eyahiya",
         profile: "Eyahiya.png",
         call: "01730983367",
         whatsapp: "01730983367"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/profile.php?id=61585451383699"
     },
     {
         name: "Nazmul",
@@ -1040,7 +1017,7 @@ const contacts = [
         profile: "Abir.jpg",
         call: "01921650054",
         whatsapp: "01921650054"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/muhammad.abir.hossain.959941"
     },
     {
         name: "Yeazuddin Ahmed",
@@ -1048,7 +1025,7 @@ const contacts = [
         call: "01861686952",
         whatsapp: "01735019250",
         telegram: "01735019250"
-        // facebook: "https://www.facebook.com/USERNAME"
+         facebook: "https://www.facebook.com/bakhtiaruddin.ahmed.7"
     },
     {
         name: "Mahdi Mobarok",
@@ -1056,14 +1033,15 @@ const contacts = [
         call: "01327482121",
         whatsapp: "01327482121",
         telegram: "01327482121"
-        // facebook: "https://www.facebook.com/USERNAME"
+        facebook: "https://www.facebook.com/muhammad.mahdi.hasan.599915
+"
     },
     {
         name: "Rafiul Islam",
         profile: "Rafiul.jpg",
         call: "01966387600",
         whatsapp: "01966387600"
-        // facebook: "https://www.facebook.com/USERNAME"
+         facebook: "https://www.facebook.com/profile.php?id=61577612075154"
     },
     {
         name: "Tahsinul Islam",
@@ -1368,6 +1346,58 @@ function createContactCard(person, index) {
 const contactList = document.getElementById("contactList");
 const searchInput = document.getElementById("searchInput");
 const emptyMessage = document.getElementById("emptyMessage");
+const goodbyeContactList = document.getElementById("goodbyeContactList");
+
+// These are separate people/records for The Goodbye Crew.
+// They are intentionally independent from the main contacts list.
+const goodbyeContacts = [
+    {
+        name: "Samir",
+        profile: "samir.jpeg",
+       // call: "01604358812",
+      //  whatsapp: "01604358812",
+      //  telegram: "01604358812",
+        facebook: "https://www.facebook.com/asif.ikram.643385"
+    },
+
+
+       {
+        name: "Tanzim",
+        profile: "tanzim.jpeg",
+       // call: "01604358812",
+      //  whatsapp: "01604358812",
+      //  telegram: "01604358812",
+        facebook: "https://www.facebook.com/asif.ikram.643385"
+    },
+
+         {
+        name: "Toha",
+        profile: "toha.jpeg",
+       // call: "01604358812",
+      //  whatsapp: "01604358812",
+      //  telegram: "01604358812",
+        facebook: "https://www.facebook.com/profile.php?id=61576469633816"
+    },
+
+           {
+        name: "Oli Ullah",
+        profile: "oli.jpeg",
+       // call: "01604358812",
+      //  whatsapp: "01604358812",
+      //  telegram: "01604358812",
+        facebook: "https://www.facebook.com/profile.php?id=61574567582932"
+    },
+
+          {
+        name: "Mahmud",
+        profile: "mahmud.jpg",
+       // call: "01604358812",
+      whatsapp: "01816-471009",
+      //  telegram: "01604358812",
+       // facebook: "https://www.facebook.com/profile.php?id=61574567582932"
+    }, 
+
+];
 
 function renderContacts(list) {
     contactList.innerHTML = "";
@@ -1394,6 +1424,10 @@ if (searchInput) {
 }
 
 renderContacts(contacts);
+
+goodbyeContacts.forEach((person, index) => {
+    goodbyeContactList.appendChild(createContactCard(person, index));
+});
 
 </script>
 </body>
