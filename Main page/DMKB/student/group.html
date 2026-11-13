@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Community</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    background:#070b18;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+    radial-gradient(ellipse at 10% 20%,#102c65 0%,transparent 40%),
+    radial-gradient(ellipse at 90% 80%,#40105e 0%,transparent 40%),
+    #070b18;
+}
+
+.glow{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(110px);
+    opacity:.3;
+    animation:glowMove 9s infinite alternate ease-in-out;
+}
+
+.glow1{
+    background:#2563eb;
+    top:5%;
+    left:-100px;
+}
+
+.glow2{
+    background:#9333ea;
+    bottom:0;
+    right:-100px;
+    animation-delay:2s;
+}
+
+@keyframes glowMove{
+    to{transform:translate(100px,70px) scale(1.2);}
+}
+
+/* PARTICLES */
+.particles{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+}
+
+.particle{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:particleMove linear infinite;
+}
+
+@keyframes particleMove{
+    from{transform:translateY(100vh);opacity:0;}
+    20%{opacity:.7;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* MAIN */
+.container{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:55px 20px;
+}
+
+/* HEADER */
+.logo{
+    width:65px;
+    height:65px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    font-size:30px;
+    background:linear-gradient(135deg,#2563eb,#9333ea);
+    box-shadow:0 0 35px #7c3aed66;
+    margin-bottom:25px;
+    animation:logoFloat 3s infinite ease-in-out;
+}
+
+@keyframes logoFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+.tag{
+    padding:8px 19px;
+    border:1px solid #ffffff25;
+    background:#ffffff09;
+    border-radius:30px;
+    color:#c4b5fd;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:22px;
+    animation:fadeDown 1s ease;
+}
+
+h1{
+    font-size:clamp(30px,6vw,53px);
+    text-align:center;
+    font-weight:800;
+    line-height:1.3;
+    animation:fadeDown 1s ease;
+}
+
+h1 span{
+    background:linear-gradient(90deg,#60a5fa,#c084fc,#f0abfc);
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.subtitle{
+    text-align:center;
+    color:#9ca8c3;
+    font-size:13px;
+    line-height:1.9;
+    margin-top:15px;
+    margin-bottom:48px;
+    animation:fadeUp 1.2s ease;
+}
+
+/* SECTION CARDS */
+.cards{
+    width:100%;
+    max-width:920px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+}
+
+.card{
+    position:relative;
+    min-height:340px;
+    padding:35px 25px;
+    text-align:center;
+    border-radius:28px;
+    text-decoration:none;
+    color:white;
+    overflow:hidden;
+    background:rgba(255,255,255,.045);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.13);
+    transition:all .45s cubic-bezier(.2,.8,.2,1);
+    animation:fadeUp 1s ease backwards;
+}
+
+.card:nth-child(2){
+    animation-delay:.2s;
+}
+
+.card:hover{
+    transform:translateY(-12px);
+}
+
+.card:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:.5s;
+    pointer-events:none;
+}
+
+.du:before{
+    background:linear-gradient(135deg,#2563eb20,transparent,#38bdf820);
+}
+
+.nazat:before{
+    background:linear-gradient(135deg,#9333ea20,transparent,#ec489920);
+}
+
+.card:hover:before{
+    opacity:1;
+}
+
+/* CARD DECORATION */
+.circle{
+    position:absolute;
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    filter:blur(65px);
+    opacity:.2;
+    right:-55px;
+    top:-55px;
+    transition:.5s;
+    pointer-events:none;
+}
+
+.du .circle{background:#3b82f6;}
+.nazat .circle{background:#c084fc;}
+
+.card:hover .circle{
+    transform:scale(1.7);
+}
+
+/* ICON */
+.icon{
+    position:relative;
+    width:90px;
+    height:90px;
+    border-radius:25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+    margin:0 auto 24px;
+    background:#ffffff0c;
+    border:1px solid #ffffff20;
+    transition:.5s;
+}
+
+.du .icon{
+    box-shadow:0 0 35px #2563eb30;
+}
+
+.nazat .icon{
+    box-shadow:0 0 35px #9333ea30;
+}
+
+.card:hover .icon{
+    transform:rotate(-8deg) scale(1.12);
+}
+
+/* TEXT */
+.card h2{
+    position:relative;
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.du h2{
+    color:#60a5fa;
+}
+
+.nazat h2{
+    color:#d8a0ff;
+}
+
+.card p{
+    position:relative;
+    color:#aab5ce;
+    font-size:12px;
+    line-height:1.9;
+    max-width:280px;
+    margin:0 auto 24px;
+}
+
+/* STUDENT COUNT */
+.info{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#d4d9e8;
+    font-size:11px;
+    padding:8px 14px;
+    border-radius:30px;
+    background:#ffffff0b;
+    border:1px solid #ffffff16;
+    margin-bottom:22px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    background:#34d399;
+    border-radius:50%;
+    box-shadow:0 0 10px #34d399;
+}
+
+/* BUTTON */
+.btn{
+    position:relative;
+    display:flex;
+    width:100%;
+    max-width:230px;
+    margin:auto;
+    padding:13px 20px;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+    background:#ffffff0c;
+    border:1px solid #ffffff20;
+    transition:.35s;
+}
+
+.du .btn{
+    color:#93c5fd;
+}
+
+.nazat .btn{
+    color:#d8b4fe;
+}
+
+.card:hover .btn{
+    background:white;
+    color:#111827;
+    box-shadow:0 5px 25px #ffffff25;
+}
+
+.arrow{
+    font-size:18px;
+    transition:.3s;
+}
+
+.card:hover .arrow{
+    transform:translateX(7px);
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    margin-top:60px;
+    font-size:11px;
+    color:#67738e;
+    letter-spacing:1.5px;
+}
+
+.footer span{
+    color:#e879f9;
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown{
+    from{opacity:0;transform:translateY(-25px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(35px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:650px){
+
+    .container{
+        padding:55px 18px 35px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+        max-width:420px;
+        gap:22px;
+    }
+
+    .card{
+        min-height:320px;
+        padding:30px 20px;
+    }
+
+    .subtitle{
+        margin-bottom:35px;
+    }
+
+    .footer{
+        margin-top:40px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+</div>
+
+<div class="particles" id="particles"></div>
+
+<main class="container">
+
+    <div class="logo">🎓</div>
+
+    <div class="tag">✦ STUDENT COMMUNITY ✦</div>
+
+    <h1>
+        Welcome To<br>
+        <span>Our Student World</span>
+    </h1>
+
+    <p class="subtitle">
+        Choose your section and discover your student community.<br>
+        Your people, your identity, your journey.
+    </p>
+
+    <div class="cards">
+
+        <!-- DU SECTION -->
+
+        <a href="student.html" class="card du">
+
+            <div class="circle"></div>
+
+            <div class="icon">🎓</div>
+
+            <h2>DUians</h2>
+
+            <p>
+                A special community for students
+                of the DU branch. Discover your
+                friends and fellow students.
+            </p>
+
+            <div class="info">
+                <span class="dot"></span>
+                DU Branch Students
+            </div>
+
+            <div class="btn">
+                VIEW STUDENT LIST
+                <span class="arrow">→</span>
+            </div>
+
+        </a>
+
+
+        <!-- NAZAT SECTION -->
+
+        <a href="nazatian.html" class="card nazat">
+
+            <div class="circle"></div>
+
+            <div class="icon">💜</div>
+
+            <h2>Nazatian</h2>
+
+            <p>
+                A beautiful community for students
+                of the Nazat branch. Find your
+                friends and explore the community.
+            </p>
+
+            <div class="info">
+                <span class="dot"></span>
+                Nazat Branch Students
+            </div>
+
+            <div class="btn">
+                VIEW STUDENT LIST
+                <span class="arrow">→</span>
+            </div>
+
+        </a>
+
+    </div>
+
+    <div class="footer">
+        MADE WITH <span>♥</span> &nbsp; | &nbsp; STUDENT COMMUNITY
+    </div>
+
+</main>
+
+<script>
+
+// FLOATING PARTICLES
+const particles=document.getElementById("particles");
+
+for(let i=0;i<40;i++){
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=(6+Math.random()*12)+"s";
+    p.style.animationDelay=Math.random()*10+"s";
+    p.style.opacity=Math.random();
+
+    particles.appendChild(p);
+
+}
+
+</script>
+
+</body>
+</html>
