@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -651,6 +652,29 @@ button, input {
     filter: drop-shadow(0 0 8px #48dcff55);
 }
 
+.goodbye-profile {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 2px solid #48dcff88;
+    border-radius: 50%;
+    background: #102b45;
+}
+
+.goodbye-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.goodbye-profile img[hidden] {
+    display: none;
+}
+
 .goodbye-card h3 {
     color: #eef7ff;
     font-size: 12px;
@@ -661,6 +685,10 @@ button, input {
     color: #91a8bf;
     font-size: 10px;
     line-height: 1.6;
+}
+
+.goodbye-card .buttons {
+    justify-content: center;
 }
 
 @keyframes goodbyeShine {
@@ -765,7 +793,7 @@ button, input {
             <div class="goodbye-line"></div>
         </div>
 
-        <div id="goodbyeContactList" class="contact-list" aria-label="Goodbye Crew contacts"></div>
+        <div id="goodbyeContactList" class="goodbye-grid" aria-label="Goodbye Crew contacts"></div>
     </section>
 
     <footer class="page-footer">
@@ -908,7 +936,8 @@ const contacts = [
         profile: "Jubu.JPG",
         call: "01789013628",
         whatsapp: "01789013628",
-        telegram: "01789013628"
+        telegram: "01789013628",
+        facebook: "https://www.facebook.com/hm.jubaeir.ahmed.2025"
     },
     {
         name: "Taki",
@@ -1385,64 +1414,140 @@ const goodbyeContacts = [
     },
     {
         name: "Hasibul Hasan",
-        profile: "a*.jpeg"
+        profile: "",
+        facebook: "https://www.facebook.com/profile.php?id=61577856052770"
     },
     {
         name: "Aminul",
-        profile: "*.jpeg",
+        profile: "",
         facebook: "https://www.facebook.com/amimul.ihsan.2.0"
     },
     {
         name: "Saif",
-        profile: "*"
+        profile: ""
     },
     {
         name: "Momsad",
-        profile: "*.jpeg"
+        profile: ""
     },
     {
         name: "Irfan",
-        profile: "**.jpeg"
+        profile: ""
+    },
+    {
+        name: "Ali",
+        profile: "",
+        facebook: "https://www.facebook.com/profile.php?id=100080567982542"
+    },
+    {
+        name: "Nurul Islam",
+        profile: "nuru.jpg",
+        facebook: "https://www.facebook.com/profile.php?id=61570799762461"
+    },
+    {
+        name: "Marjan",
+        profile: "",
+        facebook: "https://www.facebook.com/profile.php?id=61591539914415"
     },
     {
         name: "Shariatullah",
-        profile: "*.jpeg",
-       // facebook: "https://www.facebook.com/AbiR36206"
+        profile: ""
+        // facebook: "https://www.facebook.com/AbiR36206"
     },
     {
         name: "Abdur Rahman",
-        profile: "*.jpeg"
+        profile: ""
+    },
+    {
+        name: "Junayed",
+        profile: ""
     },
     {
         name: "Abdullah",
-        profile: "*"
+        profile: ""
     },
     {
         name: "Amir hamza",
-        profile: "*.jpeg"
+        profile: ""
     },
     {
         name: "Osman",
-        profile: "*.jpeg"
+        profile: ""
     },
     {
         name: "Yousuf",
-        profile: "*.jpeg"
+        profile: ""
     },
     {
         name: "Yousuf khan",
-        profile: "*.jpeg"
+        profile: ""
     },
     {
         name: "Saidul",
-        profile: "*.jpeg"
+        profile: ""
     },
     {
         name: "Nurul Amin",
-        profile: "*.jpeg"
+        profile: ""
     }
 ];
 
+
+function createGoodbyeCard(person, index) {
+    const card = document.createElement("article");
+    card.className = "goodbye-card";
+    card.style.animationDelay = `${Math.min(index * 0.06, 0.6)}s`;
+
+    const profile = document.createElement("div");
+    profile.className = "goodbye-profile";
+
+    const img = document.createElement("img");
+    img.alt = person.name;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.hidden = !person.profile;
+
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-user-graduate";
+    icon.setAttribute("aria-hidden", "true");
+    icon.style.display = person.profile ? "none" : "block";
+
+    if (person.profile) {
+        img.src = person.profile;
+        img.addEventListener("error", () => {
+            img.hidden = true;
+            icon.style.display = "block";
+        });
+        img.addEventListener("load", () => {
+            img.hidden = false;
+            icon.style.display = "none";
+        });
+    }
+
+    profile.append(img, icon);
+
+    const name = document.createElement("h3");
+    name.textContent = person.name;
+
+    const note = document.createElement("p");
+    note.textContent = "A part of our memories";
+
+    card.append(profile, name, note);
+
+    if (person.facebook) {
+        const social = document.createElement("div");
+        social.className = "buttons";
+        social.innerHTML = createSocialButton("Facebook", person.facebook);
+        card.appendChild(social);
+    }
+
+    card.addEventListener("click", event => {
+        if (event.target.closest("a")) return;
+        launchDragon(card);
+    });
+
+    return card;
+}
 
 function renderContacts(list) {
     contactList.innerHTML = "";
@@ -1471,7 +1576,7 @@ if (searchInput) {
 renderContacts(contacts);
 
 goodbyeContacts.forEach((person, index) => {
-    goodbyeContactList.appendChild(createContactCard(person, index));
+    goodbyeContactList.appendChild(createGoodbyeCard(person, index));
 });
 
 </script>
