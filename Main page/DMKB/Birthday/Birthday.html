@@ -87,6 +87,7 @@ body{
     background:linear-gradient(90deg,#ff6ec7,#8b5cf6,#38bdf8,#ff6ec7);
     background-size:300%;
     -webkit-background-clip:text;
+    background-clip:text;
     color:transparent;
     animation:gradientMove 5s linear infinite;
 }
@@ -447,7 +448,6 @@ const friends = [
 
     {name:"মীর রাফি",birthday:"10 September",image:"Mir Rafi.jpg"},
     {name:"আব্দুল্লাহ ইয়ামেন",birthday:"19 September",image:"abdul.jpg"},
- 
 
     // NEW FRIENDS
 
@@ -459,7 +459,7 @@ const friends = [
 
     {name:"মোহাম্মদ মিজানুর রহমান",birthday:"6 May",image:"mizan.jpg"},
     {name:"সৈয়দ ইয়াজ উদ্দিন আহমেদ",birthday:"10 April",image:"images/default.jpg"},
-    {name:"মো ফখরুল ইসলাম",birthday:"30 May",image:"fokhrul.jpg},
+    {name:"মো ফখরুল ইসলাম",birthday:"30 May",image:"fokhrul.jpg"},
 
     {name:"মো ফয়সান হোসেন",birthday:"1 January",image:"foysal.jpg"},
 
@@ -477,9 +477,9 @@ const friends = [
     {name:"মো নাজমুলদ্দীন জাকির",birthday:"11 August",image:"jakir.jpg"},
 
     {name:"ইবনে শেখ মাহদী",birthday:"27 March",image:"mahdi.jpg"},
- 
+
     {name:"মেজবাউল হাসান মুক্ত",birthday:"23 October",image:"mokto.jpg"},
-  
+
     {name:"মো মাহফুজুল আমীন মারজান",birthday:"28 September",image:"marjan.jpg"},
 
     {name:"মুহাম্মদ যাইদ হাসান মারুফ",birthday:"16 June",image:"jhid.jpg"},
@@ -504,10 +504,9 @@ const friends = [
     {name:"মো সাজ্জাদ হোসাইন রায়হান সরকার",birthday:"27 August",image:"images/default.jpg"},
     {name:"আসিফ ইকরাম",birthday:"6 December",image:"images/default.jpg"},
     {name:"মো ত্বকী তাহমিদ খন্দকার",birthday:"18 November",image:"taki.jpg"},
-  
+
     {name:"মো আতিকুর রহমান",birthday:"7 July",image:"images/default.jpg"},
     {name:"মোঃ জাহিদুল ইসলাম সুজন",birthday:"16 June",image:"images/default.jpg"},
-
 
     {name:"মোঃ সিবগাতুল্লাহ সোহান",birthday:"11 November",image:"images/default.jpg"},
 
@@ -528,7 +527,7 @@ const monthNames = [
 
 let lastOrder = "";
 let lastDay = new Date().toDateString();
-let birthdayCelebrated = {};
+let birthdayCelebrated = new Set();
 
 
 /* ==========================================
@@ -617,7 +616,7 @@ function createCard(friend,index,isNext){
     }
 
     card.dataset.birthday = birthday.getTime();
-    card.dataset.friendName = friend.name;
+    card.dataset.friendIndex = index;
 
     card.innerHTML = `
 
@@ -680,12 +679,14 @@ function createCard(friend,index,isNext){
 
 function getSortedFriends(){
 
-    return [...friends].sort((a,b)=>{
+    return friends
+        .map((friend,index)=>({
+            ...friend,
+            originalIndex:index,
+            nextDate:getNextBirthday(friend.birthday)
+        }))
+        .sort((a,b)=>a.nextDate-b.nextDate);
 
-        return getNextBirthday(a.birthday) -
-               getNextBirthday(b.birthday);
-
-    });
 }
 
 
@@ -702,7 +703,7 @@ function renderBirthdays(){
     const sortedFriends = getSortedFriends();
 
     const newOrder = sortedFriends
-        .map(friend=>friend.name)
+        .map(friend=>friend.originalIndex)
         .join("|");
 
     if(
@@ -719,7 +720,9 @@ function renderBirthdays(){
     sortedFriends.forEach((friend,index)=>{
 
         const card = createCard(
-            friend,index,index === 0
+            friend,
+            friend.originalIndex,
+            index === 0
         );
 
         list.appendChild(card);
@@ -742,11 +745,8 @@ function updateCountdown(){
 
     cards.forEach(card=>{
 
-        const friendName = card.dataset.friendName;
-
-        const friend = friends.find(
-            item=>item.name === friendName
-        );
+        const friendIndex = Number(card.dataset.friendIndex);
+        const friend = friends[friendIndex];
 
         if(!friend) return;
 
@@ -800,11 +800,11 @@ function updateCountdown(){
             }
 
             const celebrationKey =
-                friendName+"-"+now.getFullYear();
+                friendIndex+"-"+now.getFullYear();
 
-            if(!birthdayCelebrated[celebrationKey]){
+            if(!birthdayCelebrated.has(celebrationKey)){
 
-                birthdayCelebrated[celebrationKey] = true;
+                birthdayCelebrated.add(celebrationKey);
 
                 createConfetti();
 
