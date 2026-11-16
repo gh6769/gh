@@ -2,540 +2,668 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>DMKB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050816">
+<title>DARUNNAZAT MADRASHA KITAB BIVAG</title>
 
 <style>
-
-/* =========================
-   GLOBAL
-========================= */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050816;
+    font-family: Arial, sans-serif;
 }
 
-body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    overflow-x: hidden;
-
-    background:
-        radial-gradient(circle at 20% 20%, #182b70, transparent 35%),
-        radial-gradient(circle at 80% 80%, #5b0b68, transparent 35%),
-        #050611;
-}
-
-
-/* =========================
-   ANIMATED BACKGROUND
-========================= */
-
-.bg {
+#three-page {
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100dvh;
     overflow: hidden;
-    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 20%, #10243c 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #15102d 0%, transparent 35%),
+        #050816;
+    perspective: 1200px;
+}
+
+#three-page canvas {
+    display: block;
+}
+
+.page-content {
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 35px 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(0,255,213,.09), transparent 35%),
+        radial-gradient(circle at 85% 85%, rgba(100,70,255,.10), transparent 35%),
+        #070b19;
+    color: white;
+    transform-style: preserve-3d;
+}
+
+/* BACKGROUND LIGHTS */
+
+.glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .18;
     pointer-events: none;
 }
 
-.bg span {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-
-    background: #00f7ff;
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 10px #00f7ff,
-        0 0 25px #00f7ff,
-        0 0 50px #00f7ff;
-
-    animation: particles 12s linear infinite;
+.glow-one {
+    background: #00ffd5;
+    top: -100px;
+    left: -80px;
 }
 
-.bg span:nth-child(1) {
-    left: 5%;
-    animation-duration: 9s;
+.glow-two {
+    background: #6555ff;
+    right: -100px;
+    bottom: -100px;
 }
 
-.bg span:nth-child(2) {
-    left: 15%;
-    animation-duration: 14s;
-    animation-delay: 2s;
-}
+/* HEADER */
 
-.bg span:nth-child(3) {
-    left: 28%;
-    animation-duration: 11s;
-    animation-delay: 4s;
-}
-
-.bg span:nth-child(4) {
-    left: 43%;
-    animation-duration: 16s;
-}
-
-.bg span:nth-child(5) {
-    left: 57%;
-    animation-duration: 10s;
-    animation-delay: 3s;
-}
-
-.bg span:nth-child(6) {
-    left: 70%;
-    animation-duration: 15s;
-}
-
-.bg span:nth-child(7) {
-    left: 84%;
-    animation-duration: 12s;
-    animation-delay: 5s;
-}
-
-.bg span:nth-child(8) {
-    left: 94%;
-    animation-duration: 17s;
-}
-
-@keyframes particles {
-    0% {
-        top: 110%;
-        transform: scale(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.5) rotate(180deg);
-    }
-
-    100% {
-        top: -10%;
-        transform: scale(0.4) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header {
+.header {
     text-align: center;
-    padding: 55px 15px 30px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+    transform: translateZ(35px);
 }
 
-header h5 {
-    font-size: clamp(16px, 3vw, 30px);
-    letter-spacing: 3px;
+.small-title {
+    color: #00ffd5;
+    font-size: 12px;
+    letter-spacing: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: block;
+}
 
+.title {
+    font-size: clamp(25px, 4vw, 48px);
+    font-weight: 900;
+    letter-spacing: 2px;
     background: linear-gradient(
         90deg,
-        #00f7ff,
         #ffffff,
-        #ff00e6,
-        #00f7ff
+        #00ffd5,
+        #8b7bff,
+        #ffffff
     );
-
     background-size: 300%;
-
     -webkit-background-clip: text;
     background-clip: text;
-
     color: transparent;
-
-    animation: gradientText 5s linear infinite;
+    animation: titleMove 6s linear infinite;
+    text-shadow: 0 0 30px rgba(0,255,213,.08);
 }
 
-header p {
-    margin-top: 10px;
-    color: #bfc8ff;
-    font-size: 15px;
-    letter-spacing: 2px;
+@keyframes titleMove {
+    0% { background-position: 0%; }
+    100% { background-position: 300%; }
 }
 
-@keyframes gradientText {
-    0% {
-        background-position: 0%;
-    }
-
-    100% {
-        background-position: 300%;
-    }
+.subtitle {
+    color: #9ca9c0;
+    margin-top: 12px;
+    font-size: 14px;
+    letter-spacing: 1px;
 }
 
+/* APP GRID */
 
-/* =========================
-   CONTAINER
-========================= */
-
-.container {
-    width: min(1100px, 94%);
-    margin: auto;
-
+.apps {
+    width: min(850px, 100%);
     display: grid;
-
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
-    padding: 20px 0 50px;
+    position: relative;
+    z-index: 2;
+    transform-style: preserve-3d;
 }
 
-
-/* =========================
-   CARD
-========================= */
-
-.card {
+.app-card {
     position: relative;
     min-height: 190px;
-    padding: 30px 20px;
-
+    padding: 28px 20px;
+    border-radius: 22px;
     text-decoration: none;
     color: white;
-
+    background: linear-gradient(
+        145deg,
+        rgba(20,34,55,.95),
+        rgba(10,15,31,.97)
+    );
+    border: 1px solid rgba(0,255,213,.20);
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     text-align: center;
     overflow: hidden;
-
-    border-radius: 25px;
-    border: 3px solid transparent;
-
-    background:
-        linear-gradient(#0b0d20, #0b0d20) padding-box,
-        linear-gradient(
-            135deg,
-            #00f7ff,
-            #7b00ff,
-            #ff00c8,
-            #00f7ff
-        ) border-box;
-
-    background-size:
-        100% 100%,
-        300% 300%;
-
-    animation: borderMove 5s linear infinite;
-
+    transition: .4s ease;
+    transform: translateZ(25px);
     box-shadow:
-        0 10px 35px rgba(0, 0, 0, 0.5),
-        inset 0 0 25px rgba(0, 247, 255, 0.05);
-
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
+        0 15px 35px rgba(0,0,0,.35),
+        inset 0 0 20px rgba(0,255,213,.025);
 }
 
-
-/* =========================
-   BORDER ANIMATION
-========================= */
-
-@keyframes borderMove {
-    0% {
-        background-position: 0 0, 0% 50%;
-    }
-
-    50% {
-        background-position: 0 0, 100% 50%;
-    }
-
-    100% {
-        background-position: 0 0, 0% 50%;
-    }
-}
-
-
-/* =========================
-   CARD SHINE
-========================= */
-
-.card::before {
+.app-card::before {
     content: "";
-
     position: absolute;
-    width: 160%;
-    height: 50px;
-
-    top: -80px;
-    left: -30%;
-
+    inset: -2px;
+    border-radius: 22px;
+    padding: 2px;
     background: linear-gradient(
-        90deg,
+        130deg,
         transparent,
-        rgba(255,255,255,.45),
+        #00ffd5,
+        #6c63ff,
         transparent
     );
-
-    transform: rotate(-15deg);
-
-    animation: shine 4s ease-in-out infinite;
+    background-size: 300% 300%;
+    animation: borderMove 5s linear infinite;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
-@keyframes shine {
-    0% {
-        top: -100px;
-    }
-
-    45%, 100% {
-        top: 120%;
-    }
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
 }
 
-
-/* =========================
-   HOVER
-========================= */
-
-.card:hover {
-    transform: translateY(-12px) scale(1.03);
-
+.app-card:hover {
+    transform: translateZ(55px) scale(1.04);
+    border-color: #00ffd5;
     box-shadow:
-        0 0 15px #00f7ff,
-        0 0 40px rgba(0, 247, 255, .45),
-        0 20px 60px rgba(0, 0, 0, .7);
+        0 20px 50px rgba(0,255,213,.13),
+        0 0 25px rgba(0,255,213,.12);
 }
 
-.card:active {
-    transform: scale(.96);
+.app-card::after {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    top: 0;
+    left: -180%;
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,.08),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: .7s;
 }
 
+.app-card:hover::after {
+    left: 130%;
+}
 
-/* =========================
-   ICON
-========================= */
+/* ICON */
 
 .icon {
-    width: 65px;
-    height: 65px;
-
+    width: 75px;
+    height: 75px;
+    border-radius: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 32px;
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,247,255,.25),
-            rgba(123,0,255,.08)
-        );
-
-    border: 2px solid rgba(0,247,255,.5);
-
-    box-shadow:
-        0 0 15px rgba(0,247,255,.5),
-        inset 0 0 15px rgba(0,247,255,.15);
-
+    font-size: 38px;
+    margin-bottom: 17px;
+    background: rgba(0,255,213,.08);
+    border: 1px solid rgba(0,255,213,.22);
+    box-shadow: 0 0 25px rgba(0,255,213,.08);
     animation: iconFloat 3s ease-in-out infinite;
 }
 
 @keyframes iconFloat {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-8px) rotate(5deg);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
 }
 
-
-/* =========================
-   TEXT
-========================= */
-
-.card h2 {
-    margin-top: 15px;
-
-    font-size: clamp(18px, 3vw, 27px);
-
-    letter-spacing: 1px;
-
-    text-shadow:
-        0 0 8px rgba(0,247,255,.7);
+.app-name {
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 9px;
+    letter-spacing: .5px;
 }
 
-.card p {
-    margin-top: 7px;
-    font-size: 13px;
-    color: #aeb8df;
-    letter-spacing: 1px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    text-align: center;
-    padding: 15px 10px 30px;
-
-    color: #777fa8;
+.app-description {
     font-size: 12px;
+    color: #aab5ca;
+    line-height: 1.5;
 }
 
+/* FOOTER */
 
-/* =========================
-   MOBILE
-========================= */
+.footer {
+    margin-top: 38px;
+    color: #697589;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    transform: translateZ(20px);
+}
 
-@media (max-width: 600px) {
+/* RESPONSIVE */
 
-    header {
-        padding-top: 35px;
+@media(max-width: 600px) {
+
+    .page-content {
+        padding: 25px 18px;
     }
 
-    header h5 {
+    .header {
+        margin-bottom: 28px;
+    }
+
+    .small-title {
+        font-size: 10px;
         letter-spacing: 2px;
     }
 
-    .container {
-        width: 94%;
-        gap: 12px;
+    .title {
+        font-size: 27px;
     }
 
-    .card {
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .apps {
+        grid-template-columns: 1fr;
+        gap: 17px;
+        max-width: 390px;
+    }
+
+    .app-card {
         min-height: 155px;
-        padding: 18px 8px;
+        padding: 20px 15px;
+    }
 
+    .icon {
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
         border-radius: 18px;
-        border-width: 2px;
+        margin-bottom: 12px;
     }
 
-    .icon {
-        width: 48px;
-        height: 48px;
-        font-size: 23px;
+    .app-name {
+        font-size: 19px;
     }
 
-    .card h2 {
-        margin-top: 10px;
-        font-size: 16px;
-    }
-
-    .card p {
-        font-size: 10px;
+    .footer {
+        margin-top: 25px;
     }
 }
 
-
-/* =========================
-   VERY SMALL PHONE
-========================= */
-
-@media (max-width: 360px) {
-
-    .container {
-        gap: 9px;
-    }
-
-    .card {
-        min-height: 140px;
-        padding: 14px 5px;
-    }
-
-    .icon {
-        width: 42px;
-        height: 42px;
-        font-size: 20px;
-    }
-
-    .card h2 {
-        font-size: 14px;
-    }
-
-    .card p {
-        font-size: 9px;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
     }
 }
-
 </style>
-</head>
 
+</head>
 
 <body>
 
-    <!-- ANIMATED BACKGROUND -->
+<div id="three-page"></div>
 
-    <div class="bg">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+<!-- ORIGINAL PAGE CONTENT -->
 
+<div id="page-content" class="page-content">
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 
     <!-- HEADER -->
 
-    <header>
-        <h5>DARUNNAZAT MADRASHA KITAB BIVAG</h5>
+    <header class="header">
+
+        <span class="small-title">
+            DARUNNAZAT MADRASHA KITAB BIVAG
+        </span>
+
+        <h1 class="title">
+            DARUNNAZAT MADRASHA KITAB BIVAG
+        </h1>
+
+        <p class="subtitle">
+            Choose Your Experience
+        </p>
+
     </header>
 
+    <!-- APP BOXES -->
 
-    <!-- MAIN MENU -->
+    <main class="apps">
 
-    <main class="container">
+        <!-- THE LAST DANCE -->
 
-        <a href="the last/the.html" class="card">
+        <a href="the last/the.html" class="app-card">
+
             <div class="icon">⏰</div>
-            <h2>The Last Dance</h2>
+
+            <div class="app-name">
+                The Last Dance
+            </div>
+
+            <div class="app-description">
+                Memories That Never End
+            </div>
+
         </a>
 
+        <!-- BIRTHDAY -->
 
-        <a href="Birthday/Birthday.html" class="card">
+        <a href="Birthday/Birthday.html" class="app-card">
+
             <div class="icon">🎂</div>
-            <h2>Birthday</h2>
+
+            <div class="app-name">
+                Birthday
+            </div>
+
+            <div class="app-description">
+                Celebrate Every Special Moment
+            </div>
+
         </a>
 
+        <!-- OUR MENTORS -->
 
-        <a href="teacher/teacher.html" class="card">
-            <div class="icon">🌟</div>
-            <h2>Our Mentors</h2>
+        <a href="teacher/teacher.html" class="app-card">
+
+            <div class="icon">🎓</div>
+
+            <div class="app-name">
+                Our Mentors
+            </div>
+
+            <div class="app-description">
+                Respect And Remember Our Teachers
+            </div>
+
         </a>
 
+        <!-- STUDENT COMMUNITY -->
 
-        <a href="student/group.html" class="card">
+        <a href="student/group.html" class="app-card">
+
             <div class="icon">👨‍🎓</div>
-            <h2>Student Community</h2>
+
+            <div class="app-name">
+                Student Community
+            </div>
+
+            <div class="app-description">
+                Together We Create Memories
+            </div>
+
         </a>
 
     </main>
 
-
     <!-- FOOTER -->
 
-    <footer>
-        <p>© Ghost Hunter • All Rights Reserved</p>
+    <footer class="footer">
+        © Ghost Hunter • All Rights Reserved
     </footer>
+
+</div>
+
+
+<!-- THREE.JS 3D SYSTEM -->
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+    CSS3DRenderer,
+    CSS3DObject
+} from "three/addons/renderers/CSS3DRenderer.js";
+
+
+/* SCENE */
+
+const scene = new THREE.Scene();
+
+
+/* CAMERA */
+
+const camera = new THREE.PerspectiveCamera(
+    35,
+    window.innerWidth / window.innerHeight,
+    1,
+    10000
+);
+
+
+/* RENDERER */
+
+const renderer = new CSS3DRenderer();
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+renderer.domElement.style.position = "absolute";
+renderer.domElement.style.inset = "0";
+renderer.domElement.style.width = "100%";
+renderer.domElement.style.height = "100%";
+
+document.getElementById("three-page")
+    .appendChild(renderer.domElement);
+
+
+/* PAGE OBJECT */
+
+const pageElement = document.getElementById("page-content");
+
+const pageObject = new CSS3DObject(pageElement);
+
+const pageGroup = new THREE.Group();
+
+pageGroup.add(pageObject);
+
+scene.add(pageGroup);
+
+
+/* CAMERA DISTANCE */
+
+function updateCamera() {
+
+    camera.aspect =
+        window.innerWidth / window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    const height = window.innerHeight;
+
+    const distance =
+        height / (2 * Math.tan(
+            THREE.MathUtils.degToRad(camera.fov / 2)
+        ));
+
+    camera.position.set(0, 0, distance * 1.02);
+
+}
+
+updateCamera();
+
+
+/* MOUSE / TOUCH CONTROL */
+
+let isDragging = false;
+
+let previousX = 0;
+let previousY = 0;
+
+let targetRotationX = 0;
+let targetRotationY = 0;
+
+let currentRotationX = 0;
+let currentRotationY = 0;
+
+let startX = 0;
+let startY = 0;
+
+const dragArea = renderer.domElement;
+
+dragArea.addEventListener("pointerdown", (event) => {
+
+    if (
+        event.target.closest("a") ||
+        event.target.closest("button")
+    ) {
+        return;
+    }
+
+    isDragging = true;
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+    startX = event.clientX;
+    startY = event.clientY;
+
+    dragArea.setPointerCapture(event.pointerId);
+
+});
+
+
+dragArea.addEventListener("pointermove", (event) => {
+
+    if (!isDragging) return;
+
+    const deltaX = event.clientX - previousX;
+    const deltaY = event.clientY - previousY;
+
+    targetRotationY += deltaX * 0.004;
+    targetRotationX += deltaY * 0.004;
+
+    targetRotationX = THREE.MathUtils.clamp(
+        targetRotationX,
+        -0.35,
+        0.35
+    );
+
+    targetRotationY = THREE.MathUtils.clamp(
+        targetRotationY,
+        -0.45,
+        0.45
+    );
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+});
+
+
+function stopDragging() {
+    isDragging = false;
+}
+
+dragArea.addEventListener("pointerup", stopDragging);
+dragArea.addEventListener("pointercancel", stopDragging);
+dragArea.addEventListener("lostpointercapture", stopDragging);
+
+
+/* ANIMATION */
+
+const clock = new THREE.Clock();
+
+function animate() {
+
+    requestAnimationFrame(animate);
+
+    const elapsed = clock.getElapsedTime();
+
+    if (!isDragging) {
+        targetRotationY *= 0.985;
+        targetRotationX *= 0.985;
+    }
+
+    currentRotationX +=
+        (targetRotationX - currentRotationX) * 0.08;
+
+    currentRotationY +=
+        (targetRotationY - currentRotationY) * 0.08;
+
+    pageGroup.rotation.x =
+        currentRotationX + Math.sin(elapsed * 0.7) * 0.015;
+
+    pageGroup.rotation.y =
+        currentRotationY + Math.sin(elapsed * 0.5) * 0.025;
+
+    pageGroup.position.y =
+        Math.sin(elapsed * 0.8) * 3;
+
+    renderer.render(scene, camera);
+
+}
+
+animate();
+
+
+/* RESIZE */
+
+window.addEventListener("resize", () => {
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    updateCamera();
+
+});
+
+</script>
 
 </body>
 </html>
-```
