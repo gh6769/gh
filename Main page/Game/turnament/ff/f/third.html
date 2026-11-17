@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FF Battle Report 3</title>
+<style>
+:root{--bg:#060906;--g:#39ff14;--a:#ffb700;--r:#ff3b3b;--text:#e8ffe4;--muted:#7fa07a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--text);font-family:"Courier New",Consolas,monospace;min-height:100%;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 20%,#39ff1420,transparent 60%),linear-gradient(#39ff1409 1px,transparent 1px);background-size:100% 100%,100% 4px}
+body::after{content:"";position:fixed;left:0;right:0;height:120px;top:-120px;z-index:1;pointer-events:none;background:linear-gradient(transparent,#39ff1418,transparent);animation:scan 5s linear infinite}
+@keyframes scan{to{top:100%}}
+main{position:relative;z-index:2;max-width:880px;margin:auto;padding:30px 14px 70px;text-align:center}
+h1{display:inline-block;position:relative;padding:8px 26px;font-size:clamp(1.7rem,8vw,3.4rem);letter-spacing:6px;color:var(--g);text-shadow:0 0 18px var(--g);animation:boot 1.2s steps(14) both}
+@keyframes boot{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+h1::before,h1::after{content:"";position:absolute;width:22px;height:22px;border:3px solid var(--a)}
+h1::before{left:0;top:0;border-right:0;border-bottom:0}
+h1::after{right:0;bottom:0;border-left:0;border-top:0}
+.sub{color:var(--muted);letter-spacing:4px;font-size:.75rem;margin:10px 0 22px}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.chip{padding:8px 16px;border:1px solid var(--g);color:var(--g);font-weight:700;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);background:#39ff1412;animation:pop .6s backwards}
+.chip:nth-child(2){animation-delay:.15s}.chip:nth-child(3){animation-delay:.3s;color:var(--a);border-color:var(--a)}
+@keyframes pop{from{transform:translateY(-30px);opacity:0}}
+h2{letter-spacing:4px;color:var(--a);font-size:1rem;margin:34px 0 14px}
+h2::before{content:"// "}
+.win{position:relative;padding:26px 14px;margin-bottom:10px;background:linear-gradient(120deg,#ffb70033,#39ff1418);border:2px solid var(--a);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px));overflow:hidden;animation:slidein .9s .4s backwards}
+@keyframes slidein{from{transform:translateX(-120%)}}
+.win::after{content:"";position:absolute;top:0;left:-60%;width:35%;height:100%;background:linear-gradient(90deg,transparent,#ffffff30,transparent);transform:skewX(-20deg);animation:sweep 3.5s infinite}
+@keyframes sweep{to{left:150%}}
+.trophy{font-size:3.4rem;display:block;animation:bounce 1.6s ease-in-out infinite;filter:drop-shadow(0 0 16px var(--a))}
+@keyframes bounce{50%{transform:translateY(-10px) scale(1.08)}}
+.wl{letter-spacing:8px;color:var(--a);font-size:.8rem;margin-top:4px}
+.wn{font-size:clamp(2.2rem,10vw,3.8rem);font-weight:900;text-transform:uppercase;color:#fff;text-shadow:0 0 22px var(--a);letter-spacing:4px}
+.ws{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.ws b{display:block;font-size:1.5rem;color:var(--g)}.ws span{font-size:.7rem;color:var(--muted)}
+.radar{position:relative;width:min(300px,78vw);aspect-ratio:1;border-radius:50%;margin:0 auto;border:2px solid var(--g);background:repeating-radial-gradient(circle,transparent 0 28px,#39ff1428 29px 30px),#0a140a;box-shadow:0 0 30px #39ff1433;overflow:hidden}
+.radar::before,.radar::after{content:"";position:absolute;background:#39ff1428}
+.radar::before{left:50%;top:0;width:1px;height:100%}.radar::after{top:50%;left:0;height:1px;width:100%}
+.sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#39ff1466,transparent 22%);animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.zone{position:absolute;inset:0;border-radius:50%;border:3px solid var(--a);box-shadow:0 0 22px var(--a),inset 0 0 40px #ffb70030;animation:zp 1.4s ease-in-out infinite alternate}
+@keyframes zp{to{border-color:#ff7a00}}
+.dot{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--g);box-shadow:0 0 12px var(--g);transform:translate(-50%,-50%);transition:.5s}
+.dot i{position:absolute;top:15px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.6rem;white-space:nowrap;color:var(--text)}
+.dot.dead{background:var(--r);box-shadow:0 0 14px var(--r);opacity:.3;transform:translate(-50%,-50%) scale(.7)}
+.clock{font-size:2.4rem;font-weight:900;color:var(--g);text-shadow:0 0 16px var(--g);margin:14px 0 4px;font-variant-numeric:tabular-nums}
+.feed{max-width:420px;margin:10px auto;min-height:120px;text-align:left;font-size:.85rem}
+.fi{padding:6px 10px;margin:5px 0;border-left:3px solid var(--r);background:#ff3b3b14;animation:fin .4s}
+.fi.w{border-color:var(--a);background:#ffb70022;color:var(--a);font-weight:700}
+@keyframes fin{from{transform:translateX(-40px);opacity:0}}
+.btn{margin-top:8px;padding:10px 26px;border:1px solid var(--a);background:#ffb70018;color:var(--a);font-family:inherit;font-weight:700;cursor:pointer;letter-spacing:2px;transition:.25s;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.btn:hover{background:var(--a);color:#000;box-shadow:0 0 22px var(--a)}
+.lh,.lr{display:grid;grid-template-columns:44px 1fr 56px 44px 64px;align-items:center;gap:8px;padding:12px 10px;text-align:left}
+.lh{color:var(--muted);font-size:.7rem;letter-spacing:2px}
+.lr{margin-bottom:8px;background:linear-gradient(90deg,#39ff1420,#39ff1406);border-left:4px solid var(--g);opacity:0;transform:translateX(-50px);animation:slidein2 .6s var(--d) forwards;transition:.3s;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%)}
+@keyframes slidein2{to{opacity:1;transform:none}}
+.lr:hover{background:linear-gradient(90deg,#39ff1440,#39ff1410);padding-left:18px}
+.lr:first-of-type{border-color:var(--a);background:linear-gradient(90deg,#ffb70033,#ffb70008)}
+.rk{font-size:1.5rem;font-weight:900;color:var(--a)}
+.nm{font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.nm .bar{height:5px;margin-top:6px;background:#ffffff14}
+.nm .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--a));transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.pv{font-weight:900;color:var(--g);text-align:right}
+.note{color:var(--muted);font-size:.72rem;margin-top:10px}
+@media(max-width:480px){.lh,.lr{grid-template-columns:30px 1fr 46px 34px 54px;font-size:.8rem;gap:5px}.rk{font-size:1.2rem}}
+</style>
+</head>
+<body>
+<main>
+  <h1>BATTLE REPORT</h1>
+  <p class="sub">FREE FIRE // TOURNAMENT MATCH</p>
+  <div class="chips"><div class="chip">⏱ 9:07</div><div class="chip">👥 5 PLAYERS</div><div class="chip">💀 <span id="tk">0</span> KILL</div></div>
+  <div class="win"><span class="trophy">🏆</span><div class="wl">★ BOOYAH · CHAMPION ★</div><div class="wn" id="wn"></div>
+    <div class="ws"><div><b id="w1"></b><span>SURVIVE</span></div><div><b id="w2"></b><span>KILL</span></div><div><b id="w3"></b><span>POINT</span></div></div></div>
+  <h2>ZONE REPLAY</h2>
+  <div class="radar"><div class="sweep"></div><div class="zone" id="zone"></div><div id="dots"></div></div>
+  <div class="clock" id="clk">0:00</div>
+  <div class="feed" id="feed"></div>
+  <button class="btn" onclick="play()">↻ REPLAY</button>
+  <h2>POINT TABLE</h2>
+  <div class="lh"><span>#</span><span>PLAYER</span><span>TIME</span><span>KILL</span><span style="text-align:right">POINT</span></div>
+  <div id="lb"></div>
+  <p class="note">POINT = SURVIVE TIME ÷ WINNER SURVIVE TIME (9:09) × 100</p>
+</main>
+<script>
+const P=[{n:'tamim',t:'9:09',k:2,x:52,y:47},{n:'saadat',t:'9:04',k:0,x:46,y:55},{n:'muhit',t:'7:40',k:2,x:70,y:34},{n:'raki',t:'7:04',k:0,x:27,y:69},{n:'sayem',t:'5:02',k:0,x:24,y:28}];
+const sec=s=>{const a=s.split(':');return +a[0]*60+ +a[1]};
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+const $=id=>document.getElementById(id);
+const T=sec(P[0].t);
+P.forEach((p,i)=>{p.r=i+1;p.s=sec(p.t);p.pt=(p.s/T*100).toFixed(1)});
+$('wn').textContent=P[0].n;$('w1').textContent=P[0].t;$('w2').textContent=P[0].k;$('w3').textContent=P[0].pt;
+const tot=P.reduce((a,p)=>a+p.k,0);let c=0;const iv=setInterval(()=>{$('tk').textContent=c;if(c>=tot)clearInterval(iv);c++},350);
+$('dots').innerHTML=P.map((p,i)=>`<div class="dot" id="d${i}" style="left:${p.x}%;top:${p.y}%"><i>${p.n}</i></div>`).join('');
+let raf;
+function play(){cancelAnimationFrame(raf);$('feed').innerHTML='';const done={};
+ P.forEach((p,i)=>$('d'+i).classList.remove('dead'));
+ const st=performance.now(),D=10000;
+ (function f(n){const x=Math.min((n-st)/D,1),s=x*T;$('clk').textContent=fmt(s);
+  $('zone').style.transform='scale('+(1-.68*x)+')';
+  for(let i=P.length-1;i>=0;i--){const p=P[i];if(!done[i]&&s>=p.s-.01){done[i]=1;
+   if(i){$('d'+i).classList.add('dead');$('feed').insertAdjacentHTML('afterbegin',`<div class="fi">💀 ${p.n} eliminated · ${p.t} · #${p.r}</div>`)}
+   else $('feed').insertAdjacentHTML('afterbegin',`<div class="fi w">🏆 ${p.n} WINS · BOOYAH!</div>`)}}
+  if(x<1)raf=requestAnimationFrame(f)})(st)}
+setTimeout(play,1500);
+$('lb').innerHTML=P.map((p,i)=>`<div class="lr" style="--d:${.8+i*.16}s"><span class="rk">${p.r}</span><span class="nm">${p.n}<div class="bar"><i data-w="${p.pt}"></i></div></span><span>${p.t}</span><span>${p.k}</span><span class="pv" data-v="${p.pt}">0.0</span></div>`).join('');
+setTimeout(()=>{document.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w+'%');document.querySelectorAll('.pv').forEach(e=>{const v=+e.dataset.v,s=performance.now();(function f(n){const x=Math.min((n-s)/1600,1);e.textContent=(v*x).toFixed(1);if(x<1)requestAnimationFrame(f)})(s)})},1500);
+</script>
+</body>
+</html>
