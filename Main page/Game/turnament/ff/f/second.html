@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FF Match Result 2</title>
+<style>
+:root{--bg:#05050f;--c1:#00f0ff;--c2:#ff2bd6;--c3:#b6ff00;--text:#f2f6ff;--muted:#8d95b5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Roboto,Arial,sans-serif;min-height:100%;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;background-image:linear-gradient(#00f0ff14 1px,transparent 1px),linear-gradient(90deg,#00f0ff14 1px,transparent 1px);background-size:44px 44px;animation:grid 6s linear infinite;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%);-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%)}
+@keyframes grid{to{background-position:0 44px,44px 0}}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.35;z-index:0;animation:drift 12s ease-in-out infinite alternate}
+.o1{width:300px;height:300px;background:var(--c2);top:-80px;left:-80px}
+.o2{width:340px;height:340px;background:var(--c1);bottom:-100px;right:-100px;animation-delay:-5s}
+@keyframes drift{to{transform:translate(60px,50px) scale(1.2)}}
+main{position:relative;z-index:2;max-width:920px;margin:auto;padding:34px 14px 70px;text-align:center}
+h1{font-size:clamp(2rem,9vw,4rem);letter-spacing:5px;text-transform:uppercase;animation:glitch 2.4s infinite,drop 1s cubic-bezier(.2,1.4,.4,1)}
+@keyframes glitch{0%,90%,100%{text-shadow:0 0 18px var(--c1)}92%{text-shadow:-4px 0 var(--c2),4px 0 var(--c1)}95%{text-shadow:4px 0 var(--c2),-4px 0 var(--c1)}}
+@keyframes drop{from{transform:translateY(-60px);opacity:0}}
+.sub{color:var(--muted);letter-spacing:3px;font-size:.8rem;margin:8px 0 24px}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.chip{padding:10px 20px;border-radius:40px;border:1px solid var(--c1);color:var(--c1);font-weight:700;background:#00f0ff10;animation:pop .6s backwards}
+.chip:nth-child(2){animation-delay:.15s;border-color:var(--c2);color:var(--c2);background:#ff2bd610}
+.chip:nth-child(3){animation-delay:.3s;border-color:var(--c3);color:var(--c3);background:#b6ff0010}
+@keyframes pop{from{transform:scale(0);opacity:0}}
+.glass{background:#ffffff0c;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid #ffffff22;border-radius:22px}
+.hero{padding:34px 16px;margin-bottom:34px;position:relative;overflow:hidden;animation:rise .9s .3s backwards}
+@keyframes rise{from{transform:translateY(60px);opacity:0}}
+.hero::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,#ffffff22,transparent);transform:skewX(-20deg);animation:sweep 4s infinite}
+@keyframes sweep{to{left:140%}}
+.ring{position:relative;width:130px;height:130px;margin:0 auto 12px}
+.ring::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--c1),var(--c2),var(--c3),var(--c1));animation:spin 3s linear infinite;box-shadow:0 0 40px #ff2bd688}
+.ring span{position:absolute;inset:6px;border-radius:50%;background:#0a0a1c;display:grid;place-items:center;font-size:3.4rem;font-weight:900;color:var(--c3)}
+.ring::after{content:"👑";position:absolute;top:-26px;left:50%;transform:translateX(-50%);font-size:2rem;animation:float 1.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translate(-50%,-8px)}}
+.booyah{color:var(--c3);letter-spacing:6px;font-weight:800;font-size:.85rem}
+.hname{font-size:clamp(2rem,9vw,3.4rem);font-weight:900;text-transform:uppercase;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent;margin:4px 0 14px}
+.hs{display:flex;justify-content:center;gap:26px;flex-wrap:wrap}
+.hs b{display:block;font-size:1.5rem;color:var(--c1)}.hs span{font-size:.75rem;color:var(--muted)}
+h2{letter-spacing:3px;margin:34px 0 14px;color:var(--c1);font-size:1.1rem}
+.race{padding:18px 14px}
+.clock{font-size:2.6rem;font-weight:900;color:var(--c3);text-shadow:0 0 18px var(--c3);font-variant-numeric:tabular-nums}
+.lane{display:flex;align-items:center;gap:10px;margin:12px 0}
+.ln{width:62px;text-align:left;font-weight:700;font-size:.9rem;flex:none}
+.track{flex:1;height:26px;border-radius:14px;background:#ffffff12;position:relative;overflow:hidden}
+.fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:14px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.tag{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:800;opacity:0;transition:opacity .4s}
+.tag.on{opacity:1}
+.btn{margin-top:10px;padding:10px 26px;border-radius:30px;border:1px solid var(--c2);background:#ff2bd622;color:var(--text);font-weight:700;cursor:pointer;transition:.25s}
+.btn:hover{background:var(--c2);box-shadow:0 0 22px var(--c2);transform:scale(1.06)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.card{padding:20px 12px;opacity:0;transform:translateY(40px) rotateX(30deg);animation:rise2 .7s forwards;transition:.3s}
+@keyframes rise2{to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-8px);border-color:var(--c1);box-shadow:0 12px 36px #00f0ff44}
+.g{position:relative;width:86px;height:86px;margin:0 auto 10px}
+.g svg{transform:rotate(-90deg)}
+.g circle{fill:none;stroke-width:7}
+.g .bg{stroke:#ffffff18}
+.g .fg{stroke:var(--c1);stroke-linecap:round;stroke-dasharray:214;stroke-dashoffset:214;transition:stroke-dashoffset 1.8s cubic-bezier(.2,.8,.2,1)}
+.g em{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:1.1rem}
+.card h3{font-size:1.1rem;margin-bottom:4px}
+.card p{font-size:.8rem;color:var(--muted)}
+.rb{display:inline-block;margin-bottom:8px;padding:2px 12px;border-radius:20px;background:var(--c2);color:#000;font-weight:800;font-size:.8rem}
+.tw{overflow-x:auto;border-radius:18px;border:1px solid #ffffff22}
+table{width:100%;border-collapse:collapse}
+th{background:linear-gradient(90deg,#00f0ff33,#ff2bd633);padding:12px 8px;font-size:.8rem;letter-spacing:1px}
+td{padding:13px 8px;border-top:1px solid #ffffff14}
+tbody tr{opacity:0;transform:translateX(-30px);animation:rise2 .5s forwards;transition:background .3s}
+tbody tr:hover{background:#00f0ff18}
+tbody tr:first-child td{color:var(--c3);font-weight:800}
+.pv{font-weight:800;color:var(--c1)}
+.note{color:var(--muted);font-size:.78rem;margin-top:10px}
+@media(max-width:480px){.ln{width:48px;font-size:.78rem}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<main>
+  <h1>Match Result</h1>
+  <p class="sub">FREE FIRE · TOURNAMENT MATCH</p>
+  <div class="chips"><div class="chip">⏱ 11:36</div><div class="chip">👥 5 Players</div><div class="chip">💀 <span id="tk">0</span> Kill</div></div>
+  <div class="glass hero">
+    <div class="ring"><span id="av"></span></div>
+    <div class="booyah">★ BOOYAH ★</div>
+    <div class="hname" id="hn"></div>
+    <div class="hs"><div><b id="h1"></b><span>SURVIVE</span></div><div><b id="h2"></b><span>KILL</span></div><div><b id="h3"></b><span>POINT</span></div></div>
+  </div>
+  <h2>SURVIVAL RACE</h2>
+  <div class="glass race"><div class="clock" id="clk">0:00</div><div id="lanes"></div><button class="btn" onclick="play()">↻ Replay</button></div>
+  <h2>RUNNERS UP</h2>
+  <div class="cards" id="cards"></div>
+  <h2>POINT TABLE</h2>
+  <div class="tw glass"><table id="pt"><thead><tr><th>#</th><th>Player</th><th>Survive</th><th>Kill</th><th>Point</th></tr></thead><tbody></tbody></table></div>
+  <p class="note">Point = Survive time ÷ Match time (11:36) × 100</p>
+</main>
+<script>
+const P=[{n:'raki',t:'11:36',k:3},{n:'tamim',t:'11:32',k:0},{n:'muhit',t:'10:39',k:1},{n:'taki',t:'8:12',k:0},{n:'sayem',t:'5:48',k:0}];
+const sec=s=>{const a=s.split(':');return +a[0]*60+ +a[1]};
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+const T=sec('11:36'),medal=['🥇','🥈','🥉'];
+P.forEach((p,i)=>{p.r=i+1;p.s=sec(p.t);p.pt=(p.s/T*100).toFixed(1)});
+const w=P[0],$=id=>document.getElementById(id);
+$('av').textContent=w.n[0].toUpperCase();$('hn').textContent=w.n;$('h1').textContent=w.t;$('h2').textContent=w.k;$('h3').textContent=w.pt;
+const tot=P.reduce((a,p)=>a+p.k,0);let c=0;const iv=setInterval(()=>{$('tk').textContent=c;if(c>=tot)clearInterval(iv);c++},350);
+$('lanes').innerHTML=P.map((p,i)=>`<div class="lane"><span class="ln">${p.n}</span><div class="track"><i class="fill" id="f${i}"></i><b class="tag" id="g${i}"></b></div></div>`).join('');
+let raf;
+function play(){cancelAnimationFrame(raf);P.forEach((p,i)=>{$('f'+i).style.width='0';$('g'+i).classList.remove('on')});
+ const st=performance.now(),D=9000;
+ (function f(n){const x=Math.min((n-st)/D,1),s=x*T;$('clk').textContent=fmt(s);
+  P.forEach((p,i)=>{$('f'+i).style.width=Math.min(s,p.s)/T*100+'%';const g=$('g'+i);if(s>=p.s-.01||x>=1){g.textContent=i?'💀 '+p.t:'👑 '+p.t;g.classList.add('on')}});
+  if(x<1)raf=requestAnimationFrame(f)})(st)}
+setTimeout(play,1400);
+$('cards').innerHTML=P.slice(1).map((p,i)=>`<div class="glass card" style="animation-delay:${.8+i*.18}s"><span class="rb">${medal[p.r-1]||'#'+p.r} ${p.r}${['st','nd','rd'][p.r-1]||'th'}</span><div class="g"><svg width="86" height="86" viewBox="0 0 86 86"><circle class="bg" cx="43" cy="43" r="34"/><circle class="fg" cx="43" cy="43" r="34" data-p="${p.pt}"/></svg><em>${p.pt}</em></div><h3>${p.n}</h3><p>⏱ ${p.t} · 💀 ${p.k} Kill</p></div>`).join('');
+setTimeout(()=>document.querySelectorAll('.fg').forEach(e=>e.style.strokeDashoffset=214*(1-e.dataset.p/100)),1500);
+const tb=document.querySelector('#pt tbody');
+P.forEach((p,i)=>tb.insertAdjacentHTML('beforeend',`<tr style="animation-delay:${1.4+i*.18}s"><td>${medal[i]||p.r}</td><td>${p.n}</td><td>${p.t}</td><td>${p.k}</td><td class="pv" data-v="${p.pt}">0.0</td></tr>`));
+setTimeout(()=>document.querySelectorAll('.pv').forEach(e=>{const v=+e.dataset.v,s=performance.now();(function f(n){const x=Math.min((n-s)/1500,1);e.textContent=(v*x).toFixed(1);if(x<1)requestAnimationFrame(f)})(s)}),1800);
+</script>
+</body>
+</html>
