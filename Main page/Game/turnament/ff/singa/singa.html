@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Fire Tournament Results</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+  body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #fff;
+  }
+
+  .header { text-align: center; margin-bottom: 50px; }
+  .header h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #ff6b00, #ffd700, #ff6b00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  .header p { color: #a0a0c0; margin-top: 8px; }
+
+  /* ===== Box List ===== */
+  .box-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .tournament-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 5px solid #ffd700;
+    border-radius: 15px;
+    padding: 25px 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .tournament-box:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateX(6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  .box-2 { border-left-color: #c0c0c0; }
+  .box-3 { border-left-color: #cd7f32; }
+
+  .box-left { display: flex; align-items: center; gap: 18px; }
+  .trophy { font-size: 2.2rem; }
+  .box-name { font-size: 1.3rem; font-weight: 700; }
+  .box-sub { font-size: 0.82rem; color: #8888aa; margin-top: 4px; }
+  .arrow { font-size: 1.5rem; color: #ff6b00; }
+
+  /* ===== Result Page ===== */
+  .result-page {
+    max-width: 800px;
+    margin: 0 auto;
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .result-page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .back-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    transition: 0.2s;
+  }
+  .back-btn:hover { background: rgba(255,107,0,0.3); }
+
+  .result-title {
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin-bottom: 8px;
+  }
+  .result-meta {
+    color: #a0a0c0;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
+
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .result-table th, .result-table td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 0.92rem;
+  }
+
+  .result-table th {
+    background: rgba(255,107,0,0.2);
+    color: #ffb366;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+  }
+
+  .result-table tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .result-table tr:last-child { border-bottom: none; }
+  .result-table tr:hover { background: rgba(255,255,255,0.04); }
+
+  .pos-1 { color: #ffd700; font-weight: 700; }
+  .pos-2 { color: #d0d0d0; font-weight: 700; }
+  .pos-3 { color: #cd7f32; font-weight: 700; }
+
+  @media (max-width: 500px) {
+    .header h1 { font-size: 1.7rem; }
+    .tournament-box { padding: 18px 20px; }
+    .box-name { font-size: 1.1rem; }
+    .result-table th, .result-table td { padding: 10px 8px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🔥 Free Fire Tournament</h1>
+    <p>একটা টুর্নামেন্টে ক্লিক করে রেজাল্ট দেখো</p>
+  </div>
+
+  <!-- ===== Box List ===== -->
+  <div class="box-list" id="boxList">
+
+    <div class="tournament-box box-1" onclick="showResult(1)">
+      <div class="box-left">
+        <div class="trophy">🏆</div>
+        <div>
+          <div class="box-name">1st Tournament</div>
+          <div class="box-sub">Season 1 • Grand Final</div>
+        </div>
+      </div>
+      <div class="arrow">➜</div>
+    </div>
+
+    <div class="tournament-box box-2" onclick="showResult(2)">
+      <div class="box-left">
+        <div class="trophy">🥈</div>
+        <div>
+          <div class="box-name">2nd Tournament</div>
+          <div class="box-sub">Season 2 • Grand Final</div>
+        </div>
+      </div>
+      <div class="arrow">➜</div>
+    </div>
+
+    <div class="tournament-box box-3" onclick="showResult(3)">
+      <div class="box-left">
+        <div class="trophy">🥉</div>
+        <div>
+          <div class="box-name">3rd Tournament</div>
+          <div class="box-sub">Season 3 • Grand Final</div>
+        </div>
+      </div>
+      <div class="arrow">➜</div>
+    </div>
+
+  </div>
+
+  <!-- ===== Result Page ===== -->
+  <div class="result-page" id="resultPage">
+    <button class="back-btn" onclick="goBack()">← ফিরে যাও</button>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-meta" id="resultMeta"></div>
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Team</th>
+          <th>Kills</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody id="resultBody"></tbody>
+    </table>
+  </div>
+
+<script>
+  // এখানে প্রতিটা tournament এর result বসাও
+  const tournaments = {
+    1: {
+      title: "1st Tournament Result",
+      meta: "Date: 15 Jan 2025 • Grand Final",
+      teams: [
+        { rank: 1, name: "Team Alpha",   kills: 18, points: 62 },
+        { rank: 2, name: "Team Bravo",   kills: 15, points: 54 },
+        { rank: 3, name: "Team Charlie", kills: 12, points: 48 },
+        { rank: 4, name: "Team Delta",   kills: 9,  points: 36 }
+      ]
+    },
+    2: {
+      title: "2nd Tournament Result",
+      meta: "Date: 22 Jan 2025 • Grand Final",
+      teams: [
+        { rank: 1, name: "Team Bravo",  kills: 20, points: 68 },
+        { rank: 2, name: "Team Delta",  kills: 16, points: 56 },
+        { rank: 3, name: "Team Alpha",  kills: 14, points: 50 },
+        { rank: 4, name: "Team Echo",   kills: 8,  points: 32 }
+      ]
+    },
+    3: {
+      title: "3rd Tournament Result",
+      meta: "Date: 29 Jan 2025 • Grand Final",
+      teams: [
+        { rank: 1, name: "Team Charlie", kills: 22, points: 72 },
+        { rank: 2, name: "Team Alpha",   kills: 17, points: 58 },
+        { rank: 3, name: "Team Echo",    kills: 13, points: 46 },
+        { rank: 4, name: "Team Bravo",   kills: 10, points: 38 }
+      ]
+    }
+  };
+
+  function showResult(id) {
+    const data = tournaments[id];
+
+    document.getElementById('resultTitle').textContent = data.title;
+    document.getElementById('resultMeta').textContent = data.meta;
+
+    const tbody = document.getElementById('resultBody');
+    tbody.innerHTML = '';
+
+    data.teams.forEach(t => {
+      const cls = t.rank === 1 ? 'pos-1' : t.rank === 2 ? 'pos-2' : t.rank === 3 ? 'pos-3' : '';
+      tbody.innerHTML += `
+        <tr>
+          <td class="${cls}">#${t.rank}</td>
+          <td>${t.name}</td>
+          <td>${t.kills}</td>
+          <td class="${cls}">${t.points}</td>
+        </tr>
+      `;
+    });
+
+    document.getElementById('boxList').style.display = 'none';
+    document.getElementById('resultPage').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function goBack() {
+    document.getElementById('resultPage').classList.remove('active');
+    document.getElementById('boxList').style.display = 'flex';
+  }
+</script>
+
+</body>
+</html>
