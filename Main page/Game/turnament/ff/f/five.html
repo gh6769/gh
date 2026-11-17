@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080b12">
+<title>FF High Score | Elite Arena</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700;800&display=swap');
+
+:root{
+ --bg:#080b12;
+ --panel:#101722;
+ --panel2:#151f2d;
+ --red:#ff365e;
+ --yellow:#ffd84a;
+ --blue:#38bdf8;
+ --green:#39f5a2;
+ --text:#f2f6ff;
+ --muted:#7e8da3;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+ background:var(--bg);
+ color:var(--text);
+ font-family:'Rajdhani',sans-serif;
+ min-height:100%;
+ overflow-x:hidden;
+ text-transform:uppercase;
+}
+
+body{
+ background:
+ radial-gradient(ellipse at 50% -15%,#20395b 0%,transparent 45%),
+ radial-gradient(ellipse at 100% 50%,#31142644,transparent 40%),
+ #080b12;
+}
+
+body::before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:10;
+ opacity:.15;
+ background-image:
+ linear-gradient(#ffffff08 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+ background-size:35px 35px;
+}
+
+body.sh main{animation:shake .4s}
+
+@keyframes shake{
+ 20%{transform:translate(-7px,3px)}
+ 40%{transform:translate(7px,-3px)}
+ 60%{transform:translate(-5px,-2px)}
+ 80%{transform:translate(4px,2px)}
+}
+
+main{
+ position:relative;
+ z-index:1;
+ max-width:1050px;
+ margin:auto;
+ padding:28px 18px 75px;
+}
+
+.topbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:12px 16px;
+ background:#111a27;
+ border:1px solid #29384c;
+ border-radius:8px;
+ box-shadow:0 8px 30px #0005;
+ font-family:Orbitron,sans-serif;
+ font-size:.67rem;
+ letter-spacing:2px;
+ color:var(--muted);
+}
+
+.brand{
+ color:var(--yellow);
+ font-weight:900;
+}
+
+.live{
+ color:var(--green);
+ display:flex;
+ align-items:center;
+ gap:7px;
+}
+
+.dot{
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--green);
+ box-shadow:0 0 12px var(--green);
+ animation:blink 1s infinite;
+}
+
+@keyframes blink{50%{opacity:.25}}
+
+.hero{
+ text-align:center;
+ padding:45px 10px 32px;
+}
+
+.tag{
+ display:inline-block;
+ padding:7px 18px;
+ color:var(--blue);
+ background:#38bdf812;
+ border:1px solid #38bdf855;
+ border-radius:30px;
+ letter-spacing:4px;
+ font-size:.75rem;
+ font-family:Orbitron,sans-serif;
+}
+
+h1{
+ font-family:Orbitron,sans-serif;
+ font-size:clamp(2.2rem,9vw,5rem);
+ font-weight:900;
+ letter-spacing:5px;
+ margin:18px 0 8px;
+ color:white;
+ text-shadow:0 0 25px #38bdf855;
+ animation:titleIn 1s ease;
+}
+
+h1 span{color:var(--yellow)}
+
+@keyframes titleIn{
+ from{opacity:0;transform:translateY(-30px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.subtitle{
+ color:var(--muted);
+ letter-spacing:5px;
+ font-size:.9rem;
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+ max-width:650px;
+ margin:28px auto 0;
+}
+
+.stat{
+ background:linear-gradient(145deg,#182535,#0d131e);
+ border:1px solid #31435a;
+ border-radius:10px;
+ padding:15px 8px;
+ position:relative;
+ overflow:hidden;
+}
+
+.stat::after{
+ content:"";
+ position:absolute;
+ width:70px;
+ height:70px;
+ background:#38bdf815;
+ filter:blur(25px);
+ right:-20px;
+ top:-20px;
+}
+
+.stat strong{
+ display:block;
+ font-family:Orbitron,sans-serif;
+ font-size:1.15rem;
+ color:var(--yellow);
+}
+
+.stat small{
+ color:var(--muted);
+ letter-spacing:2px;
+ font-size:.65rem;
+}
+
+.section-title{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ margin:40px 0 18px;
+ font-family:Orbitron,sans-serif;
+ font-size:.95rem;
+ letter-spacing:2px;
+}
+
+.section-title::before{
+ content:"";
+ width:5px;
+ height:25px;
+ background:var(--blue);
+ box-shadow:0 0 15px var(--blue);
+ border-radius:5px;
+}
+
+.section-title::after{
+ content:"";
+ height:1px;
+ flex:1;
+ background:linear-gradient(90deg,#38bdf855,transparent);
+}
+
+/* CHAMPION */
+
+.win{
+ position:relative;
+ overflow:hidden;
+ padding:35px 15px;
+ text-align:center;
+ border:1px solid #ffd84a88;
+ border-radius:15px;
+ background:
+ radial-gradient(ellipse at center,#71552255,transparent 65%),
+ linear-gradient(135deg,#1d2630,#10141e);
+ box-shadow:0 15px 45px #0006,inset 0 0 35px #ffd84a0b;
+}
+
+.win::before,.win::after{
+ content:"";
+ position:absolute;
+ width:180px;
+ height:180px;
+ border:1px solid #ffd84a22;
+ transform:rotate(45deg);
+}
+
+.win::before{left:-100px;top:-100px}
+.win::after{right:-100px;bottom:-100px}
+
+.crown{
+ font-size:2rem;
+ color:var(--yellow);
+ filter:drop-shadow(0 0 15px #ffd84a);
+ animation:float 2s ease-in-out infinite;
+}
+
+@keyframes float{
+ 50%{transform:translateY(-8px)}
+}
+
+.win small{
+ display:block;
+ color:var(--yellow);
+ font-family:Orbitron,sans-serif;
+ font-size:.7rem;
+ letter-spacing:5px;
+ margin-top:10px;
+}
+
+.wn{
+ font-family:Orbitron,sans-serif;
+ font-size:clamp(2rem,9vw,4rem);
+ font-weight:900;
+ margin:12px 0;
+ color:white;
+ text-shadow:0 0 25px #ffd84a77;
+}
+
+.wl{
+ display:inline-block;
+ padding:7px 22px;
+ background:var(--yellow);
+ color:#101010;
+ font-family:Orbitron,sans-serif;
+ font-size:.75rem;
+ font-weight:900;
+ letter-spacing:3px;
+ border-radius:4px;
+}
+
+/* PLAYER CARDS */
+
+.sel{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:13px;
+}
+
+.tile{
+ position:relative;
+ overflow:hidden;
+ padding:17px 8px;
+ text-align:center;
+ border-radius:10px;
+ background:linear-gradient(145deg,#1a2635,#0d131d);
+ border:1px solid #34465a;
+ transition:.35s;
+}
+
+.tile::before{
+ content:"";
+ position:absolute;
+ height:3px;
+ top:0;
+ left:0;
+ width:100%;
+ background:var(--c);
+ box-shadow:0 0 15px var(--c);
+}
+
+.tile:hover{
+ transform:translateY(-6px);
+ border-color:var(--c);
+ box-shadow:0 10px 25px #0007,0 0 15px color-mix(in srgb,var(--c),transparent 75%);
+}
+
+.tile .av{
+ width:55px;
+ height:55px;
+ margin:0 auto 10px;
+ display:grid;
+ place-items:center;
+ border-radius:50%;
+ font-family:Orbitron,sans-serif;
+ font-size:1.5rem;
+ font-weight:900;
+ color:#080b12;
+ background:var(--c);
+ box-shadow:0 0 20px color-mix(in srgb,var(--c),transparent 55%);
+}
+
+.tile b{
+ display:block;
+ font-size:.9rem;
+ letter-spacing:1px;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+
+.tile em{
+ position:absolute;
+ top:10px;
+ left:10px;
+ color:var(--muted);
+ font-size:.7rem;
+ font-style:normal;
+ font-family:Orbitron,sans-serif;
+}
+
+.tile.cur{
+ border-color:var(--yellow);
+ box-shadow:0 0 22px #ffd84a66;
+ transform:translateY(-5px) scale(1.04);
+}
+
+.tile.lock{
+ border-color:var(--yellow);
+ box-shadow:0 0 30px #ffd84a99;
+ animation:champ 1s ease-in-out infinite alternate;
+}
+
+@keyframes champ{
+ to{box-shadow:0 0 35px #ffd84a}
+}
+
+.tile.lock::after{
+ content:"CHAMPION";
+ position:absolute;
+ bottom:0;
+ left:0;
+ width:100%;
+ padding:4px;
+ background:var(--yellow);
+ color:#111;
+ font-family:Orbitron,sans-serif;
+ font-size:.55rem;
+ font-weight:900;
+}
+
+/* REPLAY */
+
+.ko{
+ padding:20px;
+ background:linear-gradient(145deg,#151f2d,#0c111a);
+ border:1px solid #34465a;
+ border-radius:12px;
+ box-shadow:0 10px 35px #0005;
+}
+
+.replay-top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ flex-wrap:wrap;
+ border-bottom:1px solid #ffffff15;
+ padding-bottom:14px;
+}
+
+.replay-top small{
+ color:var(--muted);
+ letter-spacing:2px;
+}
+
+.clock{
+ font-family:Orbitron,sans-serif;
+ font-size:2rem;
+ font-weight:900;
+ color:var(--yellow);
+ text-shadow:0 0 20px #ffd84a66;
+}
+
+.ann{
+ min-height:35px;
+ text-align:center;
+ margin:15px 0;
+ font-family:Orbitron,sans-serif;
+ font-size:1rem;
+ font-weight:900;
+ color:var(--red);
+ letter-spacing:3px;
+}
+
+.ann.pop{animation:ap .5s}
+
+@keyframes ap{
+ from{transform:scale(1.8);opacity:0}
+ to{transform:scale(1);opacity:1}
+}
+
+.hp{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ margin:15px 0;
+ text-align:left;
+}
+
+.hp .n{
+ width:75px;
+ flex:none;
+ font-size:.9rem;
+ font-weight:800;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+
+.hp .bx{
+ flex:1;
+ height:15px;
+ background:#2b1820;
+ border-radius:20px;
+ overflow:hidden;
+ border:1px solid #ffffff25;
+}
+
+.hp .bx i{
+ display:block;
+ height:100%;
+ width:100%;
+ border-radius:20px;
+ background:linear-gradient(90deg,#25d88a,#a6ff69);
+ box-shadow:0 0 12px #39f5a2;
+ transition:width .5s linear;
+}
+
+.hp .st{
+ width:55px;
+ flex:none;
+ text-align:right;
+ font-family:Orbitron,sans-serif;
+ font-size:.65rem;
+ color:var(--muted);
+}
+
+.hp.dead .n{
+ color:var(--muted);
+ text-decoration:line-through;
+}
+
+.hp.dead .bx i{background:var(--red);box-shadow:0 0 12px var(--red)}
+.hp.dead .st{color:var(--red)}
+.hp.winr .st{color:var(--yellow)}
+
+.btn{
+ display:block;
+ margin:22px auto 0;
+ padding:12px 30px;
+ border:1px solid var(--yellow);
+ border-radius:5px;
+ background:linear-gradient(135deg,#ffd84a,#ffad25);
+ color:#111;
+ font-family:Orbitron,sans-serif;
+ font-size:.75rem;
+ font-weight:900;
+ letter-spacing:2px;
+ cursor:pointer;
+ box-shadow:0 5px 20px #ffd84a33;
+ transition:.3s;
+}
+
+.btn:hover{
+ transform:translateY(-3px);
+ box-shadow:0 8px 25px #ffd84a77;
+}
+
+/* LEADERBOARD */
+
+.table-wrap{
+ overflow-x:auto;
+ background:#101722;
+ border:1px solid #34465a;
+ border-radius:10px;
+}
+
+.lh,.lr{
+ min-width:570px;
+ display:grid;
+ grid-template-columns:55px 75px 1fr 75px 55px 85px;
+ align-items:center;
+ gap:7px;
+ padding:14px 12px;
+ text-align:left;
+}
+
+.lh{
+ color:var(--blue);
+ background:#1c2939;
+ font-family:Orbitron,sans-serif;
+ font-size:.65rem;
+ letter-spacing:1px;
+}
+
+.lr{
+ border-bottom:1px solid #ffffff12;
+ opacity:0;
+ transform:translateX(-30px);
+ transition:opacity .5s,transform .5s,background .3s;
+}
+
+.lr:last-child{border-bottom:0}
+.lr.in{opacity:1;transform:none}
+.lr:hover{background:#ffffff0b}
+
+.rk{
+ color:var(--c);
+ font-family:Orbitron,sans-serif;
+ font-weight:900;
+ font-size:1rem;
+}
+
+.ini{
+ font-family:Orbitron,sans-serif;
+ font-size:1.2rem;
+ font-weight:900;
+ color:var(--c);
+}
+
+.fn{
+ font-weight:700;
+ font-size:.9rem;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+
+.sc{
+ text-align:right;
+ color:var(--yellow);
+ font-family:Orbitron,sans-serif;
+ font-weight:900;
+}
+
+.note{
+ text-align:center;
+ color:var(--muted);
+ font-size:.72rem;
+ letter-spacing:1px;
+ margin-top:15px;
+}
+
+.footer{
+ text-align:center;
+ margin-top:45px;
+ padding-top:20px;
+ border-top:1px solid #ffffff15;
+ color:#64748b;
+ font-family:Orbitron,sans-serif;
+ font-size:.6rem;
+ letter-spacing:3px;
+}
+
+@media(max-width:600px){
+ main{padding:18px 12px 55px}
+ .topbar{font-size:.55rem;letter-spacing:1px;padding:12px 9px}
+ .hero{padding:35px 5px 25px}
+ h1{letter-spacing:2px}
+ .subtitle{letter-spacing:2px;font-size:.75rem}
+ .stats{gap:7px}
+ .stat{padding:12px 5px}
+ .stat strong{font-size:.95rem}
+ .stat small{font-size:.57rem;letter-spacing:1px}
+ .sel{grid-template-columns:repeat(2,1fr);gap:10px}
+ .tile{padding:17px 5px}
+ .ko{padding:15px 10px}
+ .hp{gap:7px}
+ .hp .n{width:60px;font-size:.75rem}
+ .hp .st{width:45px;font-size:.58rem}
+ .clock{font-size:1.6rem}
+ .section-title{font-size:.78rem}
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<div class="topbar">
+ <span class="brand">FF / ELITE ARENA</span>
+ <span class="live"><i class="dot"></i> MATCH RECORDED</span>
+ <span>SEASON 01</span>
+</div>
+
+<header class="hero">
+ <div class="tag">OFFICIAL MATCH RESULT</div>
+ <h1>HIGH <span>SCORE</span></h1>
+ <p class="subtitle">FREE FIRE · 7 PLAYER MATCH</p>
+
+ <div class="stats">
+  <div class="stat">
+   <strong>⏱ 10:52</strong>
+   <small>MATCH TIME</small>
+  </div>
+  <div class="stat">
+   <strong>👥 7</strong>
+   <small>PLAYERS</small>
+  </div>
+  <div class="stat">
+   <strong>💀 <span id="tk">0</span></strong>
+   <small>TOTAL KILLS</small>
+  </div>
+ </div>
+</header>
+
+<section class="win">
+ <div class="crown">♛</div>
+ <small>★ BOOYAH ★ CHAMPION ★</small>
+ <div class="wn" id="wn"></div>
+ <div class="wl">YOU WIN!</div>
+</section>
+
+<h2 class="section-title">PLAYER SELECT</h2>
+<div class="sel" id="sel"></div>
+
+<h2 class="section-title">K.O. REPLAY</h2>
+
+<section class="ko">
+ <div class="replay-top">
+  <small>ELIMINATION TIMELINE</small>
+  <div class="clock" id="clk">0:00</div>
+ </div>
+ <div class="ann" id="ann">READY?</div>
+ <div id="hps"></div>
+ <button class="btn" onclick="play()">↻ &nbsp; REPLAY MATCH</button>
+</section>
+
+<h2 class="section-title">HIGH SCORE TABLE</h2>
+
+<div class="table-wrap">
+ <div class="lh">
+  <span>RANK</span>
+  <span>INI</span>
+  <span>PLAYER</span>
+  <span>TIME</span>
+  <span>KO</span>
+  <span style="text-align:right">SCORE</span>
+ </div>
+ <div id="lb"></div>
+</div>
+
+<p class="note">SCORE = SURVIVE TIME ÷ MATCH TIME (10:52) × 100</p>
+
+<footer class="footer">
+ FREE FIRE ELITE ARENA · MATCH RESULT
+</footer>
+
+</main>
+
+<script>
+const P=[
+ {n:'saadat',t:'10:52',k:3},
+ {n:'muhit',t:'10:50',k:1},
+ {n:'sayem',t:'7:31',k:2},
+ {n:'raki',t:'7:07',k:2},
+ {n:'saharia',t:'4:05',k:0},
+ {n:'arman',t:'3:53',k:0},
+ {n:'tamim',t:'2:56',k:0}
+];
+
+const col=['#ffe600','#d8d8ff','#ff9a2a','#2a8bff','#2aff6b','#ff4fd8','#ff2a2a'];
+
+const sec=s=>{
+ const a=s.split(':');
+ return +a[0]*60 + +a[1];
+};
+
+const fmt=s=>
+ Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+
+const $=id=>document.getElementById(id);
+const T=sec('10:52');
+
+P.forEach((p,i)=>{
+ p.r=i+1;
+ p.s=sec(p.t);
+ p.pt=(p.s/T*100).toFixed(1);
+ p.c=col[i];
+ p.i=p.n.slice(0,3);
+});
+
+$('wn').textContent=P[0].n;
+
+const tot=P.reduce((a,p)=>a+p.k,0);
+let c=0;
+
+const iv=setInterval(()=>{
+ $('tk').textContent=c;
+ if(c>=tot)clearInterval(iv);
+ c++;
+},300);
+
+$('sel').innerHTML=P.map((p,i)=>`
+ <div class="tile" id="t${i}" style="--c:${p.c}">
+  <em>#${p.r}</em>
+  <div class="av">${p.n[0]}</div>
+  <b>${p.n}</b>
+ </div>
+`).join('');
+
+let k=0,cnt=0;
+
+const cy=setInterval(()=>{
+ document.querySelectorAll('.tile').forEach(t=>t.classList.remove('cur'));
+
+ if(cnt++>26){
+  clearInterval(cy);
+  $('t0').classList.add('lock');
+  return;
+ }
+
+ k=(k+1+(cnt%3))%7;
+ $('t'+k).classList.add('cur');
+
+},90);
+
+$('hps').innerHTML=P.map((p,i)=>`
+ <div class="hp" id="h${i}">
+  <span class="n">${p.n}</span>
+  <div class="bx"><i></i></div>
+  <span class="st">${p.t}</span>
+ </div>
+`).join('');
+
+let raf;
+
+function ann(t){
+ const a=$('ann');
+ a.textContent=t;
+ a.classList.remove('pop');
+ void a.offsetWidth;
+ a.classList.add('pop');
+}
+
+function play(){
+
+ cancelAnimationFrame(raf);
+
+ const done={};
+
+ P.forEach((p,i)=>{
+  const h=$('h'+i);
+  h.className='hp';
+  h.querySelector('i').style.width='100%';
+  h.querySelector('.st').textContent=p.t;
+ });
+
+ $('clk').textContent='0:00';
+ ann('FIGHT!');
+
+ const st=performance.now();
+ const D=10000;
+
+ (function f(n){
+
+  const x=Math.min((n-st)/D,1);
+  const s=x*T;
+
+  $('clk').textContent=fmt(s);
+
+  for(let i=P.length-1;i>=0;i--){
+
+   const p=P[i];
+
+   if(!done[i]&&s>=p.s-.01){
+
+    done[i]=1;
+
+    const h=$('h'+i);
+
+    if(i){
+
+     h.classList.add('dead');
+     h.querySelector('i').style.width='0';
+     h.querySelector('.st').textContent='K.O.';
+
+     ann('K.O.! '+p.n);
+
+     document.body.classList.add('sh');
+
+     setTimeout(()=>{
+      document.body.classList.remove('sh');
+     },400);
+
+    }else{
+
+     h.classList.add('winr');
+     h.querySelector('.st').textContent='WIN';
+     ann(p.n+' WINS!');
+
+    }
+   }
+  }
+
+  if(x<1)raf=requestAnimationFrame(f);
+
+ })(st);
+}
+
+setTimeout(play,2800);
+
+$('lb').innerHTML=P.map(p=>`
+ <div class="lr" style="--c:${p.c}" data-v="${p.pt}">
+  <span class="rk">${p.r}${['ST','ND','RD'][p.r-1]||'TH'}</span>
+  <span class="ini">${p.i}</span>
+  <span class="fn">${p.n}</span>
+  <span>${p.t}</span>
+  <span>${p.k}</span>
+  <span class="sc">0.0</span>
+ </div>
+`).join('');
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+
+ if(!e.isIntersecting)return;
+
+ io.unobserve(e.target);
+
+ const r=e.target;
+ const i=[...r.parentNode.children].indexOf(r);
+
+ setTimeout(()=>{
+
+  r.classList.add('in');
+
+  const v=+r.dataset.v;
+  const s=performance.now();
+  const el=r.querySelector('.sc');
+
+  (function f(n){
+
+   const x=Math.min((n-s)/1400,1);
+
+   el.textContent=(v*x).toFixed(1);
+
+   if(x<1)requestAnimationFrame(f);
+
+  })(s);
+
+ },i*130);
+
+}),{threshold:.2});
+
+document.querySelectorAll('.lr').forEach(r=>io.observe(r));
+
+</script>
+</body>
+</html>
