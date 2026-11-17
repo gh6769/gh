@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>সরদার বস্ত্রালয়</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans Bengali', Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fdf2e9, #f6e3d3);
+    color: #3b2a20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px;
+  }
+  header { text-align: center; margin-bottom: 40px; }
+  header h1 { font-size: 2.4rem; color: #8a2b0e; }
+  header p { margin-top: 8px; color: #7a5a48; }
+  .boxes {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+  }
+  .box {
+    flex: 1 1 320px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 36px 28px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 24px rgba(120, 60, 20, .15);
+    border-top: 6px solid #c0431b;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .box.admin { border-top-color: #2a5d9f; }
+  .box:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(120, 60, 20, .25); }
+  .icon { font-size: 3.2rem; margin-bottom: 14px; }
+  .box h2 { font-size: 1.5rem; margin-bottom: 10px; }
+  .box p { color: #7a5a48; margin-bottom: 22px; font-size: .95rem; }
+  .btn {
+    display: inline-block;
+    padding: 10px 26px;
+    border-radius: 999px;
+    background: #c0431b;
+    color: #fff;
+    font-weight: 600;
+  }
+  .admin .btn { background: #2a5d9f; }
+  footer { margin-top: 48px; font-size: .85rem; color: #7a5a48; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>সরদার বস্ত্রালয়</h1>
+  <p>স্বাগতম! নিচের যেকোনো একটি বেছে নিন</p>
+</header>
+
+<main class="boxes">
+  <!-- Box 1: Online Site -->
+  <a class="box" href="https://YOUR-SITE-LINK.com" target="_blank" rel="noopener">
+    <div class="icon">🛍️</div>
+    <h2>অনলাইন সাইট</h2>
+    <p>আমাদের পোশাকের সংগ্রহ দেখুন ও অর্ডার করুন</p>
+    <span class="btn">সাইটে যান</span>
+  </a>
+
+  <!-- Box 2: Admin Panel -->
+  <a class="box admin" href="https://YOUR-SITE-LINK.com/admin" target="_blank" rel="noopener">
+    <div class="icon">🔐</div>
+    <h2>অ্যাডমিন প্যানেল</h2>
+    <p>পণ্য, অর্ডার ও স্টক ম্যানেজ করুন</p>
+    <span class="btn">অ্যাডমিনে যান</span>
+  </a>
+</main>
+
+<footer>© সরদার বস্ত্রালয়</footer>
+
+</body>
+</html>
