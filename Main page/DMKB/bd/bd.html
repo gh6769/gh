@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+
+<title>বাংলাদেশ ছাত্র হিযবুল্লাহ</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050505;
+    overflow:hidden;
+    font-family:'Noto Sans Bengali',Arial,sans-serif;
+    color:white;
+}
+
+/* =================================
+   VIDEO BACKGROUND
+================================= */
+
+.video-bg{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    overflow:hidden;
+}
+
+.video-bg video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* VIDEO DARK OVERLAY */
+.overlay{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    background:rgba(0,0,0,.68);
+    pointer-events:none;
+}
+
+/* =================================
+   ORIGINAL SECOND HTML DESIGN
+================================= */
+
+.heading{
+    position:absolute;
+    top:35px;
+    left:40px;
+    z-index:5;
+    pointer-events:none;
+}
+
+.heading h1{
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.heading p{
+    margin-top:8px;
+    color:#aaa;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.background-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:clamp(55px,13vw,170px);
+    font-weight:900;
+    white-space:nowrap;
+    color:rgba(255,255,255,0.035);
+    pointer-events:none;
+    z-index:2;
+}
+
+#scene-container{
+    position:relative;
+    z-index:3;
+    width:100vw;
+    height:100vh;
+    cursor:grab;
+    touch-action:none;
+}
+
+#scene-container:active{
+    cursor:grabbing;
+}
+
+@media(max-width:600px){
+
+    .heading{
+        left:20px;
+        top:20px;
+    }
+
+    .heading h1{
+        font-size:17px;
+    }
+
+    .heading p{
+        font-size:9px;
+    }
+
+    .background-text{
+        font-size:55px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND FROM FIRST HTML -->
+<div class="video-bg">
+    <video autoplay muted loop playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div class="overlay"></div>
+
+<!-- HEADING -->
+<div class="heading">
+    <h1>বাংলাদেশ ছাত্র হিযবুল্লাহ</h1>
+    <p>THE SEVEN FUNDAMENTAL PRINCIPLES</p>
+</div>
+
+<!-- BACKGROUND TEXT -->
+<div class="background-text">HIZBULLAH</div>
+
+<!-- 3D SCENE -->
+<div id="scene-container"></div>
+
+<!-- THREE JS -->
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+
+/* LOAD BANGLA FONT */
+await document.fonts.load("700 32px 'Noto Sans Bengali'");
+await document.fonts.load("400 23px 'Noto Sans Bengali'");
+
+/* SCENE */
+const container = document.getElementById("scene-container");
+
+const scene = new THREE.Scene();
+
+/* IMPORTANT:
+   Transparent scene so video appears behind paper
+*/
+scene.background = null;
+
+/* CAMERA */
+const camera = new THREE.PerspectiveCamera(
+    35,
+    window.innerWidth/window.innerHeight,
+    0.1,
+    100
+);
+
+camera.position.set(0,0,11);
+
+/* RENDERER */
+const renderer = new THREE.WebGLRenderer({
+    antialias:true,
+    alpha:true
+});
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio,2)
+);
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+
+renderer.setClearColor(0x000000,0);
+
+container.appendChild(renderer.domElement);
+
+/* LIGHTING */
+const ambient = new THREE.AmbientLight(0xffffff,0.65);
+scene.add(ambient);
+
+const mainLight = new THREE.DirectionalLight(0xffffff,1.4);
+mainLight.position.set(-4,5,7);
+scene.add(mainLight);
+
+const rimLight = new THREE.PointLight(0x9eaeff,8,15);
+rimLight.position.set(4,2,5);
+scene.add(rimLight);
+
+const hoverLight = new THREE.PointLight(0xffffff,0,12);
+scene.add(hoverLight);
+
+/* PAPER GROUP */
+const paperGroup = new THREE.Group();
+scene.add(paperGroup);
+
+/* SEVEN PRINCIPLES */
+const principles = [
+
+{
+    number:"01",
+    title:"লিল্লাহিয়াত",
+    description:
+    "জীবনের সকল কাজ একমাত্র মহান আল্লাহর সন্তুষ্টি অর্জনের উদ্দেশ্যে নিবেদিত রাখা। কোনো পার্থিব স্বার্থ বা লোকদেখানো মানসিকতা পরিহার করে ইবাদত ও সমাজসেবা করা এর মূল কথা।"
+},
+
+{
+    number:"02",
+    title:"ইক্বামাতে দ্বীন",
+    description:
+    "নিজের ব্যক্তিগত জীবন, পরিবার এবং সমাজে ইসলামের বিধিবিধান ও আদর্শ পরিপূর্ণভাবে প্রতিষ্ঠা ও বাস্তবায়ন করা।"
+},
+
+{
+    number:"03",
+    title:"তাহসীলে ইলমে দ্বীন",
+    description:
+    "ইসলামের সঠিক ও বিশুদ্ধ জ্ঞান অর্জন করা। কুরআন ও সুন্নাহর মৌলিক শিক্ষা অর্জনের মাধ্যমে নিজেকে এবং অন্যকে আলোকিত করা।"
+},
+
+{
+    number:"04",
+    title:"ছোহবাতে ছালেহীন",
+    description:
+    "নেককার, পরহেজগার ও আল্লাহওয়ালা ব্যক্তিদের সংস্পর্শে থাকা। সৎ সঙ্গের মাধ্যমে নিজের আত্মশুদ্ধি অর্জন এবং চারিত্রিক উন্নতি ঘটানো।"
+},
+
+{
+    number:"05",
+    title:"তাবলীগে দ্বীন",
+    description:
+    "সাধারণ মানুষের কাছে ইসলামের শান্তির বাণী, নৈতিকতা এবং সঠিক আদর্শ পৌঁছে দেওয়া বা দাওয়াতি কাজ পরিচালনা করা।"
+},
+
+{
+    number:"06",
+    title:"জিহাদ ফি ছাবিলিল্লাহ",
+    description:
+    "আল্লাহর পথে সর্বাত্মক প্রচেষ্টা চালানো। এর মাধ্যমে নিজের মনের কুপ্রবৃত্তির বিরুদ্ধে সংগ্রাম করা এবং সমাজের সকল অন্যায়, অসত্য ও দুর্নীতির বিরুদ্ধে শান্তিপূর্ণভাবে রুখে দাঁড়ানোকে বোঝানো হয়।"
+},
+
+{
+    number:"07",
+    title:"ই'তিছাম বি হাবলিল্লাহ",
+    description:
+    "আল্লাহর রজ্জুকে (কুরআন ও সুন্নাহ) ঐক্যবদ্ধভাবে আঁকড়ে ধরা। মুসলমানদের মধ্যকার বিভেদ ভুলে পারস্পরিক ভ্রাতৃত্ব ও ঐক্য বজায় রাখা।"
+}
+
+];
+
+/* TEXT WRAPPER */
+function wrapText(ctx,text,x,y,maxWidth,lineHeight){
+
+    const words = text.split(" ");
+    let line = "";
+
+    for(let i=0;i<words.length;i++){
+
+        const testLine = line + words[i] + " ";
+
+        if(
+            ctx.measureText(testLine).width > maxWidth &&
+            line !== ""
+        ){
+
+            ctx.fillText(line.trim(),x,y);
+
+            line = words[i] + " ";
+            y += lineHeight;
+
+        }else{
+
+            line = testLine;
+
+        }
+
+    }
+
+    if(line.trim()){
+        ctx.fillText(line.trim(),x,y);
+    }
+
+    return y + lineHeight;
+}
+
+/* CREATE PAPER TEXTURE */
+function createTexture(){
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = 1100;
+    canvas.height = 1700;
+
+    const ctx = canvas.getContext("2d");
+
+    /* SOLID PAPER BACKGROUND */
+    const gradient = ctx.createLinearGradient(0,0,1100,1700);
+
+    gradient.addColorStop(0,"#202226");
+    gradient.addColorStop(0.5,"#191b20");
+    gradient.addColorStop(1,"#111318");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0,0,1100,1700);
+
+    /* BORDER */
+    ctx.strokeStyle = "rgba(255,255,255,0.45)";
+    ctx.lineWidth = 5;
+    ctx.strokeRect(22,22,1056,1656);
+
+    /* INNER BORDER */
+    ctx.strokeStyle = "rgba(255,255,255,0.13)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(38,38,1024,1624);
+
+    /* HEADER */
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 48px 'Noto Sans Bengali'";
+
+    ctx.fillText(
+        "বাংলাদেশ ছাত্র হিযবুল্লাহ",
+        550,
+        115
+    );
+
+    ctx.font = "500 27px 'Noto Sans Bengali'";
+    ctx.fillStyle = "#cccccc";
+
+    ctx.fillText(
+        "সাতটি মূলনীতি ও তাদের অর্থ",
+        550,
+        165
+    );
+
+    /* HEADER LINE */
+    ctx.strokeStyle = "rgba(255,255,255,0.5)";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    ctx.moveTo(260,205);
+    ctx.lineTo(840,205);
+    ctx.stroke();
+
+    /* PRINCIPLES */
+    ctx.textAlign = "left";
+
+    let y = 275;
+
+    principles.forEach((item,index)=>{
+
+        /* NUMBER */
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "700 29px 'Noto Sans Bengali'";
+
+        ctx.fillText(
+            item.number + ".",
+            65,
+            y
+        );
+
+        /* TITLE */
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "700 32px 'Noto Sans Bengali'";
+
+        ctx.fillText(
+            item.title,
+            125,
+            y
+        );
+
+        y += 48;
+
+        /* DESCRIPTION */
+        ctx.fillStyle = "#dedee2";
+        ctx.font = "400 23px 'Noto Sans Bengali'";
+
+        y = wrapText(
+            ctx,
+            item.description,
+            125,
+            y,
+            895,
+            35
+        );
+
+        /* SEPARATOR */
+        if(index !== principles.length-1){
+
+            y += 8;
+
+            ctx.strokeStyle = "rgba(255,255,255,0.20)";
+            ctx.lineWidth = 1.5;
+
+            ctx.beginPath();
+            ctx.moveTo(65,y);
+            ctx.lineTo(1035,y);
+            ctx.stroke();
+
+            y += 32;
+
+        }
+
+    });
+
+    /* BOTTOM DECORATION */
+    ctx.strokeStyle = "rgba(255,255,255,0.4)";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    ctx.moveTo(300,1615);
+    ctx.lineTo(800,1615);
+    ctx.stroke();
+
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "600 25px 'Noto Sans Bengali'";
+
+    ctx.fillText(
+        "ঐক্য • জ্ঞান • নৈতিকতা",
+        550,
+        1655
+    );
+
+    /* TEXTURE */
+    const texture = new THREE.CanvasTexture(canvas);
+
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+    return texture;
+}
+
+/* CREATE PAPER */
+const geometry = new THREE.PlaneGeometry(
+    4.1,
+    6.35,
+    50,
+    70
+);
+
+const texture = createTexture();
+
+const material = new THREE.MeshPhysicalMaterial({
+
+    map:texture,
+    color:0xffffff,
+
+    transparent:false,
+    opacity:1,
+
+    roughness:0.25,
+    metalness:0.08,
+
+    clearcoat:0.65,
+    clearcoatRoughness:0.2,
+
+    side:THREE.DoubleSide,
+    depthWrite:true
+
+});
+
+const paper = new THREE.Mesh(geometry,material);
+
+paperGroup.add(paper);
+
+/* ORIGINAL VERTICES */
+const position = geometry.attributes.position;
+
+const original = [];
+
+for(let i=0;i<position.count;i++){
+
+    original.push({
+
+        x:position.getX(i),
+        y:position.getY(i),
+        z:position.getZ(i)
+
+    });
+
+}
+
+paper.userData.original = original;
+paper.userData.position = position;
+
+/* BORDER EDGES */
+const edgeGeometry = new THREE.EdgesGeometry(
+    new THREE.PlaneGeometry(4.1,6.35)
+);
+
+const edgeMaterial = new THREE.LineBasicMaterial({
+
+    color:0xffffff,
+    transparent:true,
+    opacity:0.20
+
+});
+
+const border = new THREE.LineSegments(
+    edgeGeometry,
+    edgeMaterial
+);
+
+border.position.z = 0.01;
+
+paper.add(border);
+
+/* MOUSE CONTROLS */
+let mouseX = 0;
+let mouseY = 0;
+
+let targetRotationX = 0;
+let targetRotationY = 0;
+
+let isDragging = false;
+
+let previousX = 0;
+let previousY = 0;
+
+container.addEventListener("pointerdown",(e)=>{
+
+    isDragging = true;
+
+    previousX = e.clientX;
+    previousY = e.clientY;
+
+    container.setPointerCapture(e.pointerId);
+
+});
+
+container.addEventListener("pointermove",(e)=>{
+
+    const rect = container.getBoundingClientRect();
+
+    mouseX = ((e.clientX-rect.left)/rect.width)*2-1;
+
+    mouseY = -((e.clientY-rect.top)/rect.height)*2+1;
+
+    if(isDragging){
+
+        const dx = e.clientX-previousX;
+        const dy = e.clientY-previousY;
+
+        targetRotationY += dx*0.006;
+        targetRotationX += dy*0.004;
+
+        targetRotationX = THREE.MathUtils.clamp(
+            targetRotationX,
+            -0.8,
+            0.8
+        );
+
+        previousX = e.clientX;
+        previousY = e.clientY;
+
+    }
+
+    hoverLight.intensity = 8;
+
+    hoverLight.position.set(
+        mouseX*5,
+        mouseY*4,
+        5
+    );
+
+});
+
+function stopDragging(){
+    isDragging = false;
+}
+
+container.addEventListener("pointerup",stopDragging);
+container.addEventListener("pointercancel",stopDragging);
+
+container.addEventListener("pointerleave",()=>{
+
+    if(!isDragging){
+        hoverLight.intensity = 0;
+    }
+
+});
+
+/* ANIMATION */
+const clock = new THREE.Clock();
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    const time = clock.getElapsedTime();
+
+    /* SMOOTH ROTATION */
+    paperGroup.rotation.y +=
+        (targetRotationY-paperGroup.rotation.y)*0.06;
+
+    paperGroup.rotation.x +=
+        (targetRotationX-paperGroup.rotation.x)*0.06;
+
+    /* FLOATING */
+    paperGroup.position.y =
+        Math.sin(time*0.8)*0.08;
+
+    /* PAPER BENDING */
+    const pos = paper.userData.position;
+    const orig = paper.userData.original;
+
+    for(let i=0;i<pos.count;i++){
+
+        const x = orig[i].x;
+        const y = orig[i].y;
+
+        const wave =
+            Math.sin(x*1.5+time*1.1)*0.10;
+
+        const bend =
+            Math.pow(x/2.05,2)*0.22;
+
+        const flutter =
+            Math.sin(y*1.4+time*1.3)*0.035;
+
+        const z = wave+bend+flutter;
+
+        pos.setXYZ(
+            i,
+            x,
+            y,
+            z
+        );
+
+    }
+
+    pos.needsUpdate = true;
+
+    paper.geometry.computeVertexNormals();
+
+    /* SUBTLE ROTATION */
+    paper.rotation.z =
+        Math.sin(time*0.4)*0.0005;
+
+    renderer.render(scene,camera);
+
+}
+
+animate();
+
+/* RESPONSIVE */
+window.addEventListener("resize",()=>{
+
+    camera.aspect =
+        window.innerWidth/window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio,2)
+    );
+
+});
+
+</script>
+
+</body>
+</html>
