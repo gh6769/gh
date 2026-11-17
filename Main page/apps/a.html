@@ -275,6 +275,8 @@ body::after {
     z-index: 1;
 }
 
+/* APP HOVER ICON */
+
 .app-card:hover .icon {
     transform: scale(1.12) rotate(-5deg);
 
@@ -483,6 +485,34 @@ body::after {
 
 .letterbox-card:hover .icon {
     box-shadow: 0 0 30px rgba(255,215,100,0.35);
+}
+
+/* WASSUP */
+
+.wassup-card {
+    border-color: rgba(37,211,102,0.4);
+
+    background: linear-gradient(
+        145deg,
+        rgba(37,211,102,0.15),
+        rgba(255,255,255,0.04)
+    );
+}
+
+.wassup-card::before {
+    background: rgba(37,211,102,0.22);
+}
+
+.wassup-card:hover {
+    border-color: #25d366;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.45),
+        0 0 30px rgba(37,211,102,0.2);
+}
+
+.wassup-card:hover .icon {
+    box-shadow: 0 0 30px rgba(37,211,102,0.35);
 }
 
 /* FOOTER */
@@ -785,8 +815,31 @@ body::after {
 
         </a>
 
-    </div>
+        <!-- WASSUP -->
 
+        <a href="https://wassup6.netlify.app"
+           class="app-card wassup-card">
+
+                <div class="icon">
+
+                <img
+                    src="wassup.jpg"
+                    alt="Wassup Logo"
+                    class="ghost-logo"
+                >
+
+            </div>
+            <div class="app-name">
+                Wassup
+            </div>
+
+            <div class="app-description">
+                Chat, Message & Connect with Friends
+            </div>
+
+        </a>
+
+    </div>
 
 </main>
 
