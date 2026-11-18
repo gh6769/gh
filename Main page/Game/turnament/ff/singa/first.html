@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FF Match 1 – Final Result</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07060d;--card:#12101f;--ink:#f3f0ff;--mut:#9a93b8;--gold:#ffc83d;--sil:#cfd6e6;--bro:#e08a4a;--hot:#ff3d6e;--cy:#27e6ff;--vi:#8a5cff;--line:#ffffff1a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f4f1ff;--card:#fff;--ink:#1a1530;--mut:#6b6488;--line:#00000014}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f1ff;--card:#fff;--ink:#1a1530;--mut:#6b6488;--line:#00000014}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Rajdhani',system-ui,sans-serif;font-weight:500;min-height:100vh;overflow-x:hidden}
+.aur{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(40% 35% at 15% 10%,#8a5cff40,transparent),radial-gradient(35% 30% at 90% 20%,#27e6ff30,transparent),radial-gradient(40% 40% at 50% 100%,#ff3d6e33,transparent);animation:dr 12s ease-in-out infinite alternate}
+@keyframes dr{to{transform:scale(1.15) translateY(-20px)}}
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:28px 16px 60px}
+header{text-align:center;margin-bottom:26px}
+.tag{display:inline-block;font:700 12px Orbitron,sans-serif;letter-spacing:.3em;color:var(--cy);border:1px solid var(--cy);padding:6px 14px;border-radius:99px;animation:pl 2s infinite}
+@keyframes pl{50%{box-shadow:0 0 18px var(--cy)}}
+h1{font:800 clamp(30px,8vw,52px)/1.05 Orbitron,sans-serif;margin:16px 0 8px;background:linear-gradient(90deg,var(--gold),var(--hot),var(--vi),var(--cy));background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:300% 0}}
+.sub{color:var(--mut);font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
+.st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center}
+.st b{display:block;font:800 22px Orbitron,sans-serif;color:var(--cy)}
+.st span{font-size:13px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
+.champ{position:relative;border-radius:22px;padding:2px;margin:10px 0 26px;overflow:hidden}
+.champ::before{content:"";position:absolute;inset:-60%;background:conic-gradient(var(--gold),var(--hot),var(--vi),var(--cy),var(--gold));animation:sp 5s linear infinite}
+@keyframes sp{to{transform:rotate(1turn)}}
+.champ .in{position:relative;background:var(--card);border-radius:20px;padding:26px 18px;text-align:center}
+.crown{font-size:44px;animation:fl 2.2s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(-6deg)}}
+.champ h2{font:800 clamp(28px,8vw,44px) Orbitron,sans-serif;color:var(--gold);letter-spacing:.08em;text-shadow:0 0 24px #ffc83d88}
+.champ p{color:var(--mut);margin-top:4px}
+.chips{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.chip{padding:6px 14px;border-radius:99px;background:var(--line);font-weight:700}
+.pod{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:end;margin-bottom:28px;height:210px}
+.pb{border-radius:14px 14px 0 0;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding-top:10px;text-align:center;transform-origin:bottom;animation:gr .9s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes gr{from{transform:scaleY(0);opacity:0}}
+.pb .n{font:800 15px Orbitron,sans-serif}.pb .m{font-size:42px;font-weight:700;line-height:1.1}
+.p1{height:100%;background:linear-gradient(var(--gold),#ffc83d22);animation-delay:.5s}
+.p2{height:78%;background:linear-gradient(var(--sil),#cfd6e622);animation-delay:.25s}
+.p3{height:60%;background:linear-gradient(var(--bro),#e08a4a22);animation-delay:.1s}
+.pb{color:#1a1530}
+h3{font:700 14px Orbitron,sans-serif;letter-spacing:.25em;color:var(--mut);margin:0 0 12px}
+.row{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;overflow:hidden;opacity:0;transform:translateY(24px);transition:.6s}
+.row.show{opacity:1;transform:none}
+.row .top{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.rk{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font:800 16px Orbitron,sans-serif;color:#1a1530;flex:none}
+.nm{flex:1;font-size:22px;font-weight:700;text-transform:capitalize}
+.nm small{display:block;font-size:14px;color:var(--mut);font-weight:500}
+.k{font:800 18px Orbitron,sans-serif;color:var(--hot);text-align:right}
+.k small{display:block;font:500 12px Rajdhani;color:var(--mut);letter-spacing:.1em}
+.bar{height:10px;border-radius:9px;background:var(--line);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:9px;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.tm{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);margin-top:6px}
+footer{text-align:center;color:var(--mut);margin-top:30px;font-size:15px}
+</style></head><body>
+<div class="aur"></div>
+<div class="wrap">
+<header><span class="tag">MATCH 06 · FINAL RESULT</span><h1>BOOYAH REPORT</h1><p class="sub">Free Fire · 6 warriors · 17 min 14 sec of pure chaos</p></header>
+<div class="stats"><div class="st"><b>6</b><span>Players</span></div><div class="st"><b>17:14</b><span>Duration</span></div><div class="st"><b>5</b><span>Total Kills</span></div></div>
+<div class="champ"><div class="in"><div class="crown">👑</div><h2>MAHDI</h2><p>Last one standing · Match Winner</p><div class="chips"><span class="chip">⏱ 17:14</span><span class="chip">🎯 3 Kills</span><span class="chip">🏆 1st Place</span></div></div></div>
+<div class="pod"><div class="pb p2"><span class="n">MUHIT</span><span class="m">🥈</span></div><div class="pb p1"><span class="n">MAHDI</span><span class="m">🥇</span></div><div class="pb p3"><span class="n">TAMIM</span><span class="m">🥉</span></div></div>
+<h3>FULL STANDINGS</h3>
+<div id="list"></div>
+<footer>⚡ Survive. Eliminate. Booyah. ⚡</footer>
+</div>
+<script>
+var P=[["mahdi","17:14",3,"#ffc83d","linear-gradient(90deg,#ffc83d,#ff3d6e)"],["muhit","17:10",2,"#cfd6e6","linear-gradient(90deg,#cfd6e6,#8a5cff)"],["tamim","15:12",0,"#e08a4a","linear-gradient(90deg,#e08a4a,#ff3d6e)"],["arman","14:15",0,"#27e6ff","linear-gradient(90deg,#27e6ff,#8a5cff)"],["saadat","9:11",0,"#8a5cff","linear-gradient(90deg,#8a5cff,#27e6ff)"],["bannah","4:56",0,"#ff3d6e","linear-gradient(90deg,#ff3d6e,#8a5cff)"]];
+var T=1034,L=document.getElementById("list"),H="";
+P.forEach(function(p,i){var a=p[1].split(":"),s=a[0]*60+ +a[1],o=["1st","2nd","3rd","4th","5th","6th"][i];
+H+='<div class="row"><div class="top"><div class="rk" style="background:'+p[3]+'">'+(i+1)+'</div><div class="nm">'+p[0]+'<small>'+o+' place</small></div><div class="k">'+p[2]+'<small>KILLS</small></div></div><div class="bar"><i data-w="'+(s/T*100).toFixed(1)+'" style="background:'+p[4]+'"></i></div><div class="tm"><span>Survived</span><span>'+p[1]+'</span></div></div>'});
+L.innerHTML=H;
+document.querySelectorAll(".row").forEach(function(r,i){setTimeout(function(){r.classList.add("show");r.querySelector("i").style.width=r.querySelector("i").dataset.w+"%"},500+i*220)});
+</script></body></html>
